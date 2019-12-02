@@ -1,0 +1,57 @@
+{
+  "name": "vl-cookie-consent",
+  "version": "0.0.0",
+  "description": "De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.",
+  "scripts": {
+    "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
+    "prepare:util": "npm explore vl-ui-util -- npm run util",
+    "test": "wct -l chrome,firefox --npm",
+    "release": "np",
+    "release:prepare": "npm run release:prepare:build && npm run release:prepare:imports && npm run release:prepare:css && npm run release:prepare:commit",
+    "release:prepare:build": "uglifyjs --compress --mangle --output vl-cookie-consent.js -- *.src.js",
+    "release:prepare:imports": "replace '/node_modules/vl-ui-core/vl-core.src.js' '/node_modules/vl-ui-core/vl-core.js' vl-cookie-consent.js",
+    "release:prepare:css": "replace '\\.\\./style.css' '/node_modules/vl-ui-cookie-consent/style.css' vl-cookie-consent.js",
+    "release:prepare:commit": "git add -f vl-cookie-consent.js && git commit --amend --no-edit && git pull",
+    "release:testless": "np --yolo",
+    "demo": "http-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milieuinfo/webcomponent-vl-cookie-consent.git"
+  },
+  "author": "DIDM",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/milieuinfo/webcomponent-vl-cookie-consent/issues"
+  },
+  "homepage": "https://github.com/milieuinfo/webcomponent-vl-cookie-consent#readme",
+  "dependencies": {
+    "vl-ui-util": "^2.0.5",
+    "vl-ui-core": "^2.0.0",
+    "vl-ui-button": "^1.3.1",
+    "vl-ui-checkbox": "^1.0.17",
+    "vl-ui-form-message": "^3.0.0",
+    "vl-ui-form-grid": "^1.0.12",
+    "vl-ui-modal": "^1.0.14"
+  },
+  "peerDependencies": {
+    "vl-ui-button": "^1.3.1",
+    "vl-ui-checkbox": "^1.0.17",
+    "vl-ui-form-message": "^3.0.0",
+    "vl-ui-form-grid": "^1.0.12",
+    "vl-ui-modal": "^1.0.14"
+  },
+  "devDependencies": {
+    "@govflanders/vl-ui-util": "^3.9.1",
+    "http-server": "0.11.1",
+    "np": "3.0.4",
+    "uglify-js-es6": "2.8.9",
+    "vl-ui-util": "^2.0.0",
+    "wct-browser-legacy": "1.0.2",
+    "web-component-tester": "6.9.2",
+    "replace": "^1.1.1"
+  },
+  "publishConfig": {
+    "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
+  }
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="js">
+
+<head>
+    <title>vl-cookie-consent voorbeeld</title>
+    <script type="module" src="demo.js"></script>
+    <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
+    <script type="module" src="../vl-cookie-consent.src.js"></script>
+</head>
+
+<body>
+    <h1>vl-ui-cookie-consent demo</h1>
+
+    <div>
+        <h2>Cookie-consent</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent id="cookie-consent-1"&gt;&lt;/vl-cookie-consent&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent id="cookie-consent-1"></vl-cookie-consent>
+            <button is="vl-button" onclick="document.querySelector('#cookie-consent-1').open();">Open
+                cookie-consent</button>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent zonder functionele opt-in</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent id="cookie-consent-2" data-vl-auto-open-disabled data-vl-auto-opt-in-functional-disabled&gt;&lt;/vl-cookie-consent&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent id="cookie-consent-2" data-vl-auto-open-disabled data-vl-auto-opt-in-functional-disabled>
+            </vl-cookie-consent>
+            <button is="vl-button" onclick="document.querySelector('#cookie-consent-2').open();">Open
+                cookie-consent</button>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent met extra opt-in</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent id="cookie-consent-3" data-vl-auto-open-disabled data-vl-opt-in-socialmedia
+                    data-vl-opt-in-socialmedia-label="Sociale media"
+                    data-vl-opt-in-socialmedia-description="Beschrijving van de sociale media cookies."&gt;&lt;/vl-cookie-consent&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent id="cookie-consent-3" data-vl-auto-open-disabled data-vl-opt-in-socialmedia
+                data-vl-opt-in-socialmedia-label="Sociale media"
+                data-vl-opt-in-socialmedia-description="Beschrijving van de sociale media cookies."></vl-cookie-consent>
+            <button is="vl-button" onclick="document.querySelector('#cookie-consent-3').open();">Open
+                cookie-consent</button>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent met extra opt-in dat default aangevinkt staat</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent id="cookie-consent-4" data-vl-auto-open-disabled data-vl-opt-in-socialmedia
+                    data-vl-opt-in-socialmedia-label="Sociale media"
+                    data-vl-opt-in-socialmedia-description="Beschrijving van de sociale media cookies."
+                    data-vl-opt-in-socialmedia-checked&gt;&lt;/vl-cookie-consent&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent id="cookie-consent-4" data-vl-auto-open-disabled data-vl-opt-in-socialmedia
+                data-vl-opt-in-socialmedia-label="Sociale media"
+                data-vl-opt-in-socialmedia-description="Beschrijving van de sociale media cookies."
+                data-vl-opt-in-socialmedia-checked></vl-cookie-consent>
+            <button is="vl-button" onclick="document.querySelector('#cookie-consent-4').open();">Open
+                cookie-consent</button>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent met extra opt-in dat verplicht is</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent id="cookie-consent-5" data-vl-auto-open-disabled data-vl-opt-in-functional data-vl-opt-in-socialmedia
+                    data-vl-opt-in-socialmedia-label="Sociale media"
+                    data-vl-opt-in-socialmedia-description="Beschrijving van de sociale media cookies."
+                    data-vl-opt-in-socialmedia-required&gt;&lt;/vl-cookie-consent&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent id="cookie-consent-5" data-vl-auto-open-disabled data-vl-opt-in-functional
+                data-vl-opt-in-socialmedia data-vl-opt-in-socialmedia-label="Sociale media"
+                data-vl-opt-in-socialmedia-description="Beschrijving van de sociale media cookies."
+                data-vl-opt-in-socialmedia-required></vl-cookie-consent>
+            <button is="vl-button" onclick="document.querySelector('#cookie-consent-5').open();">Open
+                cookie-consent</button>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent dynamisch extra opt-in toevoegen</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent id="cookie-consent-6" data-vl-auto-open-disabled&gt;&lt;/vl-cookie-consent&gt;
+                &lt;button is="vl-button" onclick="document.querySelector('#cookie-consent-6').addOptIn({
+                    name: 'socialmedia',
+                    label: 'Sociale media',
+                    description: 'Sociale media beschrijving',
+                    value: true,
+                    required: false,
+                    callbacks: {
+                        activated: () =&gt; {},
+                        deactivated: () =&gt; {}
+                    }
+                });"&gt;Voeg sociale media opt-in toe&lt;/button&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent id="cookie-consent-6" data-vl-auto-open-disabled></vl-cookie-consent>
+            <button is="vl-button" onclick="document.querySelector('#cookie-consent-6').open();">Open
+                cookie-consent</button>
+            <button is="vl-button" onclick="document.querySelector('#cookie-consent-6').addOptIn({
+                name: 'socialmedia',
+                label: 'Sociale media',
+                description: 'Sociale media beschrijving',
+                value: true,
+                required: false,
+                callbacks: {
+                    activated: () => {},
+                    deactivated: () => {}
+                }
+            });">Voeg sociale media opt-in toe</button>
+        </div>
+    </div>
+</body>
+
+</html>
