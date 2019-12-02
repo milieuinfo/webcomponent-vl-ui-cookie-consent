@@ -4,7 +4,7 @@ import '/node_modules/vl-ui-checkbox/vl-checkbox.js';
 import '/node_modules/vl-ui-form-message/vl-form-message.js';
 import '/node_modules/vl-ui-form-grid/vl-form-grid.js';
 import '/node_modules/vl-ui-modal/vl-modal.js';
-import { analytics } from '/dist/analytics.js';
+import { analytics } from '/src/analytics.js';
 
 customElements.whenDefined('vl-modal').then(() => {
     define('vl-cookie-consent', VlCookieConsent);
