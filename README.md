@@ -5,7 +5,7 @@ De cookie consent kan gebruikt worden om de gebruiker te informeren over de cook
 
 ## Installatie
 ```
-npm install --save vl-ui-cookie-consent
+$ npm install --save vl-ui-cookie-consent
 ```
 
 ## API
@@ -14,7 +14,7 @@ De [API](https://webcomponenten.omgeving.vlaanderen.be/doc/Vlcookie-consent.html
 ## Demo
 De [demo](https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent.html) pagina bevat een overzicht van de mogelijkheden met code voorbeelden. Lokaal opstarten kan met onderstaand [NPM](https://www.npmjs.com) script.
 ```
-npm run demo
+$ npm run demo
 ```
 
 ## Testen
@@ -22,7 +22,7 @@ De webcomponent bevat verschillende unit testen die bij elke commit geautomatise
 
 De testen kunnen lokaal opgestart worden met onderstaand [NPM](https://www.npmjs.com) script.
 ```
-npm run test
+$ npm run test
 ```
 
 ## Issues
