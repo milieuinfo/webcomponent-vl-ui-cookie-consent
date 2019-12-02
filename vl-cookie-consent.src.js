@@ -1,9 +1,10 @@
 import { VlElement, define } from '/node_modules/vl-ui-core/vl-core.js';
-import { VlButton } from '/node_modules/vl-ui-button/vl-button.js';
-import { VlCheckbox } from '/node_modules/vl-ui-checkbox/vl-checkbox.js';
-import { VlFormLabel, VlFormValidationMessage, VlFormAnnotation } from '/node_modules/vl-ui-form-message/vl-form-message.js';
-import { VlFormGrid } from '/node_modules/vl-ui-form-grid/vl-form-grid.js';
-import { VlModal } from '/node_modules/vl-ui-modal/vl-modal.js';
+import '/node_modules/vl-ui-button/vl-button.js';
+import '/node_modules/vl-ui-checkbox/vl-checkbox.js';
+import '/node_modules/vl-ui-form-message/vl-form-message.js';
+import '/node_modules/vl-ui-form-grid/vl-form-grid.js';
+import '/node_modules/vl-ui-modal/vl-modal.js';
+import { analytics } from '/dist/analytics.js';
 
 customElements.whenDefined('vl-modal').then(() => {
     define('vl-cookie-consent', VlCookieConsent);
@@ -71,11 +72,6 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
         this._cookieConsentCookieName = 'cookie-consent';
         this._cookieConsentDateCookieName = 'cookie-consent-date';
         this._cookieConsentResetDate = new Date('2019/05/14');
-        this._matomoScriptId = 'vl-cookie-consent-matomo-script';
-        this._matomoPiwikScriptId = 'vl-cookie-consent-matomo-piwik-script';
-        this._matomoOntwikkelUrl = '//stats-ontwikkel.milieuinfo.be/';
-        this._matomoOefenUrl = '//stats-oefen.milieuinfo.be/';
-        this._matomoProdUrl = '//stats.milieuinfo.be/';
     }
 
     connectedCallback() {
@@ -181,154 +177,6 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
 
     get _cookiePrefix() {
         return 'vl-cookie-consent-';
-    }
-
-    get _matomoId() {
-        let match = {
-            'stats-ontwikkel.milieuinfo.be': {
-                'id': 1,
-                'url': this._matomoOntwikkelUrl
-            },
-            'ontwikkel.milieuinfo.be': {
-                'id': 2,
-                'url': this._matomoOntwikkelUrl
-            },
-            'ontwikkel.omgevingsloket.be': {
-                'id': 3,
-                'url': this._matomoOntwikkelUrl
-            },
-            'bredero-ontwikkel.ruimteinfo.be': {
-                'id': 5,
-                'url': this._matomoOntwikkelUrl
-            },
-            'bredero-bupo-ontwikkel.ruimteinfo.be': {
-                'id': 6,
-                'url': this._matomoOntwikkelUrl
-            },
-            'bredero-xfr-ontwikkel.ruimteinfo.be': {
-                'id': 7,
-                'url': this._matomoOntwikkelUrl
-            },
-            'ontwikkel.ruimtemonitor.be': {
-                'id': 8,
-                'url': this._matomoOntwikkelUrl
-            },
-            'rupadviestoets-ontwikkel.milieuinfo.be': {
-                'id': 9,
-                'url': this._matomoOntwikkelUrl
-            },
-            'zendantennes-ontwikkel.milieuinfo.be': {
-                'id': 13,
-                'url': this._matomoOntwikkelUrl
-            },
-            'vsm-ontwikkel.milieuinfo.be': {
-                'id': 16,
-                'url': this._matomoOntwikkelUrl
-            },
-            'mobiscore-ontwikkel.omgeving.vlaanderen.be': {
-                'id': 22,
-                'url': this._matomoOntwikkelUrl
-            },
-            'erkenningencontactgegevens-ontwikkel.omgeving.vlaanderen.be': {
-                'id': 24,
-                'url': this._matomoOntwikkelUrl
-            }
-        }[window.location.host];
-
-        if (!match) {
-            match = {
-                'stats-oefen.milieuinfo.be': {
-                    'id': 1,
-                    'url': this._matomoOefenUrl
-                },
-                'oefen.ruimtemonitor.be': {
-                    'id': 2,
-                    'url': this._matomoOefenUrl
-                },
-                'oefen.omgevingsloket.be': {
-                    'id': 4,
-                    'url': this._matomoOefenUrl
-                },
-                'vsm-oefen.milieuinfo.be': {
-                    'id': 8,
-                    'url': this._matomoOefenUrl
-                },
-                'rupadviestoets-oefen.milieuinfo.be': {
-                    'id': 9,
-                    'url': this._matomoOefenUrl
-                },
-                'zendantennes-oefen.milieuinfo.be': {
-                    'id': 10,
-                    'url': this._matomoOefenUrl
-                },
-                'www2-oefen.omgeving.vlaanderen.be': {
-                    'id': 12,
-                    'url': this._matomoOefenUrl
-                },
-                'mobiscore-oefen.omgeving.vlaanderen.be': {
-                    'id': 14,
-                    'url': this._matomoOefenUrl
-                },
-                'erkenningencontactgegevens-oefen.omgeving.vlaanderen.be': {
-                    'id': 16,
-                    'url': this._matomoOefenUrl
-                }
-            }[window.location.host];
-        }
-
-        if (!match) {
-            match = {
-                'vsm.milieuinfo.be': {
-                    'id': 9,
-                    'url': this._matomoProdUrl
-                },
-                'rupadviestoets.milieuinfo.be': {
-                    'id': 11,
-                    'url': this._matomoProdUrl
-                },
-                'zendantennes.milieuinfo.be': {
-                    'id': 12,
-                    'url': this._matomoProdUrl
-                },
-                'www.omgevingsloket.be': {
-                    'id': 14,
-                    'url': this._matomoProdUrl
-                },
-                'www2.omgeving.vlaanderen.be': {
-                    'id': 27,
-                    'url': this._matomoProdUrl
-                },
-                'mobiscore.omgeving.vlaanderen.be': {
-                    'id': 29,
-                    'url': this._matomoProdUrl
-                },
-                'ruimtelijkeordening.be': {
-                    'id': 30,
-                    'url': this._matomoProdUrl
-                },
-                'complexeprojecten.be': {
-                    'id': 31,
-                    'url': this._matomoProdUrl
-                },
-                'rsv.ruimtevlaanderen.be': {
-                    'id': 32,
-                    'url': this._matomoProdUrl
-                },
-                'ena.ruimtevlaanderen.be': {
-                    'id': 33,
-                    'url': this._matomoProdUrl
-                },
-                'erkenningencontactgegevens.omgeving.vlaanderen.be': {
-                    'id': 44,
-                    'url': this._matomoProdUrl
-                }
-            }[window.location.host];
-        }
-
-        if (!match) {
-            console.warn('de website is nog niet gekend bij ons dus er zullen geen gebruikersstatistieken bijgehouden worden');
-        }
-        return match;
     }
 
     get _modalElement() {
@@ -469,49 +317,9 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
     }
 
     _addAnalytics() {
-        if (!document.getElementById(this._matomoScriptId)) {
-            document.head.appendChild(this._createMatomoScript());
+        if (!document.getElementById(analytics.scriptId)) {
+            document.head.appendChild(analytics.script);
         }
-    }
-
-    _createMatomoScript() {
-        const matomo = this._matomoId;
-        const element = document.createElement('script');
-        element.setAttribute('id', this._matomoScriptId);
-        if (matomo) {
-            const script = document.createTextNode("" +
-                "if (!window._paq) {" +
-                "var _paq = window._paq || [];" +
-                "_paq.push(['trackPageView']);" +
-                "_paq.push(['enableLinkTracking']);" +
-                "(function() {" +
-                "var u='" + matomo.url + "';" +
-                "_paq.push(['setTrackerUrl', u+'piwik.php']);" +
-                "_paq.push(['setSiteId', " + matomo.id + "]);" +
-                "var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];" +
-                "g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; g.id='" + this._matomoPiwikScriptId + "'; s.parentNode.insertBefore(g,s);" +
-                "})();" +
-                "" +
-                "var currentUrl = window.location.href;" +
-                "window.addEventListener('hashchange', function() {" +
-                "_paq.push(['setReferrerUrl', currentUrl]);" +
-                "currentUrl = '' + window.location.hash.substr(1);" +
-                "_paq.push(['setCustomUrl', currentUrl]);" +
-                "_paq.push(['setDocumentTitle', document.title]);" +
-                "_paq.push(['deleteCustomVariables', 'page']);" +
-                "_paq.push(['setGenerationTimeMs', 0]);" +
-                "_paq.push(['trackPageView']);" +
-                "var content = document.getElementById('content');" +
-                "_paq.push(['MediaAnalytics::scanForMedia', content]);" +
-                "_paq.push(['FormAnalytics::scanForForms', content]);" +
-                "_paq.push(['trackContentImpressionsWithinNode', content]);" +
-                "_paq.push(['enableLinkTracking']);" +
-                "});" +
-                "}"
-            );
-            element.appendChild(script);
-        }
-        return element;
     }
 
     _getCookie(name) {
