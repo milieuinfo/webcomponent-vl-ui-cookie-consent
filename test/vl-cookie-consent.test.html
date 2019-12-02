@@ -166,12 +166,14 @@
 
       test('alleen wanneer de functionele en analytics opt-ins aanwezig zijn, zullen er gebruikersstatistieken bewaard worden', () => {
         const cookieConsent = fixture('vl-cookie-consent-analytics-fixture');
-        should.exist(document.head.querySelector('#' + cookieConsent._matomoScriptId));
+        should.exist(document.head.querySelector('#vl-cookie-consent-matomo-script'));
       });
 
       test('als de cookie-consent modal niet meer getoond moet worden, zullen de gebruikersstatistieken nog steeds verwerkt worden', () => {
+        document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;';
+        document.cookie = 'vl-cookie-consent-cookie-consent-date=1575052845025;Max-Age=2147483647;path=/;';
         const cookieConsent = fixture('vl-cookie-consent-analytics-fixture');
-        should.exist(document.head.querySelector('#' + cookieConsent._matomoScriptId));
+        should.exist(document.head.querySelector('#vl-cookie-consent-matomo-script'));
       });
 
       test('de cookie-consent modal kan steeds manueel geopend worden om de opt-ins te kunnen aanpassen', () => {
@@ -180,12 +182,6 @@
         assert(vl.modal.toggle.notCalled);
         cookieConsent.open();
         assert(vl.modal.toggle.called);
-      });
-
-      test('via de cookie-consent kan gevraagd worden of een opt-in actief is of niet', () => {
-        const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-fixture');
-        const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        assert.isFalse(cookieConsent.isOptInActive('socialmedia'));
       });
 
       test('via de cookie-consent kan gevraagd worden of een opt-in actief is of niet', () => {
@@ -369,6 +365,9 @@
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         let optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
         let optInCheckboxes = optInFormGridColumn.querySelectorAll('vl-checkbox');
+        cookieConsent.addOptIn({
+          name: 'socialmedia'
+        });
         cookieConsent.addOptIn({
           name: 'socialmedia'
         });
