@@ -1,5 +1,6 @@
 # vl-cookie-consent
 ![GitHub issues](https://img.shields.io/github/issues-raw/milieuinfo/webcomponent-vl-ui-cookie-consent) ![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/milieuinfo/webcomponent-vl-ui-cookie-consent) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/milieuinfo/webcomponent-vl-ui-cookie-consent)
+
 De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.
 
 ## Installatie
