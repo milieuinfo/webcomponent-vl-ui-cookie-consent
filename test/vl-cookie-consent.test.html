@@ -43,24 +43,25 @@
 
   <test-fixture id="vl-cookie-consent-opt-in-socialmedia-fixture">
     <template>
-      <vl-cookie-consent data-vl-auto-opt-in-functional-disabled data-vl-opt-in-socialmedia data-vl-opt-in-socialmedia-label="socialemedia media"
-        data-vl-opt-in-socialmedia-description="socialemedia media opt-in beschrijving"></vl-cookie-consent>
+      <vl-cookie-consent data-vl-auto-opt-in-functional-disabled>
+        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving."></vl-cookie-consent-opt-in>
+      </vl-cookie-consent>
     </template>
   </test-fixture>
 
   <test-fixture id="vl-cookie-consent-opt-in-socialmedia-checked-fixture">
     <template>
-      <vl-cookie-consent data-vl-auto-opt-in-functional-disabled data-vl-opt-in-socialmedia data-vl-opt-in-socialmedia-label="socialemedia media"
-        data-vl-opt-in-socialmedia-description="socialemedia media opt-in beschrijving"
-        data-vl-opt-in-socialmedia-checked></vl-cookie-consent>
+      <vl-cookie-consent data-vl-auto-opt-in-functional-disabled>
+        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving." data-vl-checked></vl-cookie-consent-opt-in>
+      </vl-cookie-consent>
     </template>
   </test-fixture>
 
   <test-fixture id="vl-cookie-consent-opt-in-socialmedia-required-fixture">
     <template>
-      <vl-cookie-consent data-vl-auto-opt-in-functional-disabled data-vl-opt-in-socialmedia data-vl-opt-in-socialmedia-label="socialemedia media"
-        data-vl-opt-in-socialmedia-description="socialemedia media opt-in beschrijving"
-        data-vl-opt-in-socialmedia-required></vl-cookie-consent>
+      <vl-cookie-consent data-vl-auto-opt-in-functional-disabled>
+        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving." data-vl-required></vl-cookie-consent-opt-in>
+      </vl-cookie-consent>
     </template>
   </test-fixture>
 
@@ -193,52 +194,54 @@
       test('bevat standaard een functionele opt-in', () => {
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        const optInDescription = optInFormGridColumn.querySelector('[is="vl-form-annotation"]');
-        should.exist(optInCheckbox);
-        assert.isTrue(optInCheckbox.hasAttribute('disabled'));
-        assert.isTrue(optInCheckbox.hasAttribute('checked'));
-        assert.equal(optInCheckbox.getAttribute('label'), 'Noodzakelijke cookies toestaan (verplicht)');
-        assert.equal(optInDescription.textContent, 'Noodzakelijke cookies helpen een website bruikbaarder te maken, door basisfuncties als paginanavigatie en toegang tot beveiligde gedeelten van de website mogelijk te maken. Zonder deze cookies kan de website niet naar behoren werken.');
-        assert.isTrue(optInDescription.hasAttribute('block'));
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('[is="vl-form-column"]:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        should.exist(optIn);
+        assert.isTrue(optIn.hasAttribute('data-vl-required'));
+        assert.isTrue(optIn.hasAttribute('data-vl-checked'));
+        assert.equal(optIn.getAttribute('data-vl-label'), 'Noodzakelijke cookies toestaan (verplicht)');
+        assert.equal(optIn.getAttribute('data-vl-description'), 'Noodzakelijke cookies helpen een website bruikbaarder te maken, door basisfuncties als paginanavigatie en toegang tot beveiligde gedeelten van de website mogelijk te maken. Zonder deze cookies kan de website niet naar behoren werken.');
       });
 
       test('aan de cookie-consent modal kan een extra opt-in toegevoegd worden met label en beschrijving', () => {
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        const optInDescription = optInFormGridColumn.querySelector('[is="vl-form-annotation"]');
-        should.exist(optInCheckbox);
-        assert.isFalse(optInCheckbox.hasAttribute('checked'));
-        assert.isFalse(optInCheckbox.hasAttribute('disabled'));
-        assert.equal(optInCheckbox.getAttribute('label'), cookieConsent.getAttribute('data-vl-opt-in-socialmedia-label'));
-        assert.equal(optInDescription.textContent, cookieConsent.getAttribute('data-vl-opt-in-socialmedia-description'));
-        assert.isTrue(optInDescription.hasAttribute('block'));
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        should.exist(optIn);
+        assert.isFalse(optIn.hasAttribute('data-vl-checked'));
+        assert.isFalse(optIn.hasAttribute('data-vl-required'));
+        assert.equal(optIn.getAttribute('data-vl-label'), 'Sociale media');
+        assert.equal(optIn.getAttribute('data-vl-description'), 'Sociale media opt-in beschrijving.');
       });
 
       test('van een extra opt-in kan bepaald worden of het standaard aangevinkt staat', () => {
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-checked-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        assert.isTrue(optInCheckbox.hasAttribute('checked'));
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        assert.isTrue(optIn.hasAttribute('data-vl-checked'));
       });
 
       test('van een extra opt-in kan bepaald worden of het verplicht is en bijgevolg niet wijzigbaar is', () => {
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-required-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        assert.isTrue(optInCheckbox.hasAttribute('disabled'));
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGrid.querySelector('vl-cookie-consent-opt-in');
+        assert.isTrue(optIn.hasAttribute('data-vl-required'));
       });
 
       test('er kan een callback toegevoegd worden aan een extra opt-in die aangeroepen wordt wanneer de opt-in optie geactiveerd wordt', (done) => {
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        const optInCheckbox = optIn.shadowRoot.querySelector('vl-checkbox');
         cookieConsent.addOptInActivatedCallback('socialmedia', done);
         optInCheckbox.toggle();
         cookieConsent.close();
@@ -247,8 +250,9 @@
       test('er kan een callback toegevoegd worden aan een extra opt-in die aangeroepen wordt wanneer de opt-in optie verplicht is', (done) => {
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-required-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
         cookieConsent.addOptInActivatedCallback('socialmedia', done);
         cookieConsent.close();
       });
@@ -256,8 +260,9 @@
       test('er kan een callback toegevoegd worden aan een extra opt-in die aangeroepen wordt wanneer de opt-in optie gedeactiveerd wordt', (done) => {
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
         cookieConsent.addOptInDeactivatedCallback('socialmedia', done);
         cookieConsent.close();
       });
@@ -274,34 +279,31 @@
       test('een extra opt-in kan ook programmatisch toegevoegd worden', () => {
         const cookieConsent = fixture('vl-cookie-consent-auto-opt-in-functional-disabled-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        let optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        let optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        let optInDescription = optInFormGridColumn.querySelector('[is="vl-form-annotation"]');
-        should.not.exist(optInCheckbox);
-        should.not.exist(optInDescription);
-        const optIn = {
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        let formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        let optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        should.not.exist(optIn);
+        const optInSocialeMedia = {
           name: 'socialmedia',
           label: 'Sociale media',
           description: 'Sociale media beschrijving',
           value: true,
           required: false
         };
-        cookieConsent.addOptIn(optIn);
-        optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        optInDescription = optInFormGridColumn.querySelector('[is="vl-form-annotation"]');
-        should.exist(optInCheckbox);
-        should.exist(optInDescription);
-        assert.isTrue(optInCheckbox.hasAttribute('checked'));
-        assert.isFalse(optInCheckbox.hasAttribute('disabled'));
-        assert.equal(optInCheckbox.getAttribute('label'), optIn.label);
-        assert.equal(optInDescription.textContent, optIn.description);
+        cookieConsent.addOptIn(optInSocialeMedia);
+        formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        should.exist(optIn);
+        assert.isTrue(optIn.hasAttribute('data-vl-checked'));
+        assert.isFalse(optIn.hasAttribute('data-vl-required'));
+        assert.equal(optIn.getAttribute('data-vl-label'), optInSocialeMedia.label);
+        assert.equal(optIn.getAttribute('data-vl-description'), optInSocialeMedia.description);
       });
 
       test('een extra opt-in kan ook programmatisch toegevoegd worden met activated callback', (done) => {
         const cookieConsent = fixture('vl-cookie-consent-auto-opt-in-functional-disabled-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optIn = {
+        cookieConsent.addOptIn({
           name: 'socialmedia',
           label: 'Sociale media',
           description: 'Sociale media beschrijving',
@@ -310,11 +312,12 @@
           callback: {
             activated: () => done()
           }
-        };
-        cookieConsent.addOptIn(optIn);
+        });
         cookieConsent.open();
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        const optInCheckbox = optIn.shadowRoot.querySelector('vl-checkbox');
         optInCheckbox.toggle();
         cookieConsent.close();
       });
@@ -322,7 +325,7 @@
       test('een extra opt-in kan ook programmatisch toegevoegd worden met deactivated callback', (done) => {
         const cookieConsent = fixture('vl-cookie-consent-auto-opt-in-functional-disabled-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        const optIn = {
+        cookieConsent.addOptIn({
           name: 'socialmedia',
           label: 'Sociale media',
           description: 'Sociale media beschrijving',
@@ -331,11 +334,12 @@
           callback: {
             deactivated: () => done()
           }
-        };
-        cookieConsent.addOptIn(optIn);
+        });
         cookieConsent.open();
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        const optInCheckbox = optIn.shadowRoot.querySelector('vl-checkbox');
         optInCheckbox.toggle();
         cookieConsent.close();
       });
@@ -343,37 +347,31 @@
       test('een extra opt-in kan ook nog programmatisch toegevoegd worden nadat de modal al geopend werd', () => {
         const cookieConsent = fixture('vl-cookie-consent-auto-opt-in-functional-disabled-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        let optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        let optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        let optInDescription = optInFormGridColumn.querySelector('[is="vl-form-annotation"]');
-        should.not.exist(optInCheckbox);
-        should.not.exist(optInDescription);
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        let formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        let optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        should.not.exist(optIn);
         cookieConsent.open();
-        const optIn = {
+        cookieConsent.addOptIn({
           name: 'socialmedia',
-        };
-        cookieConsent.addOptIn(optIn);
-        optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        optInDescription = optInFormGridColumn.querySelector('[is="vl-form-annotation"]');
-        should.exist(optInCheckbox);
-        should.exist(optInDescription);
+        });
+        formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        should.exist(optIn);
       });
 
       test('een extra opt-in kan slechts één keer programmatisch toegevoegd worden', () => {
         const cookieConsent = fixture('vl-cookie-consent-auto-opt-in-functional-disabled-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        let optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        let optInCheckboxes = optInFormGridColumn.querySelectorAll('vl-checkbox');
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
         cookieConsent.addOptIn({
           name: 'socialmedia'
         });
         cookieConsent.addOptIn({
           name: 'socialmedia'
         });
-        optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        optInCheckboxes = optInFormGridColumn.querySelectorAll('vl-checkbox');
-        assert.lengthOf(optInCheckboxes, 1);
+        const optIns = formGrid.querySelectorAll('.vl-form-column vl-cookie-consent-opt-in');
+        assert.lengthOf(optIns, 1);
       });
 
       test('de cookies die via de cookie-consent modal gezet zijn kunnen altijd manueel gereset worden', () => {
@@ -397,18 +395,20 @@
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-checked-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         const button = modal.querySelector('button');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        const optInCheckbox = optIn.shadowRoot.querySelector('vl-checkbox');
         const cookieConsentCookieName = cookieConsent._cookiePrefix + cookieConsent._cookieConsentCookieName;
         const cookieConsentDateCookieName = cookieConsent._cookiePrefix + cookieConsent._cookieConsentDateCookieName;
         const cookieConsentsocialmediaCookieName = cookieConsent._cookiePrefix + 'socialmedia';
-        assert.isTrue(optInCheckbox.hasAttribute('checked'));
+        assert.isTrue(optIn.hasAttribute('data-vl-checked'));
         optInCheckbox.toggle();
         button.click();
         assert.include(document.cookie, cookieConsentsocialmediaCookieName + '=false');
         cookieConsent.reset();
         cookieConsent.open();
-        assert.isTrue(optInCheckbox.hasAttribute('checked'));
+        assert.isTrue(optIn.hasAttribute('data-vl-checked'));
       });
 
       test('de opt-in optie met checked waarde wordt niet aangevinkt indien de gebruiker eerder de opt-in optie uitgeschakeld heeft', () => {
@@ -416,9 +416,10 @@
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-checked-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         const button = modal.querySelector('button');
-        const optInFormGridColumn = modal.querySelector('[is="vl-form-column"]:last-child');
-        const optInCheckbox = optInFormGridColumn.querySelector('vl-checkbox');
-        assert.isFalse(optInCheckbox.hasAttribute('checked'));
+        const formGrid = modal.querySelector('[is="vl-form-grid"]');
+        const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
+        const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
+        assert.isFalse(optIn.hasAttribute('data-vl-checked'));
       });
 
       test('wanneer de cookie-consent modal ooit al eens gesloten werd, maar de cookie-consent reset datum niet bestaat, zal de cookie-consent modal opnieuw geopend worden', () => {

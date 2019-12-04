@@ -11,18 +11,97 @@ customElements.whenDefined('vl-modal').then(() => {
 });
 
 /**
+ * VlCookieConsentOptIn
+ * @class
+ * @classdesc De cookie consent opt-in geeft de gebruiker om één specifiek soort van cookies te accepteren of te weigeren.
+ * 
+ * @extends VlElement
+ * 
+ * @property {boolean} data-vl-label - Attribuut bepaalt het label van de opt-in.
+ * @property {boolean} data-vl-description - Attribuut bepaalt de beschrijving van de opt-in.
+ * @property {boolean} data-vl-checked - Attribuut bepaalt of de opt-in standaard aangevinkt staat.
+ * @property {boolean} data-vl-required - Attribuut bepaalt of de opt-in verplicht is en bijgevolg aangevinkt staat en niet wijzigbaar is.
+ * 
+ * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/releases/latest|Release notes}
+ * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues|Issues}
+ * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent.html|Demo}
+ * 
+ */
+export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
+    static get _observedAttributes() {
+        return ['data-vl-label', 'data-vl-description', 'data-vl-checked', 'data-vl-required'];
+    }
+
+    constructor() {
+        super(`
+            <style>
+                @import '/node_modules/vl-ui-form-grid/style.css';
+                @import '/node_modules/vl-ui-form-message/style.css';
+            </style>
+            <div>
+                <vl-checkbox></vl-checkbox>
+            </div>
+        `);
+    }
+
+    get checked() {
+        return this._checkboxElement.checked;
+    }
+
+    get _checkboxElement() {
+        return this._element.querySelector('vl-checkbox');
+    }
+
+    get _descriptionElement() {
+        return this._element.querySelector('#description');
+    }
+
+    _getDescriptionTemplate(description) {
+        return this._template(`
+            <p id="description" is="vl-form-annotation" block>${description}</p>
+        `);
+    }
+
+    _data_vl_labelChangedCallback(oldValue, newValue) {
+        this._checkboxElement.setAttribute('label', newValue);
+    }
+
+    _data_vl_descriptionChangedCallback(oldValue, newValue) {
+        if (newValue) {
+            if (this._descriptionElement) {
+                this._descriptionElement.textContent = newValue;
+            } else {
+                this._element.appendChild(this._getDescriptionTemplate(newValue));
+            }
+        } else {
+            this._descriptionElement.remove();
+        }
+    }
+
+    _data_vl_checkedChangedCallback(oldValue, newValue) {
+        if (newValue != undefined) {
+            this._checkboxElement.setAttribute('checked', '');
+        }
+    }
+
+    _data_vl_requiredChangedCallback(oldValue, newValue) {
+        if (newValue != undefined) {
+            this._checkboxElement.setAttribute('checked', '');
+            this._checkboxElement.setAttribute('disabled', '');
+        }
+    }
+}
+
+/**
  * VlCookieConsent
  * @class
- * @classdesc De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.
+ * @classdesc De cookie consent kan gebruikt worden om de gebruiker te informeren over al de cookies die gebruikt worden.
  * 
  * @extends VlElement
  * 
  * @property {boolean} data-vl-auto-open-disabled - Attribuut wordt gebruikt om te voorkomen dat de cookie consent modal onmiddellijk gautomatiseerd geopend wordt.
  * @property {boolean} data-vl-auto-opt-in-functional-disabled - Attribuut wordt gebruikt om de niet wijzigbare functionele opt-in optie te deactiveren.
  * @property {boolean} data-vl-analytics - Attribuut wordt gebruikt om het verwerken van gebruikersstatistieken te activeren.
- * @property {boolean} data-vl-opt-in-* - Attribuut zal een opt-in `*` activeren.
- * @property {boolean} data-vl-opt-in-*-label - Attribuut bepaalt het label van de opt-in `*`.
- * @property {boolean} data-vl-opt-in-*-description - Attribuut bepaalt de beschrijving van de opt-in `*`.
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues|Issues}
@@ -36,10 +115,6 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
 
     static get _attributePrefix() {
         return 'data-vl-';
-    }
-
-    static get _optInAttributePrefix() {
-        return VlCookieConsent._attributePrefix + "opt-in-";
     }
 
     constructor() {
@@ -68,17 +143,17 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
                 </div>
             </vl-modal>
         `);
+        
         this._optIns = {};
         this._cookieConsentCookieName = 'cookie-consent';
         this._cookieConsentDateCookieName = 'cookie-consent-date';
         this._cookieConsentResetDate = new Date('2019/05/14');
-    }
 
-    connectedCallback() {
         if (!this._isFunctionalOptInDisabled) {
             this._addFunctionalOptIn();
         }
         this._processOptIns();
+        this._element.appendChild(this._getButtonTemplate());
         if (!this._isAutoOpenDisabled) {
             this._open();
         }
@@ -184,7 +259,11 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
     }
 
     get _formGridElement() {
-        return this._element.querySelector("[is='vl-form-grid']");
+        return this._element.querySelector('[is="vl-form-grid"]');
+    }
+
+    get _optInElementen() {
+        return this.querySelectorAll('vl-cookie-consent-opt-in');
     }
 
     _getButtonTemplate() {
@@ -198,18 +277,16 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
         return template;
     }
 
-    _getOptInsTemplate(optIn) {
+    _getOptInTemplate(optIn) {
         if (optIn) {
-            const checked = (optIn.value || optIn.required) ? 'checked' : '';
-            const disabled = optIn.required ? 'disabled' : '';
-            const checkbox = `<vl-checkbox label="${optIn.label}" ${checked} ${disabled}></vl-checkbox>`;
+            const checked = (optIn.value || optIn.required) ? 'data-vl-checked' : '';
+            const required = optIn.required ? 'data-vl-required' : '';
             const template = this._template(`
                 <div is="vl-form-column">
-                    ${checkbox}
-                    <p is="vl-form-annotation" block>${optIn.description}</p>
+                    <vl-cookie-consent-opt-in data-vl-label="${optIn.label}" data-vl-description="${optIn.description}" ${checked} ${required}></vl-cookie-consent-opt-in>
                 </div>
             `);
-            template.querySelector('vl-checkbox').addEventListener('input', (event) => {
+            template.querySelector('vl-cookie-consent-opt-in').addEventListener('input', (event) => {
                 const checked = event && event.currentTarget ? event.currentTarget.checked : false;
                 optIn.value = checked;
             });
@@ -224,44 +301,24 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
     }
 
     _resetOptInValue(optIn) {
-        optIn.value = this._getOptInCheckedAttribute(optIn.name);
-    }
-
-    _getOptInAttribute(name, attribute) {
-        return this.getAttribute(VlCookieConsent._optInAttributePrefix + name + '-' + attribute);
-    }
-
-    _getOptInLabelAttribute(name) {
-        return this._getOptInAttribute(name, 'label') || name;
-    }
-
-    _getOptInDescriptionAttribute(name) {
-        return this._getOptInAttribute(name, 'description');
-    }
-
-    _getOptInCheckedAttribute(name) {
-        return this._getOptInAttribute(name, 'checked') != undefined;
-    }
-
-    _getOptInRequiredAttribute(name) {
-        return this._getOptInAttribute(name, 'required') != undefined;
+        const match = [... this._optInElementen].find((optIn) => {
+            return optIn.id = optIn.name;
+        });
+        if (match) {
+            optIn.value = optIn.getAttribute(VlCookieConsent._attributePrefix + 'checked') != undefined;
+        }
     }
 
     _processOptIns() {
-        [... this.attributes].forEach((attribute) => {
-            const matches = /^data-vl-opt-in-([^-]+)(-(.+))?$/.exec(attribute.name);
-            if (matches) {
-                const name = matches[1];
-                this._processOptIn({
-                    name: name,
-                    label: this._getOptInLabelAttribute(name),
-                    description: this._getOptInDescriptionAttribute(name),
-                    value: this._getOptInCheckedAttribute(name),
-                    required: this._getOptInRequiredAttribute(name)
-                });
-            }
+        this._optInElementen.forEach((optIn) => {
+            this._processOptIn({
+                name: optIn.id,
+                label: optIn.getAttribute(VlCookieConsent._attributePrefix + 'label'),
+                description: optIn.getAttribute(VlCookieConsent._attributePrefix + 'description'),
+                value: optIn.getAttribute(VlCookieConsent._attributePrefix + 'checked') != undefined,
+                required: optIn.getAttribute(VlCookieConsent._attributePrefix + 'required') != undefined
+            });
         });
-        this._element.appendChild(this._getButtonTemplate());
     }
 
     _processOptIn({ name, label, description, value, required, callback: { activated, deactivated } = {} }) {
@@ -278,7 +335,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
                 },
                 'required': !!required
             };
-            const optInTemplate = this._getOptInsTemplate(optIn);
+            const optInTemplate = this._getOptInTemplate(optIn);
             if (optInTemplate) {
                 this._formGridElement.appendChild(optInTemplate);
             }
@@ -374,3 +431,6 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
         }
     }
 }
+
+
+define('vl-cookie-consent-opt-in', VlCookieConsentOptIn);

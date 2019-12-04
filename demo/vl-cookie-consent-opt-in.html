@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html class="js">
+
+<head>
+    <title>vl-cookie-consent voorbeeld</title>
+    <script type="module" src="demo.js"></script>
+    <script type="module" src="../node_modules/vl-ui-button/vl-button.js"></script>
+    <script type="module" src="../vl-cookie-consent.src.js"></script>
+</head>
+
+<body>
+    <h1>vl-ui-cookie-consent-opt-in demo</h1>
+
+    <div>
+        <h2>Cookie-consent opt-in met label</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent-opt-in data-vl-label="Sociale media"&gt;&lt;/vl-cookie-consent-opt-in&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent-opt-in data-vl-label="Sociale media"></vl-cookie-consent-opt-in>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent opt-in met label en beschrijving</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Sociale media beschrijving."&gt;&lt;/vl-cookie-consent-opt-in&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Sociale media beschrijving."></vl-cookie-consent-opt-in>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent opt-in met label en standaard aangevinkt</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-checked&gt;&lt;/vl-cookie-consent-opt-in&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-checked></vl-cookie-consent-opt-in>
+        </div>
+    </div>
+
+    <div>
+        <h2>Cookie-consent opt-in met label en verplicht</h2>
+        <pre>
+            <code class="line-numbers language-markup">
+                &lt;vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-required&gt;&lt;/vl-cookie-consent-opt-in&gt;
+            </code>
+        </pre>
+        <div class="demo">
+            <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-required></vl-cookie-consent-opt-in>
+        </div>
+    </div>
+</body>
+
+</html>
