@@ -17,8 +17,8 @@ customElements.whenDefined('vl-modal').then(() => {
  * 
  * @extends VlElement
  * 
- * @property {boolean} data-vl-open - Attribuut wordt gebruikt om de cookie consent modal onmiddellijk gautomatiseerd te openen.
- * @property {boolean} data-vl-opt-in-functional - Attribuut wordt gebruikt om de niet wijzigbare functionele opt-in optie te activeren.
+ * @property {boolean} data-vl-auto-open-disabled - Attribuut wordt gebruikt om te voorkomen dat de cookie consent modal onmiddellijk gautomatiseerd geopend wordt.
+ * @property {boolean} data-vl-auto-opt-in-functional-disabled - Attribuut wordt gebruikt om de niet wijzigbare functionele opt-in optie te deactiveren.
  * @property {boolean} data-vl-analytics - Attribuut wordt gebruikt om het verwerken van gebruikersstatistieken te activeren.
  * @property {boolean} data-vl-opt-in-* - Attribuut zal een opt-in `*` activeren.
  * @property {boolean} data-vl-opt-in-*-label - Attribuut bepaalt het label van de opt-in `*`.
