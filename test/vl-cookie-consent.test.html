@@ -57,10 +57,10 @@
     </template>
   </test-fixture>
 
-  <test-fixture id="vl-cookie-consent-opt-in-socialmedia-required-fixture">
+  <test-fixture id="vl-cookie-consent-opt-in-socialmedia-mandatory-fixture">
     <template>
       <vl-cookie-consent data-vl-auto-opt-in-functional-disabled>
-        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving." data-vl-required></vl-cookie-consent-opt-in>
+        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving." data-vl-mandatory></vl-cookie-consent-opt-in>
       </vl-cookie-consent>
     </template>
   </test-fixture>
@@ -198,7 +198,7 @@
         const formGridColumn = formGrid.querySelector('[is="vl-form-column"]:last-child');
         const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
         should.exist(optIn);
-        assert.isTrue(optIn.hasAttribute('data-vl-required'));
+        assert.isTrue(optIn.hasAttribute('data-vl-mandatory'));
         assert.isTrue(optIn.hasAttribute('data-vl-checked'));
         assert.equal(optIn.getAttribute('data-vl-label'), 'Noodzakelijke cookies toestaan (verplicht)');
         assert.equal(optIn.getAttribute('data-vl-description'), 'Noodzakelijke cookies helpen een website bruikbaarder te maken, door basisfuncties als paginanavigatie en toegang tot beveiligde gedeelten van de website mogelijk te maken. Zonder deze cookies kan de website niet naar behoren werken.');
@@ -212,7 +212,7 @@
         const optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
         should.exist(optIn);
         assert.isFalse(optIn.hasAttribute('data-vl-checked'));
-        assert.isFalse(optIn.hasAttribute('data-vl-required'));
+        assert.isFalse(optIn.hasAttribute('data-vl-mandatory'));
         assert.equal(optIn.getAttribute('data-vl-label'), 'Sociale media');
         assert.equal(optIn.getAttribute('data-vl-description'), 'Sociale media opt-in beschrijving.');
       });
@@ -227,12 +227,12 @@
       });
 
       test('van een extra opt-in kan bepaald worden of het verplicht is en bijgevolg niet wijzigbaar is', () => {
-        const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-required-fixture');
+        const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-mandatory-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         const formGrid = modal.querySelector('[is="vl-form-grid"]');
         const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
         const optIn = formGrid.querySelector('vl-cookie-consent-opt-in');
-        assert.isTrue(optIn.hasAttribute('data-vl-required'));
+        assert.isTrue(optIn.hasAttribute('data-vl-mandatory'));
       });
 
       test('er kan een callback toegevoegd worden aan een extra opt-in die aangeroepen wordt wanneer de opt-in optie geactiveerd wordt', (done) => {
@@ -248,7 +248,7 @@
       });
 
       test('er kan een callback toegevoegd worden aan een extra opt-in die aangeroepen wordt wanneer de opt-in optie verplicht is', (done) => {
-        const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-required-fixture');
+        const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-mandatory-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         const formGrid = modal.querySelector('[is="vl-form-grid"]');
         const formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
@@ -288,14 +288,14 @@
           label: 'Sociale media',
           description: 'Sociale media beschrijving',
           value: true,
-          required: false
+          mandatory: false
         };
         cookieConsent.addOptIn(optInSocialeMedia);
         formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
         optIn = formGridColumn.querySelector('vl-cookie-consent-opt-in');
         should.exist(optIn);
         assert.isTrue(optIn.hasAttribute('data-vl-checked'));
-        assert.isFalse(optIn.hasAttribute('data-vl-required'));
+        assert.isFalse(optIn.hasAttribute('data-vl-mandatory'));
         assert.equal(optIn.getAttribute('data-vl-label'), optInSocialeMedia.label);
         assert.equal(optIn.getAttribute('data-vl-description'), optInSocialeMedia.description);
       });
@@ -308,7 +308,7 @@
           label: 'Sociale media',
           description: 'Sociale media beschrijving',
           value: false,
-          required: false,
+          mandatory: false,
           callback: {
             activated: () => done()
           }
@@ -330,7 +330,7 @@
           label: 'Sociale media',
           description: 'Sociale media beschrijving',
           value: true,
-          required: false,
+          mandatory: false,
           callback: {
             deactivated: () => done()
           }
