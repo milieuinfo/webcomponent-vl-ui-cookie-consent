@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-cookie-consent",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.",
   "scripts": {
     "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
