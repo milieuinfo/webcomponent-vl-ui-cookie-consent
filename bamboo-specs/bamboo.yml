@@ -2,8 +2,8 @@
 version: 2
 plan:
   project-key: WEBCO
-  key: VLCOOKIECONSENT
-  name: webcomponent-vl-cookie-consent
+  key: VLUICOOKIECONSENT
+  name: webcomponent-vl-ui-cookie-consent
 
 triggers:
   - polling: 130
@@ -48,7 +48,7 @@ Release:
 ---
 version: 2
 plan:
-  key: VLCOOKIECONSENT
+  key: VLUICOOKIECONSENT
 
 plan-permissions:
   - groups:
