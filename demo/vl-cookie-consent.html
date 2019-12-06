@@ -81,13 +81,13 @@
         <pre>
             <code class="line-numbers language-markup">
                 &lt;vl-cookie-consent id="cookie-consent-5" data-vl-auto-open-disabled data-vl-opt-in-functional&gt;
-                    &lt;vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Beschrijving van de sociale media cookies." data-vl-required&gt;&lt;/vl-cookie-consent-opt-in&gt;
+                    &lt;vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Beschrijving van de sociale media cookies." data-vl-mandatory&gt;&lt;/vl-cookie-consent-opt-in&gt;
                 &lt;/vl-cookie-consent&gt;
             </code>
         </pre>
         <div class="demo">
             <vl-cookie-consent id="cookie-consent-5" data-vl-auto-open-disabled data-vl-opt-in-functional>
-                <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Beschrijving van de sociale media cookies." data-vl-required></vl-cookie-consent-opt-in>
+                <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Beschrijving van de sociale media cookies." data-vl-mandatory></vl-cookie-consent-opt-in>
             </vl-cookie-consent>
             <button is="vl-button" onclick="document.querySelector('#cookie-consent-5').open();">Open
                 cookie-consent</button>
@@ -104,7 +104,7 @@
                     label: 'Sociale media',
                     description: 'Sociale media beschrijving',
                     value: true,
-                    required: false,
+                    mandatory: false,
                     callbacks: {
                         activated: () =&gt; {},
                         deactivated: () =&gt; {}
@@ -121,7 +121,7 @@
                 label: 'Sociale media',
                 description: 'Sociale media beschrijving',
                 value: true,
-                required: false,
+                mandatory: false,
                 callbacks: {
                     activated: () => {},
                     deactivated: () => {}

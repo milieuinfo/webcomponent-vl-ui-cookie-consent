@@ -35,9 +35,9 @@
     </template>
   </test-fixture>
 
-  <test-fixture id="vl-cookie-consent-opt-in-required-fixture">
+  <test-fixture id="vl-cookie-consent-opt-in-mandatory-fixture">
     <template>
-      <vl-cookie-consent-opt-in data-vl-required></vl-cookie-consent-opt-in>
+      <vl-cookie-consent-opt-in data-vl-mandatory></vl-cookie-consent-opt-in>
     </template>
   </test-fixture>
 
@@ -71,8 +71,8 @@
         assert.isTrue(checkbox.checked);
       });
 
-      test('zal de checkbox standaard aanvinken en op disabled zetten indien het required attribuut aanwezig is', () => {
-        const cookieConsent = fixture('vl-cookie-consent-opt-in-required-fixture');
+      test('zal de checkbox standaard aanvinken en op disabled zetten indien het mandatory attribuut aanwezig is', () => {
+        const cookieConsent = fixture('vl-cookie-consent-opt-in-mandatory-fixture');
         const checkbox = cookieConsent.shadowRoot.querySelector('vl-checkbox');
         assert.isTrue(checkbox.hasAttribute('checked'));
         assert.isTrue(checkbox.hasAttribute('disabled'));

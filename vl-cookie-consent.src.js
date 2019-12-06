@@ -20,7 +20,7 @@ customElements.whenDefined('vl-modal').then(() => {
  * @property {boolean} data-vl-label - Attribuut bepaalt het label van de opt-in.
  * @property {boolean} data-vl-description - Attribuut bepaalt de beschrijving van de opt-in.
  * @property {boolean} data-vl-checked - Attribuut bepaalt of de opt-in standaard aangevinkt staat.
- * @property {boolean} data-vl-required - Attribuut bepaalt of de opt-in verplicht is en bijgevolg aangevinkt staat en niet wijzigbaar is.
+ * @property {boolean} data-vl-mandatory - Attribuut bepaalt of de opt-in verplicht is en bijgevolg aangevinkt staat en niet wijzigbaar is.
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues|Issues}
@@ -29,7 +29,7 @@ customElements.whenDefined('vl-modal').then(() => {
  */
 export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
     static get _observedAttributes() {
-        return ['data-vl-label', 'data-vl-description', 'data-vl-checked', 'data-vl-required'];
+        return ['data-vl-label', 'data-vl-description', 'data-vl-checked', 'data-vl-mandatory'];
     }
 
     constructor() {
@@ -84,7 +84,7 @@ export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
         }
     }
 
-    _data_vl_requiredChangedCallback(oldValue, newValue) {
+    _data_vl_mandatoryChangedCallback(oldValue, newValue) {
         if (newValue != undefined) {
             this._checkboxElement.setAttribute('checked', '');
             this._checkboxElement.setAttribute('disabled', '');
@@ -201,7 +201,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
      * @param {string} optIn.label - Het label van de opt-in optie die getoond zal worden aan de gebruiker.
      * @param {string} optIn.description - De beschrijving van de opt-in optie die getoond zal worden aan de gebruiker.
      * @param {boolean} optIn.value - De standaard opt-in optie waarde die bepaalt of de opt-in standaard geactiveerd wordt.
-     * @param {boolean} optIn.required - Indien de opt-in verplicht is, zal de opt-in standaard geactiveerd worden en kan deze niet gewijzigd worden door de gebruiker.
+     * @param {boolean} optIn.mandatory - Indien de opt-in verplicht is, zal de opt-in standaard geactiveerd worden en kan deze niet gewijzigd worden door de gebruiker.
      * @param {function} optIn.callback - De callback functies.
      * @param {function} optIn.callback.activated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in geactiveerd werd.
      * @param {function} optIn.callback.deactivated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in gedactiveerd werd.
@@ -279,11 +279,11 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
 
     _getOptInTemplate(optIn) {
         if (optIn) {
-            const checked = (optIn.value || optIn.required) ? 'data-vl-checked' : '';
-            const required = optIn.required ? 'data-vl-required' : '';
+            const checked = (optIn.value || optIn.mandatory) ? 'data-vl-checked' : '';
+            const mandatory = optIn.mandatory ? 'data-vl-mandatory' : '';
             const template = this._template(`
                 <div is="vl-form-column">
-                    <vl-cookie-consent-opt-in data-vl-label="${optIn.label}" data-vl-description="${optIn.description}" ${checked} ${required}></vl-cookie-consent-opt-in>
+                    <vl-cookie-consent-opt-in data-vl-label="${optIn.label}" data-vl-description="${optIn.description}" ${checked} ${mandatory}></vl-cookie-consent-opt-in>
                 </div>
             `);
             template.querySelector('vl-cookie-consent-opt-in').addEventListener('input', (event) => {
@@ -316,12 +316,12 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
                 label: optIn.getAttribute(VlCookieConsent._attributePrefix + 'label'),
                 description: optIn.getAttribute(VlCookieConsent._attributePrefix + 'description'),
                 value: optIn.getAttribute(VlCookieConsent._attributePrefix + 'checked') != undefined,
-                required: optIn.getAttribute(VlCookieConsent._attributePrefix + 'required') != undefined
+                mandatory: optIn.getAttribute(VlCookieConsent._attributePrefix + 'mandatory') != undefined
             });
         });
     }
 
-    _processOptIn({ name, label, description, value, required, callback: { activated, deactivated } = {} }) {
+    _processOptIn({ name, label, description, value, mandatory, callback: { activated, deactivated } = {} }) {
         if (!this._bevatOptIn(name)) {
             const storedValue = this._getCookie(name);
             const optIn = this._optIns[name] = {
@@ -333,7 +333,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
                     'activated': activated,
                     'deactivated': deactivated
                 },
-                'required': !!required
+                'mandatory': !!mandatory
             };
             const optInTemplate = this._getOptInTemplate(optIn);
             if (optInTemplate) {
@@ -345,7 +345,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
     _submitOptIns() {
         Object.values(this._optIns).forEach((optIn) => {
             if (optIn.callback) {
-                if (optIn.value || optIn.required) {
+                if (optIn.value || optIn.mandatory) {
                     if (optIn.callback.activated) {
                         optIn.callback.activated();
                     }
@@ -369,7 +369,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
             label: 'Noodzakelijke cookies toestaan (verplicht)',
             description: 'Noodzakelijke cookies helpen een website bruikbaarder te maken, door basisfuncties als paginanavigatie en toegang tot beveiligde gedeelten van de website mogelijk te maken. Zonder deze cookies kan de website niet naar behoren werken.',
             value: false,
-            required: true
+            mandatory: true
         });
     }
 
