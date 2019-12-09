@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-cookie-consent",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.",
   "scripts": {
     "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
@@ -11,7 +11,7 @@
     "release:prepare:build": "uglifyjs --compress --mangle --output vl-cookie-consent.js -- *.src.js",
     "release:prepare:imports": "npm run release:prepare:imports:core && npm run release:prepare:imports:src",
     "release:prepare:imports:core": "replace '/node_modules/vl-ui-core/vl-core.src.js' '/node_modules/vl-ui-core/vl-core.js' vl-cookie-consent.js",
-    "release:prepare:imports:src": "replace '/src/analytics.js' '/node_modules/vl-ui-modal/src/analytics.js' vl-cookie-consent.js",
+    "release:prepare:imports:src": "replace '/src/analytics.js' '/node_modules/vl-ui-cookie-consent/src/analytics.js' vl-cookie-consent.js",
     "release:prepare:css": "replace '\\.\\./style.css' '/node_modules/vl-ui-cookie-consent/style.css' vl-cookie-consent.js",
     "release:prepare:commit": "git add -f vl-cookie-consent.js && git commit --amend --no-edit && git pull",
     "release:testless": "np --yolo",
