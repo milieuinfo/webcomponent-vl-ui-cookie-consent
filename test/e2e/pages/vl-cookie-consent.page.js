@@ -1,4 +1,3 @@
-const VlCheckbox = require('../components/vl-checkbox');
 const { Page, Config } = require('vl-ui-core');
 
 class VlCookieConsentPage extends Page {

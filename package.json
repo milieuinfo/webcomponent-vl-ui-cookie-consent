@@ -43,7 +43,7 @@
   "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-cookie-consent#readme",
   "dependencies": {
     "vl-ui-button": "^1.3.2",
-    "vl-ui-checkbox": "^1.0.17",
+    "vl-ui-checkbox": "github:milieuinfo/webcomponent-vl-ui-checkbox#UIG-271",
     "vl-ui-core": "^2.2.5",
     "vl-ui-form-grid": "^1.0.12",
     "vl-ui-form-message": "^3.0.0",
@@ -51,7 +51,7 @@
   },
   "peerDependencies": {
     "vl-ui-button": "^1.3.1",
-    "vl-ui-checkbox": "^1.0.17",
+    "vl-ui-checkbox": "github:milieuinfo/webcomponent-vl-ui-checkbox#UIG-271",
     "vl-ui-form-message": "^3.0.0",
     "vl-ui-form-grid": "^1.0.12",
     "vl-ui-modal": "^1.0.14"

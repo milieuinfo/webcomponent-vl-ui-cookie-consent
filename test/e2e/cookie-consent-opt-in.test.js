@@ -9,5 +9,12 @@ describe('vl-cookie-consent-opt-in', async () => {
         return vlCookieConsentOptInPage.load();
     });
 
+    it('ik kan een opt-in met label aanvinken', async () => {
+        const optIn = await vlCookieConsentOptInPage.getConsentMetLabel();
+        await assert.eventually.isFalse(optIn.isOptedIn());
+        await optIn.optIn();
+        await assert.eventually.isTrue(optIn.isOptedIn());
+    });
+
     after(() => driver && driver.quit());
 });
