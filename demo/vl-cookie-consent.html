@@ -114,9 +114,9 @@
         </pre>
         <div class="demo">
             <vl-cookie-consent id="cookie-consent-6" data-vl-auto-open-disabled></vl-cookie-consent>
-            <button is="vl-button" onclick="document.querySelector('#cookie-consent-6').open();">Open
+            <button id="content-dynamic" is="vl-button" onclick="document.querySelector('#cookie-consent-6').open();">Open
                 cookie-consent</button>
-            <button id="consent-dynamic" is="vl-button" onclick="document.querySelector('#cookie-consent-6').addOptIn({
+            <button id="add-optIn" is="vl-button" onclick="document.querySelector('#cookie-consent-6').addOptIn({
                 name: 'socialmedia',
                 label: 'Sociale media',
                 description: 'Sociale media beschrijving',

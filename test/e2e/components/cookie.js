@@ -26,7 +26,7 @@ class Cookie {
     }
 
     async isSocialConsent() {
-        return await this._getCookieValue('vl-cookie-consent-social');
+        return await this._getCookieValue('vl-cookie-consent-socialmedia');
     }
 
 }

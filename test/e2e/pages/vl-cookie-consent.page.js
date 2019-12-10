@@ -29,6 +29,18 @@ class VlCookieConsentPage extends Page {
         return this._getConsent('#cookie-consent-3');
     }
 
+    async getExtraOptInDefaultConsent() {
+        return this._getConsent('#cookie-consent-4');
+    }
+
+    async getExtraOptInMandatoryConsent() {
+        return this._getConsent('#cookie-consent-5');
+    }
+
+    async getDynamicConsent() {
+        return this._getConsent('#cookie-consent-6');
+    }
+
     async openConsent() {
         return this._openConsent('#consent');
     }
@@ -50,6 +62,22 @@ class VlCookieConsentPage extends Page {
             }
         } catch {}
     }
+    async openConsentMetExtraDefaultOptIn() {
+        return (await this.driver.findElement(By.css('#consent-optIn-default')));
+    }
+
+    async openConsentMetExtraDefaultVerplicht() {
+        return (await this.driver.findElement(By.css('#consent-optIn-mandatory')));
+    }
+
+    async openConsentDynamic() {
+        return (await this.driver.findElement(By.css('#content-dynamic')));
+    }
+
+    async voegSocialeMediaOptInToe() {
+        return (await this.driver.findElement(By.css('#add-optIn')));
+    }
+
 }
 
 module.exports = VlCookieConsentPage;
