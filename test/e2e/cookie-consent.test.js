@@ -4,10 +4,9 @@ const { Cookies } = require('./components/cookie');
 
 describe('vl-cookie-consent', async () => {
     const vlCookieConsentPage = new VlCookieConsentPage(driver);
-    let cookies;
+    const cookies = new Cookies(driver);
 
     before(async () => {
-        cookies = await new Cookies(driver);
         await driver.manage().deleteAllCookies();
         return vlCookieConsentPage.load();
     });
@@ -52,7 +51,7 @@ describe('vl-cookie-consent', async () => {
 
         await assert.isTrue((await cookies.getCookieConsentCookie()).value);
         await assert.isNotNull((await cookies.getCookieConsentDateCookie()).value);
-        await assert.isFalse((await cookies.getCookieConsentOptedInFunctionalCookie()).value);
+        await assert.isUndefined((await cookies.getCookieConsentOptedInFunctionalCookie().value));
     });
 
     it('als gebruiker kan ik een cookie-consent met sociale media opt-in aanvaarden en zal er voor sociale media een cookie gezet worden', async () => {

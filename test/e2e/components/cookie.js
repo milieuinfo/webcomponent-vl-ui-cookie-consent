@@ -29,9 +29,11 @@ class Cookies {
 
 class Cookie {
     constructor(cookie) {
-        this._value = cookie.value;
-        delete cookie.value;
-        Object.assign(this, cookie);
+        if (cookie) {
+            this._value = cookie.value;
+            delete cookie.value;
+            Object.assign(this, cookie);
+        }
     }
 
     get value() {
