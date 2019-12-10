@@ -1,6 +1,6 @@
 const VlCookieConsent = require('../components/vl-cookie-consent');
 const { Page, Config } = require('vl-ui-core');
-const { By } = require('selenium-webdriver');
+const { By, until } = require('selenium-webdriver');
 
 class VlCookieConsentPage extends Page {
 
@@ -34,7 +34,7 @@ class VlCookieConsentPage extends Page {
     }
 
     async openConsentMetExtraOptIn() {
-        return (await this.driver.findElement(By.css('#consent-optIn-default'))).click();
+        return (await this.driver.findElement(By.css('#consent-optIn'))).click();
     }
 
 }

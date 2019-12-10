@@ -65,7 +65,8 @@ describe('vl-cookie-consent', async () => {
         await vlCookieConsentPage.openConsentMetExtraOptIn();
         const modal = await vlCookieConsentPage.getExtraOptInConsent();
         const optIn = await modal.getOptIn('Sociale media');
+        
         await optIn.optIn();
         await assert.eventually.isTrue(optIn.isSelected());
-    })
+    });
 });
