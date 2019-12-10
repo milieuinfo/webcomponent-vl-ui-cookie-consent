@@ -9,7 +9,6 @@ describe('vl-cookie-consent', async () => {
         await driver.manage().deleteAllCookies();
 
         const cookies = await new Cookie(driver);
-        
         await assert.eventually.isUndefined(cookies.isConsent());
         await assert.eventually.isUndefined(cookies.getConsentDate());
         await assert.eventually.isUndefined(cookies.isOptedInFunctional());
@@ -19,8 +18,8 @@ describe('vl-cookie-consent', async () => {
 
     it('als gebruiker kan ik de demo-pagina openen en krijg ik de opt-in modal te zien omdat de eerste consent geen auto-open-disabled attribuut heeft', async () => {
         const modal = await vlCookieConsentPage.getConsent();
-        
-        await assert.eventually.isTrue(modal.isDisplayed());        
+        await assert.eventually.isTrue(modal.isDisplayed()); 
+        await modal.bewaarKeuze();       
     });
 
     it('als gebruiker kan ik de auto-open-disabled modal bevestigen en worden de juiste cookies gezet', async () => {
@@ -65,8 +64,8 @@ describe('vl-cookie-consent', async () => {
         await vlCookieConsentPage.openConsentMetExtraOptIn();
         const modal = await vlCookieConsentPage.getExtraOptInConsent();
         const optIn = await modal.getOptIn('Sociale media');
-        
         await optIn.optIn();
-        await assert.eventually.isTrue(optIn.isSelected());
+        await assert.eventually.isTrue(optIn.isOptedIn());
+        await modal.bewaarKeuze();
     });
 });

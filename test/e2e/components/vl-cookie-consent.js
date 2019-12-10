@@ -4,7 +4,6 @@ const { By } = require('selenium-webdriver');
 const VlCookieConsentOptIn = require('../components/vl-cookie-consent-opt-in');
 
 class VlCookieConsent extends VlElement {
-
     async _getModal() {
         return new VlModal(this.driver, this.shadowRoot);
     }
@@ -20,7 +19,7 @@ class VlCookieConsent extends VlElement {
     }
 
     async bewaarKeuze() {
-     return (await this._getModal()).submit();
+        return (await this._getModal()).submit();
     }
 }
 

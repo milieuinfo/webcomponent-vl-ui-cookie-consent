@@ -3,7 +3,6 @@ const { VlCheckbox } = require('vl-ui-checkbox');
 const { By } = require('selenium-webdriver');
 
 class VlCookieConsentOptIn extends VlElement {
-
     async _getCheckbox() {
         const checkboxElement = await this.shadowRoot.findElement(By.css('vl-checkbox'));
         return new VlCheckbox(this.driver, checkboxElement);
