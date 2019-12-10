@@ -368,7 +368,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
             name: 'functional',
             label: 'Noodzakelijke cookies toestaan (verplicht)',
             description: 'Noodzakelijke cookies helpen een website bruikbaarder te maken, door basisfuncties als paginanavigatie en toegang tot beveiligde gedeelten van de website mogelijk te maken. Zonder deze cookies kan de website niet naar behoren werken.',
-            value: false,
+            value: true,
             mandatory: true
         });
     }

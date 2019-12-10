@@ -9,28 +9,28 @@ describe('vl-cookie-consent-opt-in', async () => {
         return vlCookieConsentOptInPage.load();
     });
 
-    it('ik kan een opt-in met label aanvinken', async () => {
+    it('als geberuiker kan ik een opt-in met label aanvinken', async () => {
         const optIn = await vlCookieConsentOptInPage.getConsentMetLabel();
         await assert.eventually.isFalse(optIn.isOptedIn());
         await optIn.optIn();
         await assert.eventually.isTrue(optIn.isOptedIn());
     });
 
-    it('ik kan een opt-in met label en beschrijving aanvinken', async () => {
+    it('als gebruiker kan ik een opt-in met label en beschrijving aanvinken', async () => {
         const optIn = await vlCookieConsentOptInPage.getConsentMetLabelEnBeschrijving();
         await assert.eventually.isFalse(optIn.isOptedIn());
         await optIn.optIn();
         await assert.eventually.isTrue(optIn.isOptedIn());
     });
 
-    it('ik kan een opt-in met label en standaard aangevinkt, uitvinken', async () => {
+    it('als gebruiker kan ik een opt-in met label en standaard aangevinkt, uitvinken', async () => {
         const optIn = await vlCookieConsentOptInPage.getConsentMetLabelEnAangevinkt();
         await assert.eventually.isTrue(optIn.isOptedIn());
         await optIn.optIn();
         await assert.eventually.isFalse(optIn.isOptedIn());
     });
 
-    it('ik kan een verplichte opt-in niet uitvinken', async () => {
+    it('als gebruiker kan ik kan een verplichte opt-in niet uitvinken', async () => {
         const optIn = await vlCookieConsentOptInPage.getConsentMetLabelEnVerplicht();
         await assert.eventually.isTrue(optIn.isOptedIn());
         await optIn.optIn();

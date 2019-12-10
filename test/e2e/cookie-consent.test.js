@@ -17,13 +17,13 @@ describe('vl-cookie-consent', async () => {
         return vlCookieConsentPage.load();
     });
 
-    it('als ik de demo-pagina open, krijg ik de opt-in modal te zien omdat de eerste consent geen auto-open-disabled attribuut heeft', async () => {
+    it('als gebruiker kan ik de demo-pagina openen en krijg ik de opt-in modal te zien omdat de eerste consent geen auto-open-disabled attribuut heeft', async () => {
         const modal = await vlCookieConsentPage.getConsent();
         
         await assert.eventually.isTrue(modal.isDisplayed());        
     });
 
-    it('als ik op \'Bewaar keuze\' klik in de auto-open-disabled modal, sluit de modal en worden de juiste cookies gezet', async () => {
+    it('als gebruiker kan ik de auto-open-disabled modal bevestigen en worden de juiste cookies gezet', async () => {
         const modal = await vlCookieConsentPage.getConsent();
         
         await assert.eventually.isTrue(modal.isDisplayed());        
@@ -36,7 +36,7 @@ describe('vl-cookie-consent', async () => {
         await assert.eventually.isTrue(cookies.isOptedInFunctional());
     });
 
-    it('als ik nogmaals toestemming geef, word de consent-date geupdate', async () => {
+    it('als gebruiker kan ik nogmaals toestemming geven en wordt de consent-date geupdate', async () => {
         await vlCookieConsentPage.openConsent();
         await (await vlCookieConsentPage.getConsent()).bewaarKeuze();
         
@@ -50,7 +50,7 @@ describe('vl-cookie-consent', async () => {
         assert.isAbove(date2, date1);
     });
 
-    it('als ik een cookie-consent zonder functionele opt-in aanvaard, word er enkel een consent en geen functional cookie gezet', async () => {
+    it('als gebruiker kan ik een cookie-consent zonder functionele opt-in aanvaarden en wordt er enkel een consent en geen functional cookie gezet', async () => {
         await vlCookieConsentPage.openConsentZonderFunctioneleOptIn();
         const modal = await vlCookieConsentPage.getNoFunctionalConsent();
         await modal.bewaarKeuze();
@@ -61,9 +61,8 @@ describe('vl-cookie-consent', async () => {
         await assert.eventually.isNotNull(cookies.getConsentDate());
     });
 
-    it('als ik een cookie-consent met sociale media opt-in aanvaard, zal er voor sociale media een cookie gezet worden', async () => {
+    it('als gebruiker kan ik een cookie-consent met sociale media opt-in aanvaarden en zal er voor sociale media een cookie gezet worden', async () => {
         await vlCookieConsentPage.openConsentMetExtraOptIn();
         const modal = await vlCookieConsentPage.getExtraOptInConsent();
-        await modal.
-    })
+    });
 });
