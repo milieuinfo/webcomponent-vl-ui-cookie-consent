@@ -37,5 +37,4 @@ describe('vl-cookie-consent-opt-in', async () => {
         await assert.eventually.isTrue(optIn.isOptedIn());
     });
 
-    after(() => driver && driver.quit());
 });

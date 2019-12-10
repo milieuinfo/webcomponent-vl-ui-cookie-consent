@@ -20,7 +20,7 @@
         </pre>
         <div class="demo">
             <vl-cookie-consent id="cookie-consent-1"></vl-cookie-consent>
-            <button is="vl-button" onclick="document.querySelector('#cookie-consent-1').open();">Open
+            <button id="consent" is="vl-button" onclick="document.querySelector('#cookie-consent-1').open();">Open
                 cookie-consent</button>
         </div>
     </div>
@@ -35,7 +35,7 @@
         <div class="demo">
             <vl-cookie-consent id="cookie-consent-2" data-vl-auto-open-disabled data-vl-auto-opt-in-functional-disabled>
             </vl-cookie-consent>
-            <button is="vl-button" onclick="document.querySelector('#cookie-consent-2').open();">Open
+            <button id="consent-noFunctional" is="vl-button" onclick="document.querySelector('#cookie-consent-2').open();">Open
                 cookie-consent</button>
         </div>
     </div>
@@ -53,7 +53,7 @@
             <vl-cookie-consent id="cookie-consent-3" data-vl-auto-open-disabled>
                 <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Beschrijving van de sociale media cookies."></vl-cookie-consent-opt-in>
             </vl-cookie-consent>
-            <button is="vl-button" onclick="document.querySelector('#cookie-consent-3').open();">Open
+            <button id="consent-optIn" is="vl-button" onclick="document.querySelector('#cookie-consent-3').open();">Open
                 cookie-consent</button>
         </div>
     </div>
@@ -71,7 +71,7 @@
             <vl-cookie-consent id="cookie-consent-4" data-vl-auto-open-disabled>
                 <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Beschrijving van de sociale media cookies." data-vl-checked></vl-cookie-consent-opt-in>
             </vl-cookie-consent>
-            <button is="vl-button" onclick="document.querySelector('#cookie-consent-4').open();">Open
+            <button id="consent-optIn-default" is="vl-button" onclick="document.querySelector('#cookie-consent-4').open();">Open
                 cookie-consent</button>
         </div>
     </div>
@@ -89,7 +89,7 @@
             <vl-cookie-consent id="cookie-consent-5" data-vl-auto-open-disabled data-vl-opt-in-functional>
                 <vl-cookie-consent-opt-in data-vl-label="Sociale media" data-vl-description="Beschrijving van de sociale media cookies." data-vl-mandatory></vl-cookie-consent-opt-in>
             </vl-cookie-consent>
-            <button is="vl-button" onclick="document.querySelector('#cookie-consent-5').open();">Open
+            <button id="consent-optIn-mandatory" is="vl-button" onclick="document.querySelector('#cookie-consent-5').open();">Open
                 cookie-consent</button>
         </div>
     </div>
@@ -116,7 +116,7 @@
             <vl-cookie-consent id="cookie-consent-6" data-vl-auto-open-disabled></vl-cookie-consent>
             <button is="vl-button" onclick="document.querySelector('#cookie-consent-6').open();">Open
                 cookie-consent</button>
-            <button is="vl-button" onclick="document.querySelector('#cookie-consent-6').addOptIn({
+            <button id="consent-dynamic" is="vl-button" onclick="document.querySelector('#cookie-consent-6').addOptIn({
                 name: 'socialmedia',
                 label: 'Sociale media',
                 description: 'Sociale media beschrijving',
