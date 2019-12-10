@@ -64,6 +64,8 @@ describe('vl-cookie-consent', async () => {
     it('als ik een cookie-consent met sociale media opt-in aanvaard, zal er voor sociale media een cookie gezet worden', async () => {
         await vlCookieConsentPage.openConsentMetExtraOptIn();
         const modal = await vlCookieConsentPage.getExtraOptInConsent();
-        await modal.
+        const optIn = await modal.getOptIn('Sociale media');
+        await optIn.optIn();
+        await assert.eventually.isTrue(optIn.isSelected());
     })
 });
