@@ -17,7 +17,7 @@ class Cookie {
         return await this._getCookieValue('vl-cookie-consent-functional');
     }
 
-    async isConsentDateSet() {
+    async getConsentDate() {
         return await this._getCookieValue('vl-cookie-consent-cookie-consent-date');
     }
 

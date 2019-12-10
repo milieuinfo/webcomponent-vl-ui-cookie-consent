@@ -6,35 +6,64 @@ describe('vl-cookie-consent', async () => {
     const vlCookieConsentPage = new VlCookieConsentPage(driver);
 
     before(async () => {
-        await driver.manage().deleteAllCookies()
+        await driver.manage().deleteAllCookies();
+
+        const cookies = await new Cookie(driver);
+        
+        await assert.eventually.isUndefined(cookies.isConsent());
+        await assert.eventually.isUndefined(cookies.getConsentDate());
+        await assert.eventually.isUndefined(cookies.isOptedInFunctional());
+
         return vlCookieConsentPage.load();
     });
 
     it('als ik de demo-pagina open, krijg ik de opt-in modal te zien omdat de eerste consent geen auto-open-disabled attribuut heeft', async () => {
-        const consent = await vlCookieConsentPage.getConsent1();
+        const modal = await vlCookieConsentPage.getConsent();
         
-        await assert.eventually.isTrue(consent.isDisplayed());        
-    });
-
-    it('als ik de demo-pagina open, zijn er nog geen cookies gezet', async () => {
-        const cookies = await new Cookie(driver);
-        
-        await assert.eventually.isUndefined(cookies.isConsent());
-        await assert.eventually.isUndefined(cookies.isConsentDateSet());
-        await assert.eventually.isUndefined(cookies.isOptedInFunctional());
+        await assert.eventually.isTrue(modal.isDisplayed());        
     });
 
     it('als ik op \'Bewaar keuze\' klik in de auto-open-disabled modal, sluit de modal en worden de juiste cookies gezet', async () => {
-        const consent = await vlCookieConsentPage.getConsent1();
+        const modal = await vlCookieConsentPage.getConsent();
         
-        await assert.eventually.isTrue(consent.isDisplayed());        
-        await consent.bewaarKeuze();
-        await assert.eventually.isFalse(consent.isDisplayed());
+        await assert.eventually.isTrue(modal.isDisplayed());        
+        await modal.bewaarKeuze();
+        await assert.eventually.isFalse(modal.isDisplayed());
         
         const cookies = await new Cookie(driver);
         await assert.eventually.isTrue(cookies.isConsent());
-        await assert.eventually.isNotNull(cookies.isConsentDateSet());
+        await assert.eventually.isNotNull(cookies.getConsentDate());
         await assert.eventually.isTrue(cookies.isOptedInFunctional());
     });
 
+    it('als ik nogmaals toestemming geef, word de consent-date geupdate', async () => {
+        await vlCookieConsentPage.openConsent();
+        await (await vlCookieConsentPage.getConsent()).bewaarKeuze();
+        
+        const date1 = await (await new Cookie(driver)).getConsentDate();
+        
+        await vlCookieConsentPage.openConsent();
+        await (await vlCookieConsentPage.getConsent()).bewaarKeuze();
+        
+        const date2 = await (await new Cookie(driver)).getConsentDate();
+
+        assert.isAbove(date2, date1);
+    });
+
+    it('als ik een cookie-consent zonder functionele opt-in aanvaard, word er enkel een consent en geen functional cookie gezet', async () => {
+        await vlCookieConsentPage.openConsentZonderFunctioneleOptIn();
+        const modal = await vlCookieConsentPage.getNoFunctionalConsent();
+        await modal.bewaarKeuze();
+
+        const cookies = await new Cookie(driver);
+        await assert.eventually.isFalse(cookies.isOptedInFunctional());
+        await assert.eventually.isTrue(cookies.isConsent());
+        await assert.eventually.isNotNull(cookies.getConsentDate());
+    });
+
+    it('als ik een cookie-consent met sociale media opt-in aanvaard, zal er voor sociale media een cookie gezet worden', async () => {
+        await vlCookieConsentPage.openConsentMetExtraOptIn();
+        const modal = await vlCookieConsentPage.getExtraOptInConsent();
+        await modal.
+    })
 });

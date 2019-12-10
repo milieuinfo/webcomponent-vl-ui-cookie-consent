@@ -1,5 +1,4 @@
 const { VlElement } = require('vl-ui-core');
-const { By, until } = require('selenium-webdriver');
 const { VlModal } = require('vl-ui-modal');
 
 class VlCookieConsent extends VlElement {
@@ -10,6 +9,11 @@ class VlCookieConsent extends VlElement {
 
     async isDisplayed() {
         return (await this._getModal()).isDisplayed();
+    }
+
+    async getOptIn(label) {
+        const modal = await this._getModal();
+        await modal.findElement(By.css('vl-cookie-consent-opt-in[data-vl-label="' + label + '"]'))
     }
 
     async bewaarKeuze() {

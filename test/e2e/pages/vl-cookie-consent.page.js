@@ -8,9 +8,33 @@ class VlCookieConsentPage extends Page {
         await super.load(Config.baseUrl + '/demo/vl-cookie-consent.html');
     }
 
-    async getConsent1() {
-        const element = await this.driver.findElement(By.css('#cookie-consent-1'));
+    async _getConsent(selector) {
+        const element = await this.driver.findElement(By.css(selector));
         return new VlCookieConsent(this.driver, element);
+    }
+    
+    async getConsent() {
+        return this._getConsent('#cookie-consent-1');
+    }
+
+    async getNoFunctionalConsent() {
+        return this._getConsent('#cookie-consent-2');
+    }
+
+    async getExtraOptInConsent() {
+        return this._getConsent('#cookie-consent-3');
+    }
+
+    async openConsent() {
+        return (await this.driver.findElement(By.css('#consent'))).click();
+    }
+
+    async openConsentZonderFunctioneleOptIn() {
+        return (await this.driver.findElement(By.css('#consent-noFunctional'))).click();
+    }
+
+    async openConsentMetExtraOptIn() {
+        return (await this.driver.findElement(By.css('#consent-optIn-default'))).click();
     }
 
 }
