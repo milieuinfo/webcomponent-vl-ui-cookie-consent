@@ -1,34 +1,45 @@
-class Cookie {
+class Cookies {
     constructor(driver) {
-        return (async () => {
-            this.cookies = await driver.manage().getCookies();
-            return this;
-        })();
+        this._driver = driver;
     }
 
-    async _getCookieValue(name) {
-        const cookie = await this.cookies.find(cookie => {
+    async get(name) {
+        const cookies = await this._driver.manage().getCookies();
+        return new Cookie(cookies.find(cookie => {
             return cookie.name === name;
-        });
-        return cookie ? JSON.parse(cookie.value) : undefined
+        }));
     }
 
-    async isOptedInFunctional() {
-        return await this._getCookieValue('vl-cookie-consent-functional');
+    async getCookieConsentCookie() {
+        return await this.get('vl-cookie-consent-cookie-consent');
     }
 
-    async getConsentDate() {
-        return await this._getCookieValue('vl-cookie-consent-cookie-consent-date');
+    async getCookieConsentDateCookie() {
+        return await this.get('vl-cookie-consent-cookie-consent-date');
     }
 
-    async isConsent() {
-        return await this._getCookieValue('vl-cookie-consent-cookie-consent');
+    async getCookieConsentOptedInFunctionalCookie() {
+        return await this.get('vl-cookie-consent-functional');
     }
 
-    async isSocialConsent() {
-        return await this._getCookieValue('vl-cookie-consent-social');
+    async getCookieConsentOptedInSocialCookie() {
+        return await this.get('vl-cookie-consent-social');
     }
-
 }
 
-module.exports = Cookie;
+class Cookie {
+    constructor(cookie) {
+        this._value = cookie.value;
+        delete cookie.value;
+        Object.assign(this, cookie);
+    }
+
+    get value() {
+        return this._value ? JSON.parse(this._value) : undefined;
+    }
+}
+
+module.exports = {
+    Cookie: Cookie,
+    Cookies: Cookies
+};

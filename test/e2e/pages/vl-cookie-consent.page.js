@@ -47,6 +47,7 @@ class VlCookieConsentPage extends Page {
             const displayed = await consent.isDisplayed();
             if (displayed) {
                 await consent.bewaarKeuze();
+                await driver.manage().deleteAllCookies();
             }
         } catch {}
     }
