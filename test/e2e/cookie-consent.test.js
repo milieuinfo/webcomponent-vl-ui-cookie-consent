@@ -83,31 +83,32 @@ describe('vl-cookie-consent', async () => {
     it('als gebruiker kan ik dynamisch een sociale media opt-in toevoegen', async () => {
         await vlCookieConsentPage.openConsentDynamic();
         const preConsentModal = await vlCookieConsentPage.getDynamicConsent();
-        const pre = await preConsentModal.getNumberOfOptIns();
+        const pre = await preConsentModal.getOptIns();
+
         await preConsentModal.bewaarKeuze();
         await vlCookieConsentPage.voegSocialeMediaOptInToe();
         await vlCookieConsentPage.openConsentDynamic();
         const postConsentModal = await vlCookieConsentPage.getDynamicConsent();
-        const post = await postConsentModal.getNumberOfOptIns();
+        const post = await postConsentModal.getOptIns();
 
-        assert.isAbove(post, pre);
-
+        assert.isAbove(post.length, pre.length);
         await postConsentModal.bewaarKeuze();
     });
 
     it('als gebruiker kan ik een opt-in intrekken en zullen de debestreffende cookies geupdate worden', async () => {
         await vlCookieConsentPage.openConsentMetExtraOptIn();
-        const consentModal = await vlCookieConsentPage.getExtraOptInConsent();
-        const optIn = await consentModal.getOptIn('Sociale media');
+        let consentModal = await vlCookieConsentPage.getExtraOptInConsent();
+
+        let optIn = await consentModal.getOptIn('Sociale media');
         await optIn.optIn();
         await consentModal.bewaarKeuze();
         assert.isTrue((await cookies.getCookieConsentOptedInSocialCookie()).value);
         
         await vlCookieConsentPage.openConsentMetExtraOptIn();
-        const unconsentModal = await vlCookieConsentPage.getExtraOptInConsent();
-        const optIn2 = await unconsentModal.getOptIn('Sociale media');
-        await optIn2.optIn();
-        await unconsentModal.bewaarKeuze();
+        consentModal = await vlCookieConsentPage.getExtraOptInConsent();
+        optIn = await consentModal.getOptIn('Sociale media');
+        await optIn.optIn();
+        await consentModal.bewaarKeuze();
         assert.isFalse((await cookies.getCookieConsentOptedInSocialCookie()).value);
     });
 

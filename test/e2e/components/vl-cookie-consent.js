@@ -18,9 +18,12 @@ class VlCookieConsent extends VlElement {
         return new VlCookieConsentOptIn(this.driver, element);
     }
 
-    async getNumberOfOptIns() {
+    async getOptIns() {
         const modal = await this._getModal();
-        return (await modal.findElements(By.css('vl-cookie-consent-opt-in'))).length;
+        const optIns = await modal.findElements(By.css('vl-cookie-consent-opt-in'));
+        return optIns.map((optIn) => {
+            return new VlCookieConsentOptIn(this.driver, optIn);
+        });
     }
 
     async bewaarKeuze() {
