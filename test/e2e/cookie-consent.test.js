@@ -68,8 +68,8 @@ describe('vl-cookie-consent', async () => {
         const modal = await vlCookieConsentPage.getExtraOptInDefaultConsent();
         await modal.bewaarKeuze();
 
-        const cookies = await new Cookie(driver);
-        await assert.eventually.isTrue(cookies.isSocialConsent());
+        const cookies = await new Cookies(driver);
+        await assert.eventually.isTrue(cookies.getCookieConsentOptedInSocialCookie());
     });
 
     it('als gebruiker kan ik een opt-in met verplichte value aanvaarden, en zal deze value als cookie bewaard worden', async () => {
@@ -77,15 +77,15 @@ describe('vl-cookie-consent', async () => {
         const modal = await vlCookieConsentPage.getExtraOptInMandatoryConsent();
         await modal.bewaarKeuze();
 
-        const cookies = await new Cookie(driver);
-        await assert.eventually.isTrue(cookies.isSocialConsent());
+        const cookies = await new Cookies(driver);
+        await assert.eventually.isTrue(cookies.getCookieConsentOptedInSocialCookie());
         await assert.eventually.isTrue(cookies.isOptedInFunctional());
     });
 
     it('als gebruiker kan ik dynamisch een sociale media opt-in toevoegen', async () => {
         await vlCookieConsentPage.openConsentDynamic();
         const modal = await vlCookieConsentPage.getDynamicConsent();
-        await consent.getOptIn('Noodzakelijke cookies toestaan (verplicht)')
+        await modal.getOptIn('Noodzakelijke cookies toestaan (verplicht)')
     })
 
 });

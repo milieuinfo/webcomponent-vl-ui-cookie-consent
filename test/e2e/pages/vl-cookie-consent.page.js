@@ -64,15 +64,15 @@ class VlCookieConsentPage extends Page {
         } catch {}
     }
     async openConsentMetExtraDefaultOptIn() {
-        return (await this.driver.findElement(By.css('#consent-optIn-default')));
+        return this._openConsent('#consent-optIn-default');
     }
 
     async openConsentMetExtraDefaultVerplicht() {
-        return (await this.driver.findElement(By.css('#consent-optIn-mandatory')));
+        return this._openConsent('#consent-optIn-mandatory');
     }
 
     async openConsentDynamic() {
-        return (await this.driver.findElement(By.css('#content-dynamic')));
+        return this._openConsent('#consent-dynamic');
     }
 
     async voegSocialeMediaOptInToe() {
