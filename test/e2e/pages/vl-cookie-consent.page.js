@@ -56,11 +56,9 @@ class VlCookieConsentPage extends Page {
     async _closeConsent() {
         const consent = await this.getConsent();
         try {
-            const displayed = await consent.isDisplayed();
-            if (displayed) {
-                await consent.bewaarKeuze();
-                await this.driver.manage().deleteAllCookies();
-            }
+            await consent.isDisplayed();
+            await consent.bewaarKeuze();
+            await this.driver.manage().deleteAllCookies();
         } catch {}
     }
     async openConsentMetExtraDefaultOptIn() {

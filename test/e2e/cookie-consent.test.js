@@ -6,7 +6,7 @@ describe('vl-cookie-consent', async () => {
     const vlCookieConsentPage = new VlCookieConsentPage(driver);
     const cookies = new Cookies(driver);
 
-    before(async () => {
+    beforeEach(async () => {
         await driver.manage().deleteAllCookies();
         return vlCookieConsentPage.load();
     });
