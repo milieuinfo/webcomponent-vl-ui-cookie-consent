@@ -355,7 +355,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
                     }
                 }
             }
-            this._setCookie(optIn.name, optIn.value || false);
+            this._setCookie(optIn.name, (optIn.value || optIn.mandatory) || false);
         });
     }
 
