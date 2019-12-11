@@ -23,7 +23,7 @@ class Cookies {
     }
 
     async getCookieConsentOptedInSocialCookie() {
-        return await this.get('vl-cookie-consent-social');
+        return await this.get('vl-cookie-consent-socialmedia');
     }
 }
 

@@ -76,7 +76,7 @@ class VlCookieConsentPage extends Page {
     }
 
     async voegSocialeMediaOptInToe() {
-        return (await this.driver.findElement(By.css('#add-optIn')));
+        return (await this.driver.findElement(By.css('#add-optIn'))).click();
     }
 
 }
