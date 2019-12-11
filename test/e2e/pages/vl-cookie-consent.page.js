@@ -13,7 +13,6 @@ class VlCookieConsentPage extends Page {
     }
 
     async _openConsent(selector) {
-        await this._closeConsent();
         return (await this.driver.findElement(By.css(selector))).click();
     }
 
@@ -42,35 +41,27 @@ class VlCookieConsentPage extends Page {
     }
 
     async openConsent() {
-        return this._openConsent('#consent');
+        return await this._openConsent('#consent');
     }
 
     async openConsentZonderFunctioneleOptIn() {
-        return this._openConsent('#consent-noFunctional');
+        return await this._openConsent('#consent-noFunctional');
     }
 
     async openConsentMetExtraOptIn() {
-        return this._openConsent('#consent-optIn');
+        return await this._openConsent('#consent-optIn');
     }
 
-    async _closeConsent() {
-        const consent = await this.getConsent();
-        try {
-            await consent.isDisplayed();
-            await consent.bewaarKeuze();
-            await this.driver.manage().deleteAllCookies();
-        } catch {}
-    }
     async openConsentMetExtraDefaultOptIn() {
-        return this._openConsent('#consent-optIn-default');
+        return await this._openConsent('#consent-optIn-default');
     }
 
     async openConsentMetExtraDefaultVerplicht() {
-        return this._openConsent('#consent-optIn-mandatory');
+        return await this._openConsent('#consent-optIn-mandatory');
     }
 
     async openConsentDynamic() {
-        return this._openConsent('#consent-dynamic');
+        return await this._openConsent('#consent-dynamic');
     }
 
     async voegSocialeMediaOptInToe() {
