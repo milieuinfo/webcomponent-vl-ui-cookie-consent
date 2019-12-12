@@ -13,7 +13,13 @@ class VlCookieConsentOptIn extends VlElement {
     }
 
     async optIn() {
-        return (await this._getCheckbox()).click();
+        const isChecked = await this.isOptedIn();
+        return isChecked ? Promise.resolve() : (await this._getCheckbox()).click();
+    }
+
+    async optOut() {
+        const isChecked = await this.isOptedIn();
+        return isChecked ? (await this._getCheckbox()).click() : Promise.resolve();
     }
 }
 

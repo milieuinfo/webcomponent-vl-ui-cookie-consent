@@ -1,5 +1,4 @@
 const VlCookieConsentOptIn = require('../components/vl-cookie-consent-opt-in');
-const { VlCheckbox } = require('vl-ui-checkbox');
 const { Page, Config } = require('vl-ui-core');
 
 class VlCookieConsentOptInPage extends Page {

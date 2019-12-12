@@ -1,10 +1,10 @@
 const { assert, driver } = require('vl-ui-core').Test;
 const VlCookieConsentPage = require('./pages/vl-cookie-consent.page');
-const { Cookies } = require('./components/cookie');
+const CookieManager = require('./components/cookie-manager');
 
 describe('vl-cookie-consent', async () => {
     const vlCookieConsentPage = new VlCookieConsentPage(driver);
-    const cookies = new Cookies(driver);
+    const cookies = new CookieManager(driver);
 
     beforeEach(async () => {
         await driver.manage().deleteAllCookies();
@@ -107,7 +107,7 @@ describe('vl-cookie-consent', async () => {
         await vlCookieConsentPage.openConsentMetExtraOptIn();
         consentModal = await vlCookieConsentPage.getExtraOptInConsent();
         optIn = await consentModal.getOptIn('Sociale media');
-        await optIn.optIn();
+        await optIn.optOut();
         await consentModal.bewaarKeuze();
         assert.isFalse((await cookies.getCookieConsentOptedInSocialCookie()).value);
     });
