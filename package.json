@@ -51,7 +51,7 @@
   },
   "peerDependencies": {
     "vl-ui-button": "^1.3.1",
-    "vl-ui-checkbox": "github:milieuinfo/webcomponent-vl-ui-checkbox#UIG-271",
+    "vl-ui-checkbox": "^1.0.18",
     "vl-ui-form-message": "^3.0.0",
     "vl-ui-form-grid": "^1.0.12",
     "vl-ui-modal": "^1.0.14"
