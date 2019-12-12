@@ -15,7 +15,7 @@ class VlCookieConsentPage extends Page {
     async _openConsent(selector) {
         const consent = await this.driver.findElement(By.css(selector));
         await this.driver.wait(until.elementIsVisible(consent), 3000);
-        return element.click();
+        return consent.click();
     }
 
     async getConsent() {
