@@ -1,6 +1,6 @@
 {
   "name": "vl-ui-cookie-consent",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "description": "De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.",
   "scripts": {
