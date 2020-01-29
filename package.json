@@ -43,7 +43,7 @@
     "vl-ui-checkbox": "^1.0.18",
     "vl-ui-form-grid": "^1.0.12",
     "vl-ui-form-message": "^3.0.0",
-    "vl-ui-modal": "^1.0.15",
+    "vl-ui-modal": "^1.0.19",
     "vl-ui-core": "^3.1.1"
   },
   "peerDependencies": {
