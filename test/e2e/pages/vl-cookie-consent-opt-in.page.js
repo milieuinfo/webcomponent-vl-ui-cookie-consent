@@ -1,5 +1,5 @@
 const VlCookieConsentOptIn = require('../components/vl-cookie-consent-opt-in');
-const { Page, Config } = require('vl-ui-core');
+const { Page, Config } = require('vl-ui-core').Test;
 
 class VlCookieConsentOptInPage extends Page {
 

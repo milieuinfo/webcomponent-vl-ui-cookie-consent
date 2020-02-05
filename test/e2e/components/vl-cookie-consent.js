@@ -1,4 +1,4 @@
-const { VlElement } = require('vl-ui-core');
+const { VlElement } = require('vl-ui-core').Test;
 const { VlModal } = require('vl-ui-modal');
 const { By } = require('selenium-webdriver');
 const VlCookieConsentOptIn = require('../components/vl-cookie-consent-opt-in');

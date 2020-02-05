@@ -1,4 +1,4 @@
-const { assert, driver } = require('vl-ui-core').Test;
+const { assert, driver } = require('vl-ui-core').Test.Setup;
 const VlCookieConsentPage = require('./pages/vl-cookie-consent.page');
 const CookieManager = require('./components/cookie-manager');
 

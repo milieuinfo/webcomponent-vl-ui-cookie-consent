@@ -1,5 +1,5 @@
 const VlCookieConsent = require('../components/vl-cookie-consent');
-const { Page, Config } = require('vl-ui-core');
+const { Page, Config } = require('vl-ui-core').Test;
 const { By, until } = require('selenium-webdriver');
 
 class VlCookieConsentPage extends Page {
