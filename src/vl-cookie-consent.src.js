@@ -6,10 +6,6 @@ import '/node_modules/vl-ui-form-grid/vl-form-grid.js';
 import '/node_modules/vl-ui-modal/vl-modal.js';
 import { analytics } from '/src/analytics.js';
 
-customElements.whenDefined('vl-modal').then(() => {
-    define('vl-cookie-consent', VlCookieConsent);
-});
-
 /**
  * VlCookieConsentOptIn
  * @class
@@ -434,3 +430,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
 
 
 define('vl-cookie-consent-opt-in', VlCookieConsentOptIn);
+
+customElements.whenDefined('vl-modal').then(() => {
+    define('vl-cookie-consent', VlCookieConsent);
+});
