@@ -1,6 +1,9 @@
 {
   "name": "vl-ui-cookie-consent",
   "version": "1.0.2",
+  "description": "De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.",
+  "author": "DIDM",
+  "license": "MIT",
   "main": "./src/index.js",
   "exports": {
     "require": "./index.js",
@@ -8,7 +11,17 @@
     "node": "./index.js",
     "default": "./index.js"
   },
-  "description": "De cookie consent kan gebruikt worden om de gebruiker te informeren over de cookies die gebruikt worden.",
+  "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-cookie-consent#readme",
+  "bugs": {
+    "url": "https://github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/milieuinfo/webcomponent-vl-ui-cookie-consent.git"
+  },
+  "publishConfig": {
+    "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
+  },
   "scripts": {
     "prepare": "npm update --dev vl-ui-util && npm run prepare:util",
     "prepare:util": "npm explore vl-ui-util -- npm run util",
@@ -45,36 +58,23 @@
     "release:testless": "np --yolo",
     "demo": "http-server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/milieuinfo/webcomponent-vl-ui-cookie-consent.git"
-  },
-  "author": "DIDM",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues"
-  },
-  "homepage": "https://github.com/milieuinfo/webcomponent-vl-ui-cookie-consent#readme",
   "dependencies": {
     "vl-ui-button": "^3.0.0",
     "vl-ui-checkbox": "^2.0.0",
     "vl-ui-core": "^4.0.0",
-    "vl-ui-form-grid": "^1.0.12",
+    "vl-ui-form-grid": "^2.0.0",
     "vl-ui-form-message": "^3.0.0",
-    "vl-ui-modal": "^1.0.19"
+    "vl-ui-modal": "^2.0.0"
   },
   "peerDependencies": {
     "vl-ui-button": "^2.0.0",
-    "vl-ui-checkbox": "^1.0.18",
-    "vl-ui-form-grid": "^1.0.12",
+    "vl-ui-checkbox": "^2.0.0",
+    "vl-ui-form-grid": "^2.0.0",
     "vl-ui-form-message": "^3.0.0",
-    "vl-ui-modal": "^1.0.14",
-    "vl-ui-core": "^3.1.1"
+    "vl-ui-modal": "^2.0.0",
+    "vl-ui-core": "^4.0.0"
   },
   "devDependencies": {
     "vl-ui-util": "^4.0.1"
-  },
-  "publishConfig": {
-    "registry": "http://artifactory-pr-build.lb.cumuli.be:8081/artifactory/api/npm/acd-npm/"
   }
 }
