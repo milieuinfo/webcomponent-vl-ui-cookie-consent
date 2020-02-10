@@ -6,10 +6,6 @@ import '/node_modules/vl-ui-form-grid/vl-form-grid.js';
 import '/node_modules/vl-ui-modal/vl-modal.js';
 import { analytics } from '/src/analytics.js';
 
-customElements.whenDefined('vl-modal').then(() => {
-    define('vl-cookie-consent', VlCookieConsent);
-});
-
 /**
  * VlCookieConsentOptIn
  * @class
@@ -24,7 +20,7 @@ customElements.whenDefined('vl-modal').then(() => {
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues|Issues}
- * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent.html|Demo}
+ * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent-opt-in.html|Demo}
  * 
  */
 export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
@@ -434,3 +430,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
 
 
 define('vl-cookie-consent-opt-in', VlCookieConsentOptIn);
+
+customElements.whenDefined('vl-modal').then(() => {
+    define('vl-cookie-consent', VlCookieConsent);
+});

@@ -1,4 +1,4 @@
-const { Cookies } = require('vl-ui-core').Cookie;
+const { Cookies } = require('vl-ui-core').Test.Cookie;
 
 class CookieManager {
     constructor(driver) {
