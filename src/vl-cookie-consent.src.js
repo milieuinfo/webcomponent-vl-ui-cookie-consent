@@ -20,7 +20,7 @@ import { analytics } from '/src/analytics.js';
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues|Issues}
- * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent.html|Demo}
+ * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent-opt-in.html|Demo}
  * 
  */
 export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
