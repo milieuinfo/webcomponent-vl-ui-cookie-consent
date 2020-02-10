@@ -1,0 +1,22 @@
+.presentation__grid {
+  background: #aaa;
+}
+
+.presentation__grid__col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10rem;
+  background: #FFE615;
+  border-radius: .5rem;
+}
+
+.presentation__grid__col p {
+  display: block;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
