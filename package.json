@@ -70,7 +70,7 @@
     "vl-ui-core": "^4.0.0",
     "vl-ui-form-grid": "^2.0.0",
     "vl-ui-form-message": "^3.0.0",
-    "vl-ui-modal": "^2.0.0"
+    "vl-ui-modal": "^2.0.1"
   },
   "peerDependencies": {
     "vl-ui-button": "^2.0.0",
