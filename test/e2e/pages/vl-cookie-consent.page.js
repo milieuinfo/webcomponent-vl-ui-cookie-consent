@@ -16,7 +16,7 @@ class VlCookieConsentPage extends Page {
         const consent = await this.driver.findElement(By.css(selector));
         await this.driver.wait(until.elementIsVisible(consent), 3000);
         await this.driver.wait(until.elementIsEnabled(consent), 3000);
-        return consent.click();
+        await consent.click();
     }
 
     async getConsent() {
@@ -44,31 +44,31 @@ class VlCookieConsentPage extends Page {
     }
 
     async openConsent() {
-        return await this._openConsent('#button-open-cookie-consent-1');
+        await this._openConsent('#button-open-cookie-consent-1');
     }
 
     async openConsentZonderFunctioneleOptIn() {
-        return await this._openConsent('#button-open-cookie-consent-2');
+        await this._openConsent('#button-open-cookie-consent-2');
     }
 
     async openConsentMetExtraOptIn() {
-        return await this._openConsent('#button-open-cookie-consent-3');
+        await this._openConsent('#button-open-cookie-consent-3');
     }
 
     async openConsentMetExtraDefaultOptIn() {
-        return await this._openConsent('#button-open-cookie-consent-4');
+        await this._openConsent('#button-open-cookie-consent-4');
     }
 
     async openConsentMetExtraDefaultVerplicht() {
-        return await this._openConsent('#button-open-cookie-consent-5');
+        await this._openConsent('#button-open-cookie-consent-5');
     }
 
     async openConsentDynamic() {
-        return await this._openConsent('#button-open-cookie-consent-6');
+        await this._openConsent('#button-open-cookie-consent-6');
     }
 
     async voegSocialeMediaOptInToe() {
-        return (await this.driver.findElement(By.css('#button-add-cookie-consent-opt-in'))).click();
+        await (await this.driver.findElement(By.css('#button-add-cookie-consent-opt-in'))).click();
     }
 
 }

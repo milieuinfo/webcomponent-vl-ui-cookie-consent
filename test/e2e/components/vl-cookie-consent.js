@@ -27,7 +27,7 @@ class VlCookieConsent extends VlElement {
     }
 
     async bewaarKeuze() {
-        return (await this._getModal()).submit();
+        await (await this._getModal()).submit();
     }
 }
 

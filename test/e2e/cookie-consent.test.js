@@ -25,7 +25,7 @@ describe('vl-cookie-consent', async () => {
         await assert.eventually.isTrue(consentModal.isDisplayed());    
         await consentModal.bewaarKeuze();
         await assert.eventually.isFalse(consentModal.isDisplayed());
-        
+
         assert.isTrue((await cookies.getCookieConsentCookie()).value);
         assert.isNotNull((await cookies.getCookieConsentDateCookie()).value);
         assert.isTrue((await cookies.getCookieConsentOptedInFunctionalCookie()).value);
