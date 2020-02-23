@@ -11,13 +11,6 @@ describe('vl-cookie-consent', async () => {
         return vlCookieConsentPage.load();
     });
 
-    it('als gebruiker kan ik de demo-pagina openen en krijg ik de opt-in modal te zien omdat de eerste consent geen auto-open-disabled attribuut heeft', async () => {
-        await vlCookieConsentPage.openConsent();
-        const modal = await vlCookieConsentPage.getConsent();
-        await assert.eventually.isTrue(modal.isDisplayed());
-        await modal.bewaarKeuze();
-    });
-
     it('als gebruiker kan ik de auto-open-disabled modal bevestigen en worden de juiste cookies gezet', async () => {
         await vlCookieConsentPage.openConsent();
         const consentModal = await vlCookieConsentPage.getConsent();     
