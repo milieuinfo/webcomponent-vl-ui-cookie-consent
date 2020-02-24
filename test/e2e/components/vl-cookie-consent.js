@@ -9,7 +9,8 @@ class VlCookieConsent extends VlElement {
     }
 
     async isDisplayed() {
-        return (await this._getModal()).isDisplayed();
+        const modal = await this._getModal();
+        return modal.isDisplayed();
     }
 
     async getOptIn(label) {
