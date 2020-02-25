@@ -11,13 +11,6 @@ describe('vl-cookie-consent', async () => {
         return vlCookieConsentPage.load();
     });
 
-    it('als gebruiker kan ik de demo-pagina openen en krijg ik de opt-in modal te zien omdat de eerste consent geen auto-open-disabled attribuut heeft', async () => {
-        await vlCookieConsentPage.openConsent();
-        const modal = await vlCookieConsentPage.getConsent();
-        await assert.eventually.isTrue(modal.isDisplayed());
-        await modal.bewaarKeuze();
-    });
-
     it('als gebruiker kan ik de auto-open-disabled modal bevestigen en worden de juiste cookies gezet', async () => {
         await vlCookieConsentPage.openConsent();
         const consentModal = await vlCookieConsentPage.getConsent();     
@@ -25,7 +18,7 @@ describe('vl-cookie-consent', async () => {
         await assert.eventually.isTrue(consentModal.isDisplayed());    
         await consentModal.bewaarKeuze();
         await assert.eventually.isFalse(consentModal.isDisplayed());
-        
+
         assert.isTrue((await cookies.getCookieConsentCookie()).value);
         assert.isNotNull((await cookies.getCookieConsentDateCookie()).value);
         assert.isTrue((await cookies.getCookieConsentOptedInFunctionalCookie()).value);
@@ -63,6 +56,7 @@ describe('vl-cookie-consent', async () => {
         await optIn.optIn();
         await assert.eventually.isTrue(optIn.isOptedIn());
         await consentModal.bewaarKeuze();
+        await assert.isTrue((await cookies.getCookieConsentOptedInSocialCookie()).value);
     });
 
     it('als gebruiker kan ik een cookie consent met een default aangevinkte opt-in aanvaarden, en zal deze opt-in als cookie bewaard worden', async () => {
@@ -83,15 +77,16 @@ describe('vl-cookie-consent', async () => {
     it('als gebruiker kan ik dynamisch een sociale media opt-in toevoegen', async () => {
         await vlCookieConsentPage.openConsentDynamic();
         const preConsentModal = await vlCookieConsentPage.getDynamicConsent();
-        const pre = await preConsentModal.getOptIns();
+        const preOptIns = await preConsentModal.getOptIns();
 
         await preConsentModal.bewaarKeuze();
         await vlCookieConsentPage.voegSocialeMediaOptInToe();
         await vlCookieConsentPage.openConsentDynamic();
         const postConsentModal = await vlCookieConsentPage.getDynamicConsent();
-        const post = await postConsentModal.getOptIns();
+        const postOptIns = await postConsentModal.getOptIns();
 
-        assert.isAbove(post.length, pre.length);
+        assert.isAbove(postOptIns.length, preOptIns.length);
+        await assert.eventually.isDefined(postConsentModal.getOptIn("Sociale media"));
         await postConsentModal.bewaarKeuze();
     });
 
