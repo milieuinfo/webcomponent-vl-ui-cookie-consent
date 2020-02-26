@@ -1,3 +1,3 @@
 module.exports = { 
-    VlCookieConsent: require('../vl-cookie-consent.src.js').VlCookieConsent
+    VlCookieConsent: require('../dist/vl-cookie-consent.src.js').VlCookieConsent
 }
