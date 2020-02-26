@@ -1,10 +1,10 @@
-import { VlElement, define } from '/node_modules/vl-ui-core/vl-core.js';
-import '/node_modules/vl-ui-button/vl-button.js';
-import '/node_modules/vl-ui-checkbox/vl-checkbox.js';
-import '/node_modules/vl-ui-form-message/vl-form-message.js';
-import '/node_modules/vl-ui-form-grid/vl-form-grid.js';
-import '/node_modules/vl-ui-modal/vl-modal.js';
-import { analytics } from '/node_modules/vl-ui-cookie-consent/src/analytics.js';
+import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import '/node_modules/vl-ui-button/dist/vl-button.js';
+import '/node_modules/vl-ui-checkbox/dist/vl-checkbox.js';
+import '/node_modules/vl-ui-form-message/dist/vl-form-message.js';
+import '/node_modules/vl-ui-form-grid/dist/vl-form-grid.js';
+import '/node_modules/vl-ui-modal/dist/vl-modal.js';
+import { analytics } from '/src/analytics.js';
 
 /**
  * VlCookieConsentOptIn
@@ -31,8 +31,8 @@ export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
     constructor() {
         super(`
             <style>
-                @import '/node_modules/vl-ui-form-grid/style.css';
-                @import '/node_modules/vl-ui-form-message/style.css';
+                @import '/node_modules/vl-ui-form-grid/dist/style.css';
+                @import '/node_modules/vl-ui-form-message/dist/style.css';
             </style>
             <div>
                 <vl-checkbox></vl-checkbox>
@@ -116,11 +116,11 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
     constructor() {
         super(`
             <style>
-                @import '/node_modules/vl-ui-button/style.css';
-                @import '/node_modules/vl-ui-checkbox/style.css';
-                @import '/node_modules/vl-ui-form-message/style.css';
-                @import '/node_modules/vl-ui-form-grid/style.css';
-                @import '/node_modules/vl-ui-modal/style.css';
+                @import '/node_modules/vl-ui-button/dist/style.css';
+                @import '/node_modules/vl-ui-checkbox/dist/style.css';
+                @import '/node_modules/vl-ui-form-message/dist/style.css';
+                @import '/node_modules/vl-ui-form-grid/dist/style.css';
+                @import '/node_modules/vl-ui-modal/dist/style.css';
             </style>
 
             <vl-modal data-title="Cookie-toestemming" not-cancellable>
