@@ -28,8 +28,7 @@ class VlCookieConsentOptIn extends VlElement {
 
     async optIn() {
         if (!(await (this.isOptedIn()))) {
-            const checkbox = await this._getCheckbox();
-            await checkbox.click();
+            await this._clickCheckbox();
         }
     }
 
@@ -38,6 +37,11 @@ class VlCookieConsentOptIn extends VlElement {
             const checkbox = await this._getCheckbox();
             await checkbox.click();
         }
+    }
+
+    async _clickCheckbox() {
+        const checkbox = await this._getCheckbox();
+        await checkbox.click();
     }
 }
 
