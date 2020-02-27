@@ -7,10 +7,6 @@ class VlCookieConsentOptInPage extends Page {
         return new VlCookieConsentOptIn(this.driver, selector);
     }
 
-    async getConsentMetLabel() {
-        return this._getCookieConsentOptIn('#label');
-    }
-
     async getConsentMetLabelEnBeschrijving() {
         return this._getCookieConsentOptIn('#label-beschrijving');
     }
