@@ -60,6 +60,6 @@
     "vl-ui-core": "^5.0.1"
   },
   "devDependencies": {
-    "vl-ui-util": "^5.0.9"
+    "vl-ui-util": "^5.0.10"
   }
 }
