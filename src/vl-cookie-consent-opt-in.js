@@ -1,7 +1,6 @@
 import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-checkbox/dist/vl-checkbox.js';
 import '/node_modules/vl-ui-form-message/dist/vl-form-message.js';
-import '/node_modules/vl-ui-form-grid/dist/vl-form-grid.js';
 
 /**
  * VlCookieConsentOptIn
@@ -28,7 +27,6 @@ export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
     constructor() {
         super(`
             <style>
-                @import '/node_modules/vl-ui-form-grid/dist/style.css';
                 @import '/node_modules/vl-ui-form-message/dist/style.css';
             </style>
             <div>

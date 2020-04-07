@@ -15,8 +15,8 @@ import '/src/vl-cookie-consent-opt-in.js';
  * @property {boolean} data-vl-analytics - Attribuut wordt gebruikt om het verwerken van gebruikersstatistieken te activeren.
  * @property {boolean} data-vl-auto-open-disabled - Attribuut wordt gebruikt om te voorkomen dat de cookie consent modal onmiddellijk gautomatiseerd geopend wordt.
  * @property {boolean} data-vl-auto-opt-in-functional-disabled - Attribuut wordt gebruikt om de niet wijzigbare functionele opt-in optie te deactiveren.
- * @property {boolean} data-vl-owner - Attribuut wordt gebruikt om in de content tekst de eigeneraar te specifiëren.
- * @property {boolean} data-vl-link - Attribuut wordt gebruikt om in de content tekst de privacy link te specifiëren.
+ * @property {boolean} data-vl-owner ['Departement Omgeving'] - Attribuut wordt gebruikt om in de content tekst de eigeneraar te specifiëren.
+ * @property {boolean} data-vl-link ['https://www.omgevingvlaanderen.be/privacy'] - Attribuut wordt gebruikt om in de content tekst de privacy link te specifiëren.
  * 
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues|Issues}
@@ -26,10 +26,6 @@ import '/src/vl-cookie-consent-opt-in.js';
 export class VlCookieConsent extends VlElement(HTMLElement) {
     static get _observedAttributes() {
         return ['analytics', 'owner', 'link'];
-    }
-
-    static get _attributePrefix() {
-        return 'data-vl-';
     }
 
     constructor() {
@@ -42,17 +38,17 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
 
             <vl-modal data-title="Cookie-toestemming" not-cancellable>
                 <div is="vl-form-grid" is-stacked slot="content">
-                    <div is="vl-form-column"><span id="owner">Het Departement Omgeving</span> maakt op de websites waarvoor zij verantwoordelijk is gebruik van "cookies" en vergelijkbare internettechnieken. Cookies zijn kleine "tekstbestanden" die worden gebruikt om onze websites en apps beter te laten werken en jouw surfervaring te verbeteren. Zij kunnen worden opgeslagen in de context van de webbrowser(s) die je gebruikt bij het bezoeken van onze website(s).</div>
+                    <div is="vl-form-column"><span data-vl-owner>Departement Omgeving</span> maakt op de websites waarvoor zij verantwoordelijk is gebruik van "cookies" en vergelijkbare internettechnieken. Cookies zijn kleine "tekstbestanden" die worden gebruikt om onze websites en apps beter te laten werken en jouw surfervaring te verbeteren. Zij kunnen worden opgeslagen in de context van de webbrowser(s) die je gebruikt bij het bezoeken van onze website(s).</div>
                     <div is="vl-form-column">Er zijn verschillende soorten cookies, en deze hebben ook een verschillende doelstelling en geldigheidsduur. Een beperkt aantal cookies (essenti&#235;le cookies) zijn absoluut noodzakelijk, deze zijn altijd anoniem. Andere cookies dragen bij aan het gebruikscomfort, je hebt de keuze om deze al dan niet te aanvaarden.</div>
                     <div is="vl-form-column">
-                        Op <a id="link" href="https://www.omgevingvlaanderen.be/privacy" target="_blank">https://www.omgevingvlaanderen.be/privacy</a> vind je meer informatie over de manier waarop het Departement Omgeving omgaat met uw privacy:
+                        Op <a id="link" href="https://www.omgevingvlaanderen.be/privacy" target="_blank">https://www.omgevingvlaanderen.be/privacy</a> vind je meer informatie over de manier waarop <span data-vl-owner>Departement Omgeving</span> omgaat met uw privacy:
                         <ul>
                             <li>ons privacybeleid, vertaald in de Privacyverklaring</li>
                             <li>algemene informatie over de nieuwe Privacywet</li>
                             <li>de contactgegevens van de functionaris voor gegevensbescherming of DPO</li>
                         </ul>
                     </div>
-                    <div is="vl-form-column">De cookie-toestemming die je geeft is van toepassing op meerdere websites, subsites en apps van het Departement Omgeving. Welke dit zijn, vind je via de Privacyverklaring. Je kunt naderhand een eerdere toestemming intrekken of wijzigen.</div>
+                    <div is="vl-form-column">De cookie-toestemming die je geeft is van toepassing op meerdere websites, subsites en apps van <span data-vl-owner>Departement Omgeving</span>. Welke dit zijn, vind je via de Privacyverklaring. Je kunt naderhand een eerdere toestemming intrekken of wijzigen.</div>
                 </div>
             </vl-modal>
         `);
@@ -156,11 +152,11 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
     };
 
     get _isAutoOpenDisabled() {
-        return this.getAttribute(VlCookieConsent._attributePrefix + 'auto-open-disabled') != undefined;
+        return this.getAttribute(VlCookieConsent.attributePrefix + 'auto-open-disabled') != undefined;
     }
 
     get _isFunctionalOptInDisabled() {
-        return this.getAttribute(VlCookieConsent._attributePrefix + 'auto-opt-in-functional-disabled') != undefined;
+        return this.getAttribute(VlCookieConsent.attributePrefix + 'auto-opt-in-functional-disabled') != undefined;
     }
 
     get _cookiePrefix() {
@@ -179,8 +175,8 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
         return this.querySelectorAll('vl-cookie-consent-opt-in');
     }
 
-    get _ownerElement() {
-        return this._shadow.querySelector('#owner');
+    get _ownerElements() {
+        return this._shadow.querySelectorAll('[data-vl-owner]');
     }
 
     get _linkElement() {
@@ -200,11 +196,11 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
 
     _getOptInTemplate(optIn) {
         if (optIn) {
-            const checked = (optIn.value || optIn.mandatory) ? `${VlCookieConsent._attributePrefix}checked` : '';
-            const mandatory = optIn.mandatory ? `${VlCookieConsent._attributePrefix}mandatory` : '';
+            const checked = (optIn.value || optIn.mandatory) ? `${VlCookieConsent.attributePrefix}checked` : '';
+            const mandatory = optIn.mandatory ? `${VlCookieConsent.attributePrefix}mandatory` : '';
             const template = this._template(`
                 <div is="vl-form-column">
-                    <vl-cookie-consent-opt-in ${VlCookieConsent._attributePrefix}label="${optIn.label}" ${VlCookieConsent._attributePrefix}description="${optIn.description}" ${checked} ${mandatory}></vl-cookie-consent-opt-in>
+                    <vl-cookie-consent-opt-in ${VlCookieConsent.attributePrefix}label="${optIn.label}" ${VlCookieConsent.attributePrefix}description="${optIn.description}" ${checked} ${mandatory}></vl-cookie-consent-opt-in>
                 </div>
             `);
             template.querySelector('vl-cookie-consent-opt-in').addEventListener('input', (event) => {
@@ -226,7 +222,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
             return optIn.id = optIn.name;
         });
         if (match) {
-            optIn.value = optIn.getAttribute(VlCookieConsent._attributePrefix + 'checked') != undefined;
+            optIn.value = optIn.getAttribute(VlCookieConsent.attributePrefix + 'checked') != undefined;
         }
     }
 
@@ -234,10 +230,10 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
         this._optInElementen.forEach((optIn) => {
             this._processOptIn({
                 name: optIn.id,
-                label: optIn.getAttribute(VlCookieConsent._attributePrefix + 'label'),
-                description: optIn.getAttribute(VlCookieConsent._attributePrefix + 'description'),
-                value: optIn.getAttribute(VlCookieConsent._attributePrefix + 'checked') != undefined,
-                mandatory: optIn.getAttribute(VlCookieConsent._attributePrefix + 'mandatory') != undefined
+                label: optIn.getAttribute(VlCookieConsent.attributePrefix + 'label'),
+                description: optIn.getAttribute(VlCookieConsent.attributePrefix + 'description'),
+                value: optIn.getAttribute(VlCookieConsent.attributePrefix + 'checked') != undefined,
+                mandatory: optIn.getAttribute(VlCookieConsent.attributePrefix + 'mandatory') != undefined
             });
         });
     }
@@ -353,7 +349,7 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
     }
 
     _ownerChangedCallback(oldValue, newValue) {
-        this._ownerElement.innerText = newValue;
+        this._ownerElements.forEach(element => element.innerText = newValue);
     }
 
     _linkChangedCallback(oldValue, newValue) {

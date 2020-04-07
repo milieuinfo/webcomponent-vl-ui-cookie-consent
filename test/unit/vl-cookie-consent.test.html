@@ -450,14 +450,16 @@
 
       test('de eigenaar en link teksten kunnen gewijzigd worden', () => {
         const cookieConsent = fixture('vl-cookie-consent-fixture');
-        assert.equal(cookieConsent._ownerElement.innerText, 'Het Departement Omgeving');
+        cookieConsent._ownerElements.forEach(element => assert.equal(element.innerText, 'Departement Omgeving'));
         assert.equal(cookieConsent._linkElement.innerText, 'https://www.omgevingvlaanderen.be/privacy');
+        assert.equal(cookieConsent._linkElement.href, 'https://www.omgevingvlaanderen.be/privacy');
         const owner = 'UIG';
         const link = 'https://webcomponenten.omgeving.vlaanderen.be';
         cookieConsent.setAttribute('data-vl-owner', owner);
         cookieConsent.setAttribute('data-vl-link', link);
-        assert.equal(cookieConsent._ownerElement.innerText, owner);
+        cookieConsent._ownerElements.forEach(element => assert.equal(element.innerText, owner));
         assert.equal(cookieConsent._linkElement.innerText, link);
+        assert.equal(cookieConsent._linkElement.href, `${link}/`);
       });
     });
   </script>

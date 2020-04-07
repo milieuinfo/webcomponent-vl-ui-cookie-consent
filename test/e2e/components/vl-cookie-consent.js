@@ -14,7 +14,7 @@ class VlCookieConsent extends VlElement {
     }
 
     async getOwner() {
-        const element = await this.shadowRoot.findElement(By.css('#owner'));
+        const element = await this.shadowRoot.findElement(By.css('[data-vl-owner]'));
         return element.getText();
     }
 

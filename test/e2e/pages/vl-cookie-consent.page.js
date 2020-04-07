@@ -7,72 +7,72 @@ class VlCookieConsentPage extends Page {
         await super.load(Config.baseUrl + '/demo/vl-cookie-consent.html');
     }
 
-    async _getConsent(number) {
-        const element = await this.driver.findElement(By.css(`#cookie-consent-${number}`));
+    async _getConsent(selector) {
+        const element = await this.driver.findElement(By.css(selector));
         return new VlCookieConsent(this.driver, element);
     }
 
-    async _openConsent(number) {
-        const consent = await this.driver.findElement(By.css(`#button-open-cookie-consent-${number}`));
+    async _openConsent(selector) {
+        const consent = await this.driver.findElement(By.css(selector));
         await this.driver.wait(until.elementIsVisible(consent), 3000);
         await this.driver.wait(until.elementIsEnabled(consent), 3000);
         await consent.click();
     }
 
     async getConsent() {
-        return this._getConsent(1);
+        return this._getConsent('#cookie-consent');
     }
 
-    async getNoFunctionalConsent() {
-        return this._getConsent(2);
+    async getConsentWithoutFunctionalOptIn() {
+        return this._getConsent('#cookie-consent-without-functional-opt-in');
     }
 
-    async getExtraOptInConsent() {
-        return this._getConsent(3);
+    async getConsentWithExtraOptIn() {
+        return this._getConsent('#cookie-consent-with-extra-opt-in');
     }
 
-    async getExtraOptInDefaultConsent() {
-        return this._getConsent(4);
+    async getConsentWithExtraCheckedOptIn() {
+        return this._getConsent('#cookie-consent-with-extra-checked-opt-in');
     }
 
-    async getExtraOptInMandatoryConsent() {
-        return this._getConsent(5);
+    async getConsentWithExtraMandatoryOptIn() {
+        return this._getConsent('#cookie-consent-with-extra-mandatory-opt-in');
     }
 
-    async getDynamicConsent() {
-        return this._getConsent(6);
+    async getConsentWithExtraDynamicOptIn() {
+        return this._getConsent('#cookie-consent-with-extra-dynamic-opt-in');
     }
 
-    async getDynamicTextConsent() {
-        return this._getConsent(7);
+    async getConsentWithDynamicText() {
+        return this._getConsent('#cookie-consent-with-custom-text');
     }
 
     async openConsent() {
-        await this._openConsent(1);
+        await this._openConsent('#button-open-cookie-consent');
     }
 
-    async openNoFunctionalConsent() {
-        await this._openConsent(2);
+    async openConsentWithoutFunctionalOptIn() {
+        await this._openConsent('#button-open-cookie-consent-without-functional-opt-in');
     }
 
-    async openExtraOptInConsent() {
-        await this._openConsent(3);
+    async openConsentWithExtraOptIn() {
+        await this._openConsent('#button-open-cookie-consent-with-extra-opt-in');
     }
 
-    async openExtraOptInDefaultConsent() {
-        await this._openConsent(4);
+    async openConsentWithExtraCheckedOptIn() {
+        await this._openConsent('#button-open-cookie-consent-with-extra-checked-opt-in');
     }
 
-    async openExtraOptInMandatoryConsent() {
-        await this._openConsent(5);
+    async openConsentWithExtraMandatoryOptIn() {
+        await this._openConsent('#button-open-cookie-consent-with-extra-mandatory-opt-in');
     }
 
-    async openDynamicConsent() {
-        await this._openConsent(6);
+    async openConsentWithExtraDynamicOptIn() {
+        await this._openConsent('#button-open-cookie-consent-with-extra-dynamic-opt-in');
     }
 
-    async openDynamicTextConsent() {
-        await this._openConsent(7);
+    async openConsentWithDynamicText() {
+        await this._openConsent('#button-open-cookie-consent-with-custom-text');
     }
 
     async voegSocialeMediaOptInToe() {
