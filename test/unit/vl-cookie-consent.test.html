@@ -68,7 +68,9 @@
     </template>
   </test-fixture>
 
-  <script>
+  <script type="module">
+    import { awaitUntil } from 'vl-ui-core/dist/vl-core';
+
     suite('vl-cookie-consent', () => {
       const should = chai.should();
       const sandbox = sinon.sandbox.create();
@@ -76,6 +78,10 @@
         document.cookie.split(";").forEach((c) => {
           document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
         });
+      };
+      const dialogElement = { 
+        hasAttribute: () => false,
+        isConnected: true 
       };
 
       setup((done) => {
@@ -118,10 +124,13 @@
         assert.equal(button.textContent, 'Ik begrijp het');
       });
 
-      test('zal standaard de cookie consent modal openen', () => {
+      test('zal standaard de cookie consent modal openen', (done) => {
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        assert(vl.modal.toggle.called);
+        sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
+        awaitUntil(() => vl.modal.toggle.called).then(() => {
+          done();
+        });
       });
 
       test('zal de cookie consent modal niet openen indien het auto-open-disabled attribuut aanwezig is', () => {
@@ -185,7 +194,10 @@
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         assert(vl.modal.toggle.notCalled);
         cookieConsent.open();
-        assert(vl.modal.toggle.called);
+        sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
+        awaitUntil(() => vl.modal.toggle.called).then(() => {
+          done();
+        });
       });
 
       test('via de cookie-consent kan gevraagd worden of een opt-in actief is of niet', () => {
@@ -429,7 +441,10 @@
         document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;';
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        assert(vl.modal.toggle.called);
+        sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
+        awaitUntil(() => vl.modal.toggle.called).then(() => {
+          done();
+        });
       });
 
       test('wanneer de cookie-consent modal ooit al eens gesloten werd, maar de cookie-consent reset datum recenter is, zal de cookie-consent modal opnieuw geopend worden', () => {
@@ -437,7 +452,10 @@
         document.cookie = 'vl-cookie-consent-cookie-consent-date=1556661600000;Max-Age=2147483647;path=/;';
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        assert(vl.modal.toggle.called);
+        sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
+        awaitUntil(() => vl.modal.toggle.called).then(() => {
+          done();
+        });
       });
 
       test('wanneer de cookie-consent modal ooit al eens gesloten werd, maar de cookie-consent reset datum ongeldig is, zal de cookie-consent modal opnieuw geopend worden', () => {
@@ -445,7 +463,10 @@
         document.cookie = 'vl-cookie-consent-cookie-consent-date=geen;Max-Age=2147483647;path=/;';
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
-        assert(vl.modal.toggle.called);
+        sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
+        awaitUntil(() => vl.modal.toggle.called).then(() => {
+          done();
+        });
       });
 
       test('de eigenaar en link teksten kunnen gewijzigd worden', () => {
