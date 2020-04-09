@@ -44,7 +44,8 @@
   <test-fixture id="vl-cookie-consent-opt-in-socialmedia-fixture">
     <template>
       <vl-cookie-consent data-vl-auto-opt-in-functional-disabled>
-        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving."></vl-cookie-consent-opt-in>
+        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media"
+          data-vl-description="Sociale media opt-in beschrijving."></vl-cookie-consent-opt-in>
       </vl-cookie-consent>
     </template>
   </test-fixture>
@@ -52,7 +53,8 @@
   <test-fixture id="vl-cookie-consent-opt-in-socialmedia-checked-fixture">
     <template>
       <vl-cookie-consent data-vl-auto-opt-in-functional-disabled>
-        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving." data-vl-checked></vl-cookie-consent-opt-in>
+        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media"
+          data-vl-description="Sociale media opt-in beschrijving." data-vl-checked></vl-cookie-consent-opt-in>
       </vl-cookie-consent>
     </template>
   </test-fixture>
@@ -60,7 +62,8 @@
   <test-fixture id="vl-cookie-consent-opt-in-socialmedia-mandatory-fixture">
     <template>
       <vl-cookie-consent data-vl-auto-opt-in-functional-disabled>
-        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media" data-vl-description="Sociale media opt-in beschrijving." data-vl-mandatory></vl-cookie-consent-opt-in>
+        <vl-cookie-consent-opt-in id="socialmedia" data-vl-label="Sociale media"
+          data-vl-description="Sociale media opt-in beschrijving." data-vl-mandatory></vl-cookie-consent-opt-in>
       </vl-cookie-consent>
     </template>
   </test-fixture>
@@ -120,7 +123,7 @@
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         assert(vl.modal.toggle.called);
       });
-      
+
       test('zal de cookie consent modal niet openen indien het auto-open-disabled attribuut aanwezig is', () => {
         const cookieConsent = fixture('vl-cookie-consent-auto-open-disabled-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
@@ -443,6 +446,20 @@
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         assert(vl.modal.toggle.called);
+      });
+
+      test('de eigenaar en link teksten kunnen gewijzigd worden', () => {
+        const cookieConsent = fixture('vl-cookie-consent-fixture');
+        cookieConsent._ownerElements.forEach(element => assert.equal(element.innerText, 'Departement Omgeving'));
+        assert.equal(cookieConsent._linkElement.innerText, 'https://www.omgevingvlaanderen.be/privacy');
+        assert.equal(cookieConsent._linkElement.href, 'https://www.omgevingvlaanderen.be/privacy');
+        const owner = 'UIG';
+        const link = 'https://webcomponenten.omgeving.vlaanderen.be';
+        cookieConsent.setAttribute('data-vl-owner', owner);
+        cookieConsent.setAttribute('data-vl-link', link);
+        cookieConsent._ownerElements.forEach(element => assert.equal(element.innerText, owner));
+        assert.equal(cookieConsent._linkElement.innerText, link);
+        assert.equal(cookieConsent._linkElement.href, `${link}/`);
       });
     });
   </script>

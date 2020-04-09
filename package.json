@@ -53,11 +53,11 @@
   },
   "peerDependencies": {
     "vl-ui-button": "^5.0.0",
-    "vl-ui-form-grid": "^3.0.0",
     "vl-ui-checkbox": "^3.0.1",
+    "vl-ui-core": "^5.1.2",
+    "vl-ui-form-grid": "^3.0.1",
     "vl-ui-form-message": "^5.0.0",
     "vl-ui-modal": "^3.0.4",
-    "vl-ui-core": "^5.0.1"
   },
   "devDependencies": {
     "vl-ui-util": "5.0.10"

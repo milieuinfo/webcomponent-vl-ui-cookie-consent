@@ -1,6 +1,6 @@
 const { VlElement } = require('vl-ui-core').Test;
+const { By } = require('vl-ui-core').Test.Setup;
 const { VlModal } = require('vl-ui-modal').Test;
-const { By } = require('selenium-webdriver');
 const VlCookieConsentOptIn = require('../components/vl-cookie-consent-opt-in');
 
 class VlCookieConsent extends VlElement {
@@ -11,6 +11,16 @@ class VlCookieConsent extends VlElement {
     async isDisplayed() {
         const modal = await this._getModal();
         return modal.isDisplayed();
+    }
+
+    async getOwner() {
+        const element = await this.shadowRoot.findElement(By.css('[data-vl-owner]'));
+        return element.getText();
+    }
+
+    async getLink() {
+        const element = await this.shadowRoot.findElement(By.css('#link'));
+        return element.getText();
     }
 
     async getOptIn(label) {
@@ -29,8 +39,9 @@ class VlCookieConsent extends VlElement {
         return Promise.all(optIns.map(optIn => new VlCookieConsentOptIn(this.driver, optIn)));
     }
 
-    async bewaarKeuze() {
-        await (await this._getModal()).submit();
+    async save() {
+        const modal = await this._getModal();
+        await modal.submit();
     }
 }
 

@@ -1,6 +1,6 @@
 const { VlElement } = require('vl-ui-core').Test;
+const { By } = require('vl-ui-core').Test.Setup;
 const { VlCheckbox } = require('vl-ui-checkbox').Test;
-const { By } = require('selenium-webdriver');
 
 class VlCookieConsentOptIn extends VlElement {
     async _getCheckbox() {
