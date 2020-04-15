@@ -60,6 +60,6 @@
     "vl-ui-modal": "^3.0.4"
   },
   "devDependencies": {
-    "vl-ui-util": "5.0.10"
+    "vl-ui-util": "^5.1.6"
   }
 }
