@@ -3,7 +3,7 @@ import 'vl-ui-button';
 import 'vl-ui-form-grid';
 import 'vl-ui-modal';
 import { analytics } from 'vl-ui-cookie-consent/src/analytics.js';
-import '/src/vl-cookie-consent-opt-in.js';
+import 'vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.src.js';
 
 /**
  * VlCookieConsent
