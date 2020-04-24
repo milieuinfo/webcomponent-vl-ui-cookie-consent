@@ -49,7 +49,7 @@
     "vl-ui-core": "^5.5.0",
     "vl-ui-form-grid": "^3.0.1",
     "vl-ui-form-message": "^5.0.0",
-    "vl-ui-modal": "github:milieuinfo/webcomponent-vl-ui-modal#update"
+    "vl-ui-modal": "^3.0.6"
   },
   "peerDependencies": {
     "vl-ui-button": "^5.0.0",
@@ -57,9 +57,9 @@
     "vl-ui-core": "^5.1.2",
     "vl-ui-form-grid": "^3.0.1",
     "vl-ui-form-message": "^5.0.0",
-    "vl-ui-modal": "milieuinfo/webcomponent-vl-ui-modal#update"
+    "vl-ui-modal": "^3.0.6"
   },
   "devDependencies": {
-    "vl-ui-util": "github:milieuinfo/webcomponent-vl-ui-util#all-build-issues"
+    "vl-ui-util": "^5.1.7"
   }
 }
