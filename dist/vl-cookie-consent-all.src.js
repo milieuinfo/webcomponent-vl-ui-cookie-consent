@@ -1,5 +1,5 @@
-import { VlCookieConsent } from "./src/vl-cookie-consent.js";
-import { VlCookieConsentOptIn } from "./src/vl-cookie-consent-opt-in.js";
+import { VlCookieConsent } from 'vl-ui-cookie-consent/dist/vl-cookie-consent.src.js';
+import { VlCookieConsentOptIn } from 'vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.src.js';
 
 export {
     VlCookieConsent, 

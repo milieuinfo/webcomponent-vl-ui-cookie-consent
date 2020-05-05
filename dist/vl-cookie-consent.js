@@ -2,8 +2,8 @@ import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-button/dist/vl-button.js';
 import '/node_modules/vl-ui-form-grid/dist/vl-form-grid.js';
 import '/node_modules/vl-ui-modal/dist/vl-modal.js';
-import { analytics } from /node_modules/vl-ui-cookie-consent/src/analytics.js;
-import /node_modules/vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.js;
+import { analytics } from '/node_modules/vl-ui-cookie-consent/src/analytics.js';
+import '/node_modules/vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.js';
 
 /**
  * VlCookieConsent
