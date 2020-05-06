@@ -73,7 +73,7 @@
 
     suite('vl-cookie-consent', () => {
       const should = chai.should();
-      const sandbox = sinon.sandbox.create();
+      const sandbox = sinon.createSandbox();
       const resetCookies = () => {
         document.cookie.split(";").forEach((c) => {
           document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
