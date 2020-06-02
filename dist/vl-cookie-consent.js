@@ -1,35 +1,35 @@
-import { VlElement, define } from '/node_modules/vl-ui-core/dist/vl-core.js';
+import {VlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-button/dist/vl-button.js';
 import '/node_modules/vl-ui-form-grid/dist/vl-form-grid.js';
 import '/node_modules/vl-ui-modal/dist/vl-modal.js';
-import { analytics } from '/node_modules/vl-ui-cookie-consent/src/analytics.js';
+import {analytics} from '/node_modules/vl-ui-cookie-consent/src/analytics.js';
 import '/node_modules/vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.js';
 
 /**
  * VlCookieConsent
  * @class
  * @classdesc De cookie consent kan gebruikt worden om de gebruiker te informeren over al de cookies die gebruikt worden.
- * 
+ *
  * @extends VlElement
- * 
+ *
  * @property {boolean} data-vl-analytics - Attribuut wordt gebruikt om het verwerken van gebruikersstatistieken te activeren.
  * @property {boolean} data-vl-auto-open-disabled - Attribuut wordt gebruikt om te voorkomen dat de cookie consent modal onmiddellijk gautomatiseerd geopend wordt.
  * @property {boolean} data-vl-auto-opt-in-functional-disabled - Attribuut wordt gebruikt om de niet wijzigbare functionele opt-in optie te deactiveren.
  * @property {boolean} data-vl-owner ['Departement Omgeving'] - Attribuut wordt gebruikt om in de content tekst de eigeneraar te specifiëren.
  * @property {boolean} data-vl-link ['https://www.omgevingvlaanderen.be/privacy'] - Attribuut wordt gebruikt om in de content tekst de privacy link te specifiëren.
- * 
+ *
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/releases/latest|Release notes}
  * @see {@link https://www.github.com/milieuinfo/webcomponent-vl-ui-cookie-consent/issues|Issues}
  * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent.html|Demo}
- * 
+ *
  */
 export class VlCookieConsent extends VlElement(HTMLElement) {
-    static get _observedAttributes() {
-        return ['analytics', 'owner', 'link'];
-    }
+  static get _observedAttributes() {
+    return ['analytics', 'owner', 'link'];
+  }
 
-    constructor() {
-        super(`
+  constructor() {
+    super(`
             <style>
                 @import '/node_modules/vl-ui-button/dist/style.css';
                 @import '/node_modules/vl-ui-form-grid/dist/style.css';
@@ -52,58 +52,58 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
                 </div>
             </vl-modal>
         `);
-        
-        this._optIns = {};
-        this._cookieConsentCookieName = 'cookie-consent';
-        this._cookieConsentDateCookieName = 'cookie-consent-date';
-        this._cookieConsentResetDate = new Date('2019/05/14');
 
-        if (!this._isFunctionalOptInDisabled) {
-            this._addFunctionalOptIn();
-        }
-        this._processOptIns();
-        this._element.appendChild(this._getButtonTemplate());
-        if (!this._isAutoOpenDisabled) {
-            this._open();
-        }
+    this._optIns = {};
+    this._cookieConsentCookieName = 'cookie-consent';
+    this._cookieConsentDateCookieName = 'cookie-consent-date';
+    this._cookieConsentResetDate = new Date('2019/05/14');
+
+    if (!this._isFunctionalOptInDisabled) {
+      this._addFunctionalOptIn();
     }
+    this._processOptIns();
+    this._element.appendChild(this._getButtonTemplate());
+    if (!this._isAutoOpenDisabled) {
+      this._open();
+    }
+  }
 
-    /**
+  /**
      * Opent de cookie-consent ook al werd deze eerder getoond aan de gebruiker.
-     * @returns {void}
+     * @return {void}
      */
-    open() {
-        this._open(true);
-    }
+  open() {
+    this._open(true);
+  }
 
-    /**
+  /**
      * Sluit de cookie-consent.
-     * @returns {void}
+     * @return {void}
      */
-    close() {
-        this._modalElement.close();
-        this._setCookie(this._cookieConsentCookieName, true);
-        this._setCookie(this._cookieConsentDateCookieName, new Date().getTime());
-        this._submitOptIns();
-    }
+  close() {
+    this._modalElement.close();
+    this._setCookie(this._cookieConsentCookieName, true);
+    this._setCookie(this._cookieConsentDateCookieName, new Date().getTime());
+    this._submitOptIns();
+  }
 
-    /**
+  /**
      * Verwijdert al de cookies en herstelt de opt-in waarden naar de initiële toestand.
-     * @returns {void}
+     * @return {void}
      */
-    reset() {
-        this._deleteCookie(this._cookieConsentCookieName);
-        this._deleteCookie(this._cookieConsentDateCookieName);
-        Object.values(this._optIns).forEach((optIn) => {
-            this._deleteCookie(optIn.name);
-            this._resetOptInValue(optIn);
-            if (optIn.callback && optIn.callback.deactivated) {
-                optIn.callback.deactivated();
-            }
-        });
-    }
+  reset() {
+    this._deleteCookie(this._cookieConsentCookieName);
+    this._deleteCookie(this._cookieConsentDateCookieName);
+    Object.values(this._optIns).forEach((optIn) => {
+      this._deleteCookie(optIn.name);
+      this._resetOptInValue(optIn);
+      if (optIn.callback && optIn.callback.deactivated) {
+        optIn.callback.deactivated();
+      }
+    });
+  }
 
-    /**
+  /**
      * Voeg een opt-in toe.
      * @param {object} optIn - De opt-in optie met attributen.
      * @param {string} optIn.name - De naam van de opt-in optie.
@@ -114,250 +114,250 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
      * @param {function} optIn.callback - De callback functies.
      * @param {function} optIn.callback.activated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in geactiveerd werd.
      * @param {function} optIn.callback.deactivated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in gedactiveerd werd.
-     * @returns {void}
+     * @return {void}
      */
-    addOptIn(optIn) {
-        this._processOptIn(optIn);
-    }
+  addOptIn(optIn) {
+    this._processOptIn(optIn);
+  }
 
-    /**
+  /**
      * Voegt aan een opt-in een callback toe die aangeroepen wordt wanneer de opt-in geactiveerd wordt.
      * @param {string} name - De opt-in optie naam.
      * @param {function} callback - Callback functie.
      */
-    addOptInActivatedCallback(name, callback) {
-        if (this._optIns[name]) {
-            this._optIns[name].callback.activated = callback;
-        }
+  addOptInActivatedCallback(name, callback) {
+    if (this._optIns[name]) {
+      this._optIns[name].callback.activated = callback;
     }
+  }
 
-    /**
+  /**
      * Voegt aan een opt-in een callback toe die aangeroepen wordt wanneer de opt-in gedeactiveerd wordt.
      * @param {string} name - De opt-in optie naam.
      * @param {function} callback - Callback functie.
      */
-    addOptInDeactivatedCallback(name, callback) {
-        if (this._optIns[name]) {
-            this._optIns[name].callback.deactivated = callback;
-        }
+  addOptInDeactivatedCallback(name, callback) {
+    if (this._optIns[name]) {
+      this._optIns[name].callback.deactivated = callback;
     }
+  }
 
-    /**
+  /**
      * Bepaalt of een opt-in actief is of niet op basis van de naam.
      * @param {string} name - De opt-in optie naam.
-     * @returns {boolean}
+     * @return {boolean}
      */
-    isOptInActive(name) {
-        return this._optIns[name] ? this._optIns[name].value : false;
-    };
+  isOptInActive(name) {
+    return this._optIns[name] ? this._optIns[name].value : false;
+  };
 
-    get _isAutoOpenDisabled() {
-        return this.getAttribute(VlCookieConsent.attributePrefix + 'auto-open-disabled') != undefined;
-    }
+  get _isAutoOpenDisabled() {
+    return this.getAttribute(VlCookieConsent.attributePrefix + 'auto-open-disabled') != undefined;
+  }
 
-    get _isFunctionalOptInDisabled() {
-        return this.getAttribute(VlCookieConsent.attributePrefix + 'auto-opt-in-functional-disabled') != undefined;
-    }
+  get _isFunctionalOptInDisabled() {
+    return this.getAttribute(VlCookieConsent.attributePrefix + 'auto-opt-in-functional-disabled') != undefined;
+  }
 
-    get _cookiePrefix() {
-        return 'vl-cookie-consent-';
-    }
+  get _cookiePrefix() {
+    return 'vl-cookie-consent-';
+  }
 
-    get _modalElement() {
-        return this._element;
-    }
+  get _modalElement() {
+    return this._element;
+  }
 
-    get _formGridElement() {
-        return this._element.querySelector('[is="vl-form-grid"]');
-    }
+  get _formGridElement() {
+    return this._element.querySelector('[is="vl-form-grid"]');
+  }
 
-    get _optInElementen() {
-        return this.querySelectorAll('vl-cookie-consent-opt-in');
-    }
+  get _optInElementen() {
+    return this.querySelectorAll('vl-cookie-consent-opt-in');
+  }
 
-    get _ownerElements() {
-        return this._shadow.querySelectorAll('[data-vl-owner]');
-    }
+  get _ownerElements() {
+    return this._shadow.querySelectorAll('[data-vl-owner]');
+  }
 
-    get _linkElement() {
-        return this._shadow.querySelector('#link');
-    }
+  get _linkElement() {
+    return this._shadow.querySelector('#link');
+  }
 
-    _getButtonTemplate() {
-        const text = Object.values(this._optIns).length > 0 ? 'Bewaar keuze' : 'Ik begrijp het';
-        const template = this._template(`
+  _getButtonTemplate() {
+    const text = Object.values(this._optIns).length > 0 ? 'Bewaar keuze' : 'Ik begrijp het';
+    const template = this._template(`
             <button is="vl-button" slot="button">${text}</button>
         `);
-        template.querySelector('button').addEventListener('click', () => {
-            this.close();
-        });
-        return template;
-    }
+    template.querySelector('button').addEventListener('click', () => {
+      this.close();
+    });
+    return template;
+  }
 
-    _getOptInTemplate(optIn) {
-        if (optIn) {
-            const checked = (optIn.value || optIn.mandatory) ? `${VlCookieConsent.attributePrefix}checked` : '';
-            const mandatory = optIn.mandatory ? `${VlCookieConsent.attributePrefix}mandatory` : '';
-            const template = this._template(`
+  _getOptInTemplate(optIn) {
+    if (optIn) {
+      const checked = (optIn.value || optIn.mandatory) ? `${VlCookieConsent.attributePrefix}checked` : '';
+      const mandatory = optIn.mandatory ? `${VlCookieConsent.attributePrefix}mandatory` : '';
+      const template = this._template(`
                 <div is="vl-form-column">
                     <vl-cookie-consent-opt-in ${VlCookieConsent.attributePrefix}label="${optIn.label}" ${VlCookieConsent.attributePrefix}description="${optIn.description}" ${checked} ${mandatory}></vl-cookie-consent-opt-in>
                 </div>
             `);
-            template.querySelector('vl-cookie-consent-opt-in').addEventListener('input', (event) => {
-                const checked = event && event.currentTarget ? event.currentTarget.checked : false;
-                optIn.value = checked;
-            });
-            return template;
+      template.querySelector('vl-cookie-consent-opt-in').addEventListener('input', (event) => {
+        const checked = event && event.currentTarget ? event.currentTarget.checked : false;
+        optIn.value = checked;
+      });
+      return template;
+    }
+  }
+
+  _open(forced) {
+    if (forced || !this._getCookieConsentCookie() || !this._heeftCookieConsentDateCookie() || !this._isCookieConsentCookieGeldig()) {
+      this._modalElement.open();
+    }
+  }
+
+  _resetOptInValue(optIn) {
+    const match = [...this._optInElementen].find((optIn) => {
+      return optIn.id = optIn.name;
+    });
+    if (match) {
+      optIn.value = optIn.getAttribute(VlCookieConsent.attributePrefix + 'checked') != undefined;
+    }
+  }
+
+  _processOptIns() {
+    this._optInElementen.forEach((optIn) => {
+      this._processOptIn({
+        name: optIn.id,
+        label: optIn.getAttribute(VlCookieConsent.attributePrefix + 'label'),
+        description: optIn.getAttribute(VlCookieConsent.attributePrefix + 'description'),
+        value: optIn.getAttribute(VlCookieConsent.attributePrefix + 'checked') != undefined,
+        mandatory: optIn.getAttribute(VlCookieConsent.attributePrefix + 'mandatory') != undefined,
+      });
+    });
+  }
+
+  _processOptIn({name, label, description, value, mandatory, callback: {activated, deactivated} = {}}) {
+    if (!this._bevatOptIn(name)) {
+      const storedValue = this._getCookie(name);
+      const optIn = this._optIns[name] = {
+        'name': name,
+        'label': label,
+        'description': description,
+        'value': storedValue !== undefined ? storedValue : value,
+        'callback': {
+          'activated': activated,
+          'deactivated': deactivated,
+        },
+        'mandatory': !!mandatory,
+      };
+      const optInTemplate = this._getOptInTemplate(optIn);
+      if (optInTemplate) {
+        this._formGridElement.appendChild(optInTemplate);
+      }
+    }
+  }
+
+  _submitOptIns() {
+    Object.values(this._optIns).forEach((optIn) => {
+      if (optIn.callback) {
+        if (optIn.value || optIn.mandatory) {
+          if (optIn.callback.activated) {
+            optIn.callback.activated();
+          }
+        } else {
+          if (optIn.callback.deactivated) {
+            optIn.callback.deactivated();
+          }
         }
-    }
+      }
+      this._setCookie(optIn.name, (optIn.value || optIn.mandatory) || false);
+    });
+  }
 
-    _open(forced) {
-        if (forced || !this._getCookieConsentCookie() || !this._heeftCookieConsentDateCookie() || !this._isCookieConsentCookieGeldig()) {
-            this._modalElement.open();
+  _bevatOptIn(name) {
+    return !!this._optIns[name];
+  }
+
+  _addFunctionalOptIn() {
+    this._processOptIn({
+      name: 'functional',
+      label: 'Noodzakelijke cookies toestaan (verplicht)',
+      description: 'Noodzakelijke cookies helpen een website bruikbaarder te maken, door basisfuncties als paginanavigatie en toegang tot beveiligde gedeelten van de website mogelijk te maken. Zonder deze cookies kan de website niet naar behoren werken.',
+      value: true,
+      mandatory: true,
+    });
+  }
+
+  _addAnalytics() {
+    if (!document.getElementById(analytics.scriptId)) {
+      document.head.appendChild(analytics.script);
+    }
+  }
+
+  _getCookie(name) {
+    name = this._cookiePrefix + name + '=';
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      let cookie = cookies[i];
+      while (cookie.charAt(0) == ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) == 0) {
+        try {
+          return JSON.parse(cookie.substring(name.length, cookie.length));
+        } catch (error) {
+          return cookie.substring(name.length, cookie.length);
         }
+      }
     }
+  }
 
-    _resetOptInValue(optIn) {
-        const match = [... this._optInElementen].find((optIn) => {
-            return optIn.id = optIn.name;
-        });
-        if (match) {
-            optIn.value = optIn.getAttribute(VlCookieConsent.attributePrefix + 'checked') != undefined;
-        }
-    }
+  _getCookieConsentCookie() {
+    return this._getCookie(this._cookieConsentCookieName);
+  }
 
-    _processOptIns() {
-        this._optInElementen.forEach((optIn) => {
-            this._processOptIn({
-                name: optIn.id,
-                label: optIn.getAttribute(VlCookieConsent.attributePrefix + 'label'),
-                description: optIn.getAttribute(VlCookieConsent.attributePrefix + 'description'),
-                value: optIn.getAttribute(VlCookieConsent.attributePrefix + 'checked') != undefined,
-                mandatory: optIn.getAttribute(VlCookieConsent.attributePrefix + 'mandatory') != undefined
-            });
-        });
-    }
+  _getCookieConsentDateCookie() {
+    return this._getCookie(this._cookieConsentDateCookieName);
+  }
 
-    _processOptIn({ name, label, description, value, mandatory, callback: { activated, deactivated } = {} }) {
-        if (!this._bevatOptIn(name)) {
-            const storedValue = this._getCookie(name);
-            const optIn = this._optIns[name] = {
-                'name': name,
-                'label': label,
-                'description': description,
-                'value': storedValue !== undefined ? storedValue : value,
-                'callback': {
-                    'activated': activated,
-                    'deactivated': deactivated
-                },
-                'mandatory': !!mandatory
-            };
-            const optInTemplate = this._getOptInTemplate(optIn);
-            if (optInTemplate) {
-                this._formGridElement.appendChild(optInTemplate);
-            }
-        }
-    }
+  _setCookie(name, value) {
+    document.cookie = this._cookiePrefix + name + '=' + value + ';Max-Age=2147483647;path=/;';
+  }
 
-    _submitOptIns() {
-        Object.values(this._optIns).forEach((optIn) => {
-            if (optIn.callback) {
-                if (optIn.value || optIn.mandatory) {
-                    if (optIn.callback.activated) {
-                        optIn.callback.activated();
-                    }
-                } else {
-                    if (optIn.callback.deactivated) {
-                        optIn.callback.deactivated();
-                    }
-                }
-            }
-            this._setCookie(optIn.name, (optIn.value || optIn.mandatory) || false);
-        });
-    }
+  _deleteCookie(name) {
+    document.cookie = this._cookiePrefix + name + '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+  }
 
-    _bevatOptIn(name) {
-        return !!this._optIns[name];
-    }
+  _heeftCookieConsentDateCookie() {
+    return this._getCookieConsentDateCookie() != undefined;
+  }
 
-    _addFunctionalOptIn() {
-        this._processOptIn({
-            name: 'functional',
-            label: 'Noodzakelijke cookies toestaan (verplicht)',
-            description: 'Noodzakelijke cookies helpen een website bruikbaarder te maken, door basisfuncties als paginanavigatie en toegang tot beveiligde gedeelten van de website mogelijk te maken. Zonder deze cookies kan de website niet naar behoren werken.',
-            value: true,
-            mandatory: true
-        });
-    }
+  _isCookieConsentCookieGeldig() {
+    return !isNaN(this._getCookieConsentDateCookie()) && (new Date(this._getCookieConsentDateCookie()) > this._cookieConsentResetDate);
+  }
 
-    _addAnalytics() {
-        if (!document.getElementById(analytics.scriptId)) {
-            document.head.appendChild(analytics.script);
-        }
+  _analyticsChangedCallback(oldValue, newValue) {
+    if (newValue != undefined) {
+      if (!this._isFunctionalOptInDisabled) {
+        this._addAnalytics();
+      } else {
+        console.error('analytics kunnen alleen toegevoegd worden wanneer de functionele cookies opt-in geactiveerd werd!');
+      }
     }
+  }
 
-    _getCookie(name) {
-        name = this._cookiePrefix + name + '=';
-        const cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            while (cookie.charAt(0) == ' ') {
-                cookie = cookie.substring(1);
-            }
-            if (cookie.indexOf(name) == 0) {
-                try {
-                    return JSON.parse(cookie.substring(name.length, cookie.length));
-                } catch (error) {
-                    return cookie.substring(name.length, cookie.length);
-                }
-            }
-        }
-    }
+  _ownerChangedCallback(oldValue, newValue) {
+    this._ownerElements.forEach((element) => element.innerText = newValue);
+  }
 
-    _getCookieConsentCookie() {
-        return this._getCookie(this._cookieConsentCookieName);
-    }
-
-    _getCookieConsentDateCookie() {
-        return this._getCookie(this._cookieConsentDateCookieName);
-    }
-
-    _setCookie(name, value) {
-        document.cookie = this._cookiePrefix + name + '=' + value + ';Max-Age=2147483647;path=/;';
-    }
-
-    _deleteCookie(name) {
-        document.cookie = this._cookiePrefix + name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
-    }
-
-    _heeftCookieConsentDateCookie() {
-        return this._getCookieConsentDateCookie() != undefined;
-    }
-
-    _isCookieConsentCookieGeldig() {
-        return !isNaN(this._getCookieConsentDateCookie()) && (new Date(this._getCookieConsentDateCookie()) > this._cookieConsentResetDate);
-    }
-
-    _analyticsChangedCallback(oldValue, newValue) {
-        if (newValue != undefined) {
-            if (!this._isFunctionalOptInDisabled) {
-                this._addAnalytics();
-            } else {
-                console.error('analytics kunnen alleen toegevoegd worden wanneer de functionele cookies opt-in geactiveerd werd!');
-            }
-        }
-    }
-
-    _ownerChangedCallback(oldValue, newValue) {
-        this._ownerElements.forEach(element => element.innerText = newValue);
-    }
-
-    _linkChangedCallback(oldValue, newValue) {
-        this._linkElement.innerText = newValue;
-        this._linkElement.href = newValue;
-    }
+  _linkChangedCallback(oldValue, newValue) {
+    this._linkElement.innerText = newValue;
+    this._linkElement.href = newValue;
+  }
 }
 
 customElements.whenDefined('vl-modal').then(() => {
-    define('vl-cookie-consent', VlCookieConsent);
+  define('vl-cookie-consent', VlCookieConsent);
 });

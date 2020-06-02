@@ -69,19 +69,19 @@
   </test-fixture>
 
   <script type="module">
-    import { awaitUntil } from 'vl-ui-core/dist/vl-core';
+    import {awaitUntil} from 'vl-ui-core/dist/vl-core';
 
     suite('vl-cookie-consent', () => {
       const should = chai.should();
-      const sandbox = sinon.sandbox.create();
+      const sandbox = sinon.createSandbox();
       const resetCookies = () => {
-        document.cookie.split(";").forEach((c) => {
-          document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+        document.cookie.split(';').forEach((c) => {
+          document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
         });
       };
-      const dialogElement = { 
+      const dialogElement = {
         hasAttribute: () => false,
-        isConnected: true 
+        isConnected: true,
       };
 
       setup((done) => {
@@ -303,7 +303,7 @@
           label: 'Sociale media',
           description: 'Sociale media beschrijving',
           value: true,
-          mandatory: false
+          mandatory: false,
         };
         cookieConsent.addOptIn(optInSocialeMedia);
         formGridColumn = formGrid.querySelector('.vl-form-column:last-child');
@@ -325,8 +325,8 @@
           value: false,
           mandatory: false,
           callback: {
-            activated: () => done()
-          }
+            activated: () => done(),
+          },
         });
         cookieConsent.open();
         const formGrid = modal.querySelector('[is="vl-form-grid"]');
@@ -347,8 +347,8 @@
           value: true,
           mandatory: false,
           callback: {
-            deactivated: () => done()
-          }
+            deactivated: () => done(),
+          },
         });
         cookieConsent.open();
         const formGrid = modal.querySelector('[is="vl-form-grid"]');
@@ -380,10 +380,10 @@
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         const formGrid = modal.querySelector('[is="vl-form-grid"]');
         cookieConsent.addOptIn({
-          name: 'socialmedia'
+          name: 'socialmedia',
         });
         cookieConsent.addOptIn({
-          name: 'socialmedia'
+          name: 'socialmedia',
         });
         const optIns = formGrid.querySelectorAll('.vl-form-column vl-cookie-consent-opt-in');
         assert.lengthOf(optIns, 1);
@@ -471,14 +471,14 @@
 
       test('de eigenaar en link teksten kunnen gewijzigd worden', () => {
         const cookieConsent = fixture('vl-cookie-consent-fixture');
-        cookieConsent._ownerElements.forEach(element => assert.equal(element.innerText, 'Departement Omgeving'));
+        cookieConsent._ownerElements.forEach((element) => assert.equal(element.innerText, 'Departement Omgeving'));
         assert.equal(cookieConsent._linkElement.innerText, 'https://www.omgevingvlaanderen.be/privacy');
         assert.equal(cookieConsent._linkElement.href, 'https://www.omgevingvlaanderen.be/privacy');
         const owner = 'UIG';
         const link = 'https://webcomponenten.omgeving.vlaanderen.be';
         cookieConsent.setAttribute('data-vl-owner', owner);
         cookieConsent.setAttribute('data-vl-link', link);
-        cookieConsent._ownerElements.forEach(element => assert.equal(element.innerText, owner));
+        cookieConsent._ownerElements.forEach((element) => assert.equal(element.innerText, owner));
         assert.equal(cookieConsent._linkElement.innerText, link);
         assert.equal(cookieConsent._linkElement.href, `${link}/`);
       });
