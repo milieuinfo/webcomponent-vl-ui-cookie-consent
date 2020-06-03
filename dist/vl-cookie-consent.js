@@ -1,16 +1,17 @@
-import {VlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
+import {vlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-button/dist/vl-button.js';
 import '/node_modules/vl-ui-form-grid/dist/vl-form-grid.js';
 import '/node_modules/vl-ui-modal/dist/vl-modal.js';
-import {analytics} from '/node_modules/vl-ui-cookie-consent/src/analytics.js';
-import '/node_modules/vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.js';
+import {analytics} from /node_modules/vl-ui-cookie-consent/src/analytics.js;
+import /node_modules/vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.js;
 
 /**
  * VlCookieConsent
  * @class
  * @classdesc De cookie consent kan gebruikt worden om de gebruiker te informeren over al de cookies die gebruikt worden.
  *
- * @extends VlElement
+ * @extends HTMLElement
+ * @mixin vlElement
  *
  * @property {boolean} data-vl-analytics - Attribuut wordt gebruikt om het verwerken van gebruikersstatistieken te activeren.
  * @property {boolean} data-vl-auto-open-disabled - Attribuut wordt gebruikt om te voorkomen dat de cookie consent modal onmiddellijk gautomatiseerd geopend wordt.
@@ -23,35 +24,35 @@ import '/node_modules/vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.js';
  * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent.html|Demo}
  *
  */
-export class VlCookieConsent extends VlElement(HTMLElement) {
+export class VlCookieConsent extends vlElement(HTMLElement) {
   static get _observedAttributes() {
     return ['analytics', 'owner', 'link'];
   }
 
   constructor() {
     super(`
-            <style>
-                @import '/node_modules/vl-ui-button/dist/style.css';
-                @import '/node_modules/vl-ui-form-grid/dist/style.css';
-                @import '/node_modules/vl-ui-modal/dist/style.css';
-            </style>
+      <style>
+          @import '/node_modules/vl-ui-button/dist/style.css';
+          @import '/node_modules/vl-ui-form-grid/dist/style.css';
+          @import '/node_modules/vl-ui-modal/dist/style.css';
+      </style>
 
-            <vl-modal data-title="Cookie-toestemming" not-cancellable>
-                <div is="vl-form-grid" is-stacked slot="content">
-                    <div is="vl-form-column"><span data-vl-owner>Departement Omgeving</span> maakt op de websites waarvoor zij verantwoordelijk is gebruik van "cookies" en vergelijkbare internettechnieken. Cookies zijn kleine "tekstbestanden" die worden gebruikt om onze websites en apps beter te laten werken en jouw surfervaring te verbeteren. Zij kunnen worden opgeslagen in de context van de webbrowser(s) die je gebruikt bij het bezoeken van onze website(s).</div>
-                    <div is="vl-form-column">Er zijn verschillende soorten cookies, en deze hebben ook een verschillende doelstelling en geldigheidsduur. Een beperkt aantal cookies (essenti&#235;le cookies) zijn absoluut noodzakelijk, deze zijn altijd anoniem. Andere cookies dragen bij aan het gebruikscomfort, je hebt de keuze om deze al dan niet te aanvaarden.</div>
-                    <div is="vl-form-column">
-                        Op <a id="link" href="https://www.omgevingvlaanderen.be/privacy" target="_blank">https://www.omgevingvlaanderen.be/privacy</a> vind je meer informatie over de manier waarop <span data-vl-owner>Departement Omgeving</span> omgaat met uw privacy:
-                        <ul>
-                            <li>ons privacybeleid, vertaald in de Privacyverklaring</li>
-                            <li>algemene informatie over de nieuwe Privacywet</li>
-                            <li>de contactgegevens van de functionaris voor gegevensbescherming of DPO</li>
-                        </ul>
-                    </div>
-                    <div is="vl-form-column">De cookie-toestemming die je geeft is van toepassing op meerdere websites, subsites en apps van <span data-vl-owner>Departement Omgeving</span>. Welke dit zijn, vind je via de Privacyverklaring. Je kunt naderhand een eerdere toestemming intrekken of wijzigen.</div>
-                </div>
-            </vl-modal>
-        `);
+      <vl-modal data-title="Cookie-toestemming" not-cancellable>
+          <div is="vl-form-grid" is-stacked slot="content">
+              <div is="vl-form-column"><span data-vl-owner>Departement Omgeving</span> maakt op de websites waarvoor zij verantwoordelijk is gebruik van "cookies" en vergelijkbare internettechnieken. Cookies zijn kleine "tekstbestanden" die worden gebruikt om onze websites en apps beter te laten werken en jouw surfervaring te verbeteren. Zij kunnen worden opgeslagen in de context van de webbrowser(s) die je gebruikt bij het bezoeken van onze website(s).</div>
+              <div is="vl-form-column">Er zijn verschillende soorten cookies, en deze hebben ook een verschillende doelstelling en geldigheidsduur. Een beperkt aantal cookies (essenti&#235;le cookies) zijn absoluut noodzakelijk, deze zijn altijd anoniem. Andere cookies dragen bij aan het gebruikscomfort, je hebt de keuze om deze al dan niet te aanvaarden.</div>
+              <div is="vl-form-column">
+                  Op <a id="link" href="https://www.omgevingvlaanderen.be/privacy" target="_blank">https://www.omgevingvlaanderen.be/privacy</a> vind je meer informatie over de manier waarop <span data-vl-owner>Departement Omgeving</span> omgaat met uw privacy:
+                  <ul>
+                      <li>ons privacybeleid, vertaald in de Privacyverklaring</li>
+                      <li>algemene informatie over de nieuwe Privacywet</li>
+                      <li>de contactgegevens van de functionaris voor gegevensbescherming of DPO</li>
+                  </ul>
+              </div>
+              <div is="vl-form-column">De cookie-toestemming die je geeft is van toepassing op meerdere websites, subsites en apps van <span data-vl-owner>Departement Omgeving</span>. Welke dit zijn, vind je via de Privacyverklaring. Je kunt naderhand een eerdere toestemming intrekken of wijzigen.</div>
+          </div>
+      </vl-modal>
+    `);
 
     this._optIns = {};
     this._cookieConsentCookieName = 'cookie-consent';
@@ -186,8 +187,8 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
   _getButtonTemplate() {
     const text = Object.values(this._optIns).length > 0 ? 'Bewaar keuze' : 'Ik begrijp het';
     const template = this._template(`
-            <button is="vl-button" slot="button">${text}</button>
-        `);
+      <button is="vl-button" slot="button">${text}</button>
+    `);
     template.querySelector('button').addEventListener('click', () => {
       this.close();
     });
@@ -199,10 +200,10 @@ export class VlCookieConsent extends VlElement(HTMLElement) {
       const checked = (optIn.value || optIn.mandatory) ? `${VlCookieConsent.attributePrefix}checked` : '';
       const mandatory = optIn.mandatory ? `${VlCookieConsent.attributePrefix}mandatory` : '';
       const template = this._template(`
-                <div is="vl-form-column">
-                    <vl-cookie-consent-opt-in ${VlCookieConsent.attributePrefix}label="${optIn.label}" ${VlCookieConsent.attributePrefix}description="${optIn.description}" ${checked} ${mandatory}></vl-cookie-consent-opt-in>
-                </div>
-            `);
+        <div is="vl-form-column">
+          <vl-cookie-consent-opt-in ${VlCookieConsent.attributePrefix}label="${optIn.label}" ${VlCookieConsent.attributePrefix}description="${optIn.description}" ${checked} ${mandatory}></vl-cookie-consent-opt-in>
+        </div>
+      `);
       template.querySelector('vl-cookie-consent-opt-in').addEventListener('input', (event) => {
         const checked = event && event.currentTarget ? event.currentTarget.checked : false;
         optIn.value = checked;
