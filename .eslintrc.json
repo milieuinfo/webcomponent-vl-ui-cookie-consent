@@ -14,6 +14,8 @@
     "ignorePatterns": [
       "**/node_modules",
       "**/sitespeed-result",
+      "**/dist",
+      "**/lib",
       "CODEOWNERS",
       "*.yml",
       "*.md",
@@ -21,7 +23,7 @@
     ],
     "overrides": [
       {
-        "files": ["dist/*.js", "src/*.js", "demo/demo.js"],
+        "files": ["src/*.js", "demo/demo.js"],
         "parserOptions": {
           "sourceType": "module"
         }
@@ -32,8 +34,7 @@
       "sourceType": "module"
     },
     "plugins": [
-        "eslint-plugin-html",
-        "only-warn"
+        "eslint-plugin-html"
     ],
     "rules": {
       "require-jsdoc": "off",

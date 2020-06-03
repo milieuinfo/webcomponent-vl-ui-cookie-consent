@@ -1,4 +1,4 @@
-import {VlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
+import {vlElement, define} from '/node_modules/vl-ui-core/dist/vl-core.js';
 import '/node_modules/vl-ui-checkbox/dist/vl-checkbox.js';
 import '/node_modules/vl-ui-form-message/dist/vl-form-message.js';
 
@@ -7,7 +7,8 @@ import '/node_modules/vl-ui-form-message/dist/vl-form-message.js';
  * @class
  * @classdesc De cookie consent opt-in geeft de gebruiker om één specifiek soort van cookies te accepteren of te weigeren.
  *
- * @extends VlElement
+ * @extend HTMLElement
+ * @mixin vlElement
  *
  * @property {boolean} data-vl-label - Attribuut bepaalt het label van de opt-in.
  * @property {boolean} data-vl-description - Attribuut bepaalt de beschrijving van de opt-in.
@@ -19,20 +20,20 @@ import '/node_modules/vl-ui-form-message/dist/vl-form-message.js';
  * @see {@link https://webcomponenten.omgeving.vlaanderen.be/demo/vl-cookie-consent-opt-in.html|Demo}
  *
  */
-export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
+export class VlCookieConsentOptIn extends vlElement(HTMLElement) {
   static get _observedAttributes() {
     return ['label', 'description', 'checked', 'mandatory'];
   }
 
   constructor() {
     super(`
-            <style>
-                @import '/node_modules/vl-ui-form-message/dist/style.css';
-            </style>
-            <div>
-                <vl-checkbox></vl-checkbox>
-            </div>
-        `);
+      <style>
+          @import '/node_modules/vl-ui-form-message/dist/style.css';
+      </style>
+      <div>
+          <vl-checkbox></vl-checkbox>
+      </div>
+    `);
   }
 
   get checked() {
@@ -49,8 +50,8 @@ export class VlCookieConsentOptIn extends VlElement(HTMLElement) {
 
   _getDescriptionTemplate(description) {
     return this._template(`
-            <p id="description" is="vl-form-annotation" block>${description}</p>
-        `);
+      <p id="description" is="vl-form-annotation" block>${description}</p>
+    `);
   }
 
   _labelChangedCallback(oldValue, newValue) {
