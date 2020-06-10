@@ -1,6 +1,6 @@
-import {vlElement, define} from vl-ui-core;
-import vl-ui-checkbox;
-import vl-ui-form-message;
+import {vlElement, define} from 'vl-ui-core';
+import 'vl-ui-checkbox';
+import 'vl-ui-form-message';
 
 /**
  * VlCookieConsentOptIn
