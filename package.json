@@ -44,22 +44,22 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-button": "^5.0.2",
-    "vl-ui-checkbox": "^3.0.1",
-    "vl-ui-core": "^5.5.1",
-    "vl-ui-form-grid": "^3.0.1",
-    "vl-ui-form-message": "^5.0.0",
-    "vl-ui-modal": "^3.0.6"
+    "vl-ui-button": "^5.0.5",
+    "vl-ui-checkbox": "^3.1.2",
+    "vl-ui-core": "^5.5.4",
+    "vl-ui-form-grid": "^3.0.4",
+    "vl-ui-form-message": "^5.0.3",
+    "vl-ui-modal": "^3.0.9"
   },
   "peerDependencies": {
-    "vl-ui-button": "^5.0.2",
-    "vl-ui-checkbox": "^3.0.1",
-    "vl-ui-core": "^5.5.1",
-    "vl-ui-form-grid": "^3.0.1",
-    "vl-ui-form-message": "^5.0.0",
-    "vl-ui-modal": "^3.0.6"
+    "vl-ui-button": "^5.0.5",
+    "vl-ui-checkbox": "^3.1.2",
+    "vl-ui-core": "^5.5.4",
+    "vl-ui-form-grid": "^3.0.4",
+    "vl-ui-form-message": "^5.0.3",
+    "vl-ui-modal": "^3.0.9"
   },
   "devDependencies": {
-    "vl-ui-util": "^5.2.3"
+    "vl-ui-util": "^5.2.4"
   }
 }

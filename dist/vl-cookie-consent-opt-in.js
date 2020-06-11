@@ -8,7 +8,6 @@ import '/node_modules/vl-ui-form-message/dist/vl-form-message.js';
  * @classdesc De cookie consent opt-in geeft de gebruiker om één specifiek soort van cookies te accepteren of te weigeren.
  *
  * @extend HTMLElement
- * @mixin vlElement
  *
  * @property {boolean} data-vl-label - Attribuut bepaalt het label van de opt-in.
  * @property {boolean} data-vl-description - Attribuut bepaalt de beschrijving van de opt-in.
