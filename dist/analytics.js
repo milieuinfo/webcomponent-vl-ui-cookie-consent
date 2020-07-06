@@ -21,7 +21,7 @@ class Analytics {
         'id': 2,
         'url': this._matomoOntwikkelUrl,
       },
-      'ontwikkel.omgevingsloket.be': {
+      'omgevingsloket2-ontwikkel.omgeving.vlaanderen.be': {
         'id': 3,
         'url': this._matomoOntwikkelUrl,
       },
@@ -47,6 +47,10 @@ class Analytics {
       },
       'zendantennes-ontwikkel.milieuinfo.be': {
         'id': 13,
+        'url': this._matomoOntwikkelUrl,
+      },
+      'omgevingsloket-ontwikkel.omgeving.vlaanderen.be': {
+        'id': 14,
         'url': this._matomoOntwikkelUrl,
       },
       'vsm-ontwikkel.milieuinfo.be': {
@@ -77,7 +81,11 @@ class Analytics {
           'id': 2,
           'url': this._matomoOefenUrl,
         },
-        'oefen.omgevingsloket.be': {
+        'omgevingsloket-oefen.omgeving.vlaanderen.be': {
+          'id': 3,
+          'url': this._matomoOefenUrl,
+        },
+        'omgevingsloket2-oefen.omgeving.vlaanderen.be': {
           'id': 4,
           'url': this._matomoOefenUrl,
         },
@@ -126,7 +134,7 @@ class Analytics {
           'id': 12,
           'url': this._matomoProdUrl,
         },
-        'www.omgevingsloket.be': {
+        'omgevingsloket.omgeving.vlaanderen.be': {
           'id': 14,
           'url': this._matomoProdUrl,
         },
