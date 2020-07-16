@@ -40,17 +40,17 @@
     "vl-ui-button": "^5.0.5",
     "vl-ui-checkbox": "^3.1.2",
     "vl-ui-core": "^5.6.2",
-    "vl-ui-form-grid": "^3.0.4",
-    "vl-ui-form-message": "^5.0.3",
-    "vl-ui-modal": "^3.0.9"
+    "vl-ui-form-grid": "^3.0.5",
+    "vl-ui-form-message": "^5.0.4",
+    "vl-ui-modal": "^3.0.10"
   },
   "peerDependencies": {
     "vl-ui-button": "^5.0.5",
     "vl-ui-checkbox": "^3.1.2",
     "vl-ui-core": "^5.6.2",
-    "vl-ui-form-grid": "^3.0.4",
-    "vl-ui-form-message": "^5.0.3",
-    "vl-ui-modal": "^3.0.9"
+    "vl-ui-form-grid": "^3.0.5",
+    "vl-ui-form-message": "^5.0.4",
+    "vl-ui-modal": "^3.0.10"
   },
   "devDependencies": {
     "vl-ui-util": "^5.2.10"
