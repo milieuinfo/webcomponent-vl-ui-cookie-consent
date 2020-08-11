@@ -54,7 +54,7 @@
       test('bevat een checkbox met label indien het label attribuut aanwezig is', () => {
         const cookieConsent = fixture('vl-cookie-consent-opt-in-fixture');
         const checkbox = cookieConsent.shadowRoot.querySelector('vl-checkbox');
-        should.equal(checkbox.getAttribute('label'), cookieConsent.getAttribute('data-vl-label'));
+        should.equal(checkbox.getAttribute('data-vl-label'), cookieConsent.getAttribute('data-vl-label'));
       });
 
       test('bevat een beschrijving indien het beschrijving attribuut aanwezig is', () => {

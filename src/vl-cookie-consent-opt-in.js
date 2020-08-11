@@ -8,6 +8,7 @@ import '/node_modules/vl-ui-form-message/dist/vl-form-message.js';
  * @classdesc De cookie consent opt-in geeft de gebruiker om één specifiek soort van cookies te accepteren of te weigeren.
  *
  * @extend HTMLElement
+ * @mixes vlElement
  *
  * @property {boolean} data-vl-label - Attribuut bepaalt het label van de opt-in.
  * @property {boolean} data-vl-description - Attribuut bepaalt de beschrijving van de opt-in.
@@ -49,12 +50,12 @@ export class VlCookieConsentOptIn extends vlElement(HTMLElement) {
 
   _getDescriptionTemplate(description) {
     return this._template(`
-      <p id="description" is="vl-form-annotation" block>${description}</p>
+      <p id="description" is="vl-form-annotation" data-vl-block>${description}</p>
     `);
   }
 
   _labelChangedCallback(oldValue, newValue) {
-    this._checkboxElement.setAttribute('label', newValue);
+    this._checkboxElement.setAttribute('data-vl-label', newValue);
   }
 
   _descriptionChangedCallback(oldValue, newValue) {
@@ -71,14 +72,14 @@ export class VlCookieConsentOptIn extends vlElement(HTMLElement) {
 
   _checkedChangedCallback(oldValue, newValue) {
     if (newValue != undefined) {
-      this._checkboxElement.setAttribute('checked', '');
+      this._checkboxElement.setAttribute('data-vl-checked', '');
     }
   }
 
   _mandatoryChangedCallback(oldValue, newValue) {
     if (newValue != undefined) {
-      this._checkboxElement.setAttribute('checked', '');
-      this._checkboxElement.setAttribute('disabled', '');
+      this._checkboxElement.setAttribute('data-vl-checked', '');
+      this._checkboxElement.setAttribute('data-vl-disabled', '');
     }
   }
 }

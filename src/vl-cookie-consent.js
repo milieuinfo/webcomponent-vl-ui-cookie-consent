@@ -11,6 +11,7 @@ import '/src/vl-cookie-consent-opt-in.js';
  * @classdesc De cookie consent kan gebruikt worden om de gebruiker te informeren over al de cookies die gebruikt worden.
  *
  * @extends HTMLElement
+ * @mixes vlElement
  *
  * @property {boolean} data-vl-analytics - Attribuut wordt gebruikt om het verwerken van gebruikersstatistieken te activeren.
  * @property {boolean} data-vl-auto-open-disabled - Attribuut wordt gebruikt om te voorkomen dat de cookie consent modal onmiddellijk gautomatiseerd geopend wordt.
@@ -31,25 +32,30 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
   constructor() {
     super(`
       <style>
-          @import '/node_modules/vl-ui-button/dist/style.css';
-          @import '/node_modules/vl-ui-form-grid/dist/style.css';
-          @import '/node_modules/vl-ui-modal/dist/style.css';
+        @import '/node_modules/vl-ui-button/dist/style.css';
+        @import '/node_modules/vl-ui-form-grid/dist/style.css';
+        @import '/node_modules/vl-ui-modal/dist/style.css';
       </style>
 
-      <vl-modal data-title="Cookie-toestemming" not-cancellable>
-          <div is="vl-form-grid" is-stacked slot="content">
-              <div is="vl-form-column"><span data-vl-owner>Departement Omgeving</span> maakt op de websites waarvoor zij verantwoordelijk is gebruik van "cookies" en vergelijkbare internettechnieken. Cookies zijn kleine "tekstbestanden" die worden gebruikt om onze websites en apps beter te laten werken en jouw surfervaring te verbeteren. Zij kunnen worden opgeslagen in de context van de webbrowser(s) die je gebruikt bij het bezoeken van onze website(s).</div>
-              <div is="vl-form-column">Er zijn verschillende soorten cookies, en deze hebben ook een verschillende doelstelling en geldigheidsduur. Een beperkt aantal cookies (essenti&#235;le cookies) zijn absoluut noodzakelijk, deze zijn altijd anoniem. Andere cookies dragen bij aan het gebruikscomfort, je hebt de keuze om deze al dan niet te aanvaarden.</div>
-              <div is="vl-form-column">
-                  Op <a id="link" href="https://www.omgevingvlaanderen.be/privacy" target="_blank">https://www.omgevingvlaanderen.be/privacy</a> vind je meer informatie over de manier waarop <span data-vl-owner>Departement Omgeving</span> omgaat met uw privacy:
-                  <ul>
-                      <li>ons privacybeleid, vertaald in de Privacyverklaring</li>
-                      <li>algemene informatie over de nieuwe Privacywet</li>
-                      <li>de contactgegevens van de functionaris voor gegevensbescherming of DPO</li>
-                  </ul>
-              </div>
-              <div is="vl-form-column">De cookie-toestemming die je geeft is van toepassing op meerdere websites, subsites en apps van <span data-vl-owner>Departement Omgeving</span>. Welke dit zijn, vind je via de Privacyverklaring. Je kunt naderhand een eerdere toestemming intrekken of wijzigen.</div>
+      <vl-modal data-title="Cookie-toestemming" data-vl-not-cancellable>
+        <div is="vl-form-grid" data-vl-is-stacked slot="content">
+          <div is="vl-form-column">
+            <span data-vl-owner>Departement Omgeving</span> maakt op de websites waarvoor zij verantwoordelijk is gebruik van "cookies" en vergelijkbare internettechnieken. Cookies zijn kleine "tekstbestanden" die worden gebruikt om onze websites en apps beter te laten werken en jouw surfervaring te verbeteren. Zij kunnen worden opgeslagen in de context van de webbrowser(s) die je gebruikt bij het bezoeken van onze website(s).
           </div>
+          <div is="vl-form-column">
+            Er zijn verschillende soorten cookies, en deze hebben ook een verschillende doelstelling en geldigheidsduur. Een beperkt aantal cookies (essenti&#235;le cookies) zijn absoluut noodzakelijk, deze zijn altijd anoniem. Andere cookies dragen bij aan het gebruikscomfort, je hebt de keuze om deze al dan niet te aanvaarden.</div>
+          <div is="vl-form-column">
+            Op <a id="link" href="https://www.omgevingvlaanderen.be/privacy" target="_blank">https://www.omgevingvlaanderen.be/privacy</a> vind je meer informatie over de manier waarop <span data-vl-owner>Departement Omgeving</span> omgaat met uw privacy:
+            <ul>
+              <li>ons privacybeleid, vertaald in de Privacyverklaring</li>
+              <li>algemene informatie over de nieuwe Privacywet</li>
+              <li>de contactgegevens van de functionaris voor gegevensbescherming of DPO</li>
+            </ul>
+          </div>
+          <div is="vl-form-column">
+            De cookie-toestemming die je geeft is van toepassing op meerdere websites, subsites en apps van <span data-vl-owner>Departement Omgeving</span>. Welke dit zijn, vind je via de Privacyverklaring. Je kunt naderhand een eerdere toestemming intrekken of wijzigen.
+          </div>
+        </div>
       </vl-modal>
     `);
 
@@ -69,17 +75,17 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
   }
 
   /**
-     * Opent de cookie-consent ook al werd deze eerder getoond aan de gebruiker.
-     * @return {void}
-     */
+   * Opent de cookie-consent ook al werd deze eerder getoond aan de gebruiker.
+   * @return {void}
+   */
   open() {
     this._open(true);
   }
 
   /**
-     * Sluit de cookie-consent.
-     * @return {void}
-     */
+   * Sluit de cookie-consent.
+   * @return {void}
+   */
   close() {
     this._modalElement.close();
     this._setCookie(this._cookieConsentCookieName, true);
@@ -88,9 +94,9 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
   }
 
   /**
-     * Verwijdert al de cookies en herstelt de opt-in waarden naar de initiële toestand.
-     * @return {void}
-     */
+   * Verwijdert al de cookies en herstelt de opt-in waarden naar de initiële toestand.
+   * @return {void}
+   */
   reset() {
     this._deleteCookie(this._cookieConsentCookieName);
     this._deleteCookie(this._cookieConsentDateCookieName);
@@ -104,27 +110,27 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
   }
 
   /**
-     * Voeg een opt-in toe.
-     * @param {object} optIn - De opt-in optie met attributen.
-     * @param {string} optIn.name - De naam van de opt-in optie.
-     * @param {string} optIn.label - Het label van de opt-in optie die getoond zal worden aan de gebruiker.
-     * @param {string} optIn.description - De beschrijving van de opt-in optie die getoond zal worden aan de gebruiker.
-     * @param {boolean} optIn.value - De standaard opt-in optie waarde die bepaalt of de opt-in standaard geactiveerd wordt.
-     * @param {boolean} optIn.mandatory - Indien de opt-in verplicht is, zal de opt-in standaard geactiveerd worden en kan deze niet gewijzigd worden door de gebruiker.
-     * @param {function} optIn.callback - De callback functies.
-     * @param {function} optIn.callback.activated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in geactiveerd werd.
-     * @param {function} optIn.callback.deactivated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in gedactiveerd werd.
-     * @return {void}
-     */
+   * Voeg een opt-in toe.
+   * @param {object} optIn - De opt-in optie met attributen.
+   * @param {string} optIn.name - De naam van de opt-in optie.
+   * @param {string} optIn.label - Het label van de opt-in optie die getoond zal worden aan de gebruiker.
+   * @param {string} optIn.description - De beschrijving van de opt-in optie die getoond zal worden aan de gebruiker.
+   * @param {boolean} optIn.value - De standaard opt-in optie waarde die bepaalt of de opt-in standaard geactiveerd wordt.
+   * @param {boolean} optIn.mandatory - Indien de opt-in verplicht is, zal de opt-in standaard geactiveerd worden en kan deze niet gewijzigd worden door de gebruiker.
+   * @param {function} optIn.callback - De callback functies.
+   * @param {function} optIn.callback.activated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in geactiveerd werd.
+   * @param {function} optIn.callback.deactivated - Functie die aangeroepen wordt wanneer de gebruiker de cookie-consent bevestigt en de opt-in gedactiveerd werd.
+   * @return {void}
+   */
   addOptIn(optIn) {
     this._processOptIn(optIn);
   }
 
   /**
-     * Voegt aan een opt-in een callback toe die aangeroepen wordt wanneer de opt-in geactiveerd wordt.
-     * @param {string} name - De opt-in optie naam.
-     * @param {function} callback - Callback functie.
-     */
+   * Voegt aan een opt-in een callback toe die aangeroepen wordt wanneer de opt-in geactiveerd wordt.
+   * @param {string} name - De opt-in optie naam.
+   * @param {function} callback - Callback functie.
+   */
   addOptInActivatedCallback(name, callback) {
     if (this._optIns[name]) {
       this._optIns[name].callback.activated = callback;
@@ -132,10 +138,10 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
   }
 
   /**
-     * Voegt aan een opt-in een callback toe die aangeroepen wordt wanneer de opt-in gedeactiveerd wordt.
-     * @param {string} name - De opt-in optie naam.
-     * @param {function} callback - Callback functie.
-     */
+   * Voegt aan een opt-in een callback toe die aangeroepen wordt wanneer de opt-in gedeactiveerd wordt.
+   * @param {string} name - De opt-in optie naam.
+   * @param {function} callback - Callback functie.
+   */
   addOptInDeactivatedCallback(name, callback) {
     if (this._optIns[name]) {
       this._optIns[name].callback.deactivated = callback;
@@ -143,10 +149,10 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
   }
 
   /**
-     * Bepaalt of een opt-in actief is of niet op basis van de naam.
-     * @param {string} name - De opt-in optie naam.
-     * @return {boolean}
-     */
+   * Bepaalt of een opt-in actief is of niet op basis van de naam.
+   * @param {string} name - De opt-in optie naam.
+   * @return {boolean}
+   */
   isOptInActive(name) {
     return this._optIns[name] ? this._optIns[name].value : false;
   };
