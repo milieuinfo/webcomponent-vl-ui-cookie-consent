@@ -37,7 +37,7 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
         @import '/node_modules/vl-ui-modal/dist/style.css';
       </style>
 
-      <vl-modal data-title="Cookie-toestemming" data-vl-not-cancellable>
+      <vl-modal data-vl-title="Cookie-toestemming" data-vl-not-cancellable>
         <div is="vl-form-grid" data-vl-is-stacked slot="content">
           <div is="vl-form-column">
             <span data-vl-owner>Departement Omgeving</span> maakt op de websites waarvoor zij verantwoordelijk is gebruik van "cookies" en vergelijkbare internettechnieken. Cookies zijn kleine "tekstbestanden" die worden gebruikt om onze websites en apps beter te laten werken en jouw surfervaring te verbeteren. Zij kunnen worden opgeslagen in de context van de webbrowser(s) die je gebruikt bij het bezoeken van onze website(s).
