@@ -4,14 +4,14 @@
 <head>
     <title>vl-cookie-consent voorbeeld</title>
     <script type="module" src="/node_modules/vl-ui-demo/dist/vl-demo-all.js"></script>
+    <script type="module" src="/node_modules/vl-ui-body/dist/vl-body.js"></script>
 
     <script type="module" src="/src/vl-cookie-consent.js"></script>
-    <script type="module" src="/node_modules/vl-ui-button/dist/vl-button.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-button/dist/style.css" />
+    <link rel="stylesheet" type="text/css" href="/node_modules/vl-ui-body/dist/style.css" />
 </head>
 
-<body>
+<body is="vl-body">
     <vl-demo-page data-vl-webcomponent="vl-cookie-consent-opt-in">
         <vl-demo data-vl-title="Cookie-consent opt-in met label">
             <vl-cookie-consent-opt-in id="cookie-consent-opt-in" data-vl-label="Sociale media"></vl-cookie-consent-opt-in>
