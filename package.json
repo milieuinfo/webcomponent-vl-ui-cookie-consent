@@ -37,22 +37,23 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-button": "^5.0.5",
-    "vl-ui-checkbox": "^3.1.2",
-    "vl-ui-core": "^5.6.2",
-    "vl-ui-form-grid": "^3.0.5",
-    "vl-ui-form-message": "^5.0.4",
-    "vl-ui-modal": "^3.0.10"
+    "vl-ui-button": "5.0.6",
+    "vl-ui-checkbox": "^3.2.0",
+    "vl-ui-core": "^6.0.0",
+    "vl-ui-form-grid": "^3.0.6",
+    "vl-ui-form-message": "^5.0.5",
+    "vl-ui-modal": "^4.0.0"
   },
   "peerDependencies": {
-    "vl-ui-button": "^5.0.5",
-    "vl-ui-checkbox": "^3.1.2",
-    "vl-ui-core": "^5.6.2",
-    "vl-ui-form-grid": "^3.0.5",
-    "vl-ui-form-message": "^5.0.4",
-    "vl-ui-modal": "^3.0.10"
+    "vl-ui-button": "^5.0.6",
+    "vl-ui-checkbox": "^3.2.0",
+    "vl-ui-core": "^6.0.0",
+    "vl-ui-form-grid": "^3.0.6",
+    "vl-ui-form-message": "^5.0.5",
+    "vl-ui-modal": "^4.0.0"
   },
   "devDependencies": {
-    "vl-ui-util": "^5.2.10"
+    "vl-ui-body": "^1.0.3",
+    "vl-ui-util": "^5.2.12"
   }
 }
