@@ -69,6 +69,10 @@ class Analytics {
         'id': 30,
         'url': this._matomoOntwikkelUrl,
       },
+      'bed-ontwikkel.omgeving.vlaanderen.be': {
+        'id': 31,
+        'url': this._matomoOntwikkelUrl,
+      },
     }[window.location.host];
 
     if (!match) {
@@ -115,6 +119,10 @@ class Analytics {
         },
         'loket-erkenningen-leefmilieu-oefen.omgeving.vlaanderen.be': {
           'id': 23,
+          'url': this._matomoOefenUrl,
+        },
+        'bed-oefen.omgeving.vlaanderen.be': {
+          'id': 24,
           'url': this._matomoOefenUrl,
         },
       }[window.location.host];
@@ -168,6 +176,10 @@ class Analytics {
         },
         'loket-erkenningen-leefmilieu.omgeving.vlaanderen.be': {
           'id': 52,
+          'url': this._matomoProdUrl,
+        },
+        'bed.omgeving.vlaanderen.be': {
+          'id': 55,
           'url': this._matomoProdUrl,
         },
       }[window.location.host];
