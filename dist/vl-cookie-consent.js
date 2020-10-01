@@ -329,7 +329,7 @@ export class VlCookieConsent extends vlElement(HTMLElement) {
   }
 
   _setCookie(name, value) {
-    document.cookie = this._cookiePrefix + name + '=' + value + ';Max-Age=2147483647;path=/;';
+    document.cookie = this._cookiePrefix + name + '=' + value + ';Max-Age=2147483647;path=/;SameSite=Strict;Secure';
   }
 
   _deleteCookie(name) {

@@ -410,7 +410,7 @@
       });
 
       test('de opt-in optie met checked waarde wordt niet aangevinkt indien de gebruiker eerder de opt-in optie uitgeschakeld heeft', () => {
-        document.cookie = 'vl-cookie-consent-socialmedia=false;Max-Age=2147483647;path=/;';
+        document.cookie = 'vl-cookie-consent-socialmedia=false;Max-Age=2147483647;path=/;SameSite=Strict;';
         const cookieConsent = fixture('vl-cookie-consent-opt-in-socialmedia-checked-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         const formGrid = modal.querySelector('[is="vl-form-grid"]');
@@ -420,7 +420,7 @@
       });
 
       test('wanneer de cookie-consent modal ooit al eens gesloten werd, maar de cookie-consent reset datum niet bestaat, zal de cookie-consent modal opnieuw geopend worden', () => {
-        document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;';
+        document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;SameSite=Strict;';
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
@@ -430,8 +430,8 @@
       });
 
       test('wanneer de cookie-consent modal ooit al eens gesloten werd, maar de cookie-consent reset datum recenter is, zal de cookie-consent modal opnieuw geopend worden', () => {
-        document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;';
-        document.cookie = 'vl-cookie-consent-cookie-consent-date=1556661600000;Max-Age=2147483647;path=/;';
+        document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;SameSite=Strict;';
+        document.cookie = 'vl-cookie-consent-cookie-consent-date=1556661600000;Max-Age=2147483647;path=/;SameSite=Strict;';
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
@@ -441,8 +441,8 @@
       });
 
       test('wanneer de cookie-consent modal ooit al eens gesloten werd, maar de cookie-consent reset datum ongeldig is, zal de cookie-consent modal opnieuw geopend worden', () => {
-        document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;';
-        document.cookie = 'vl-cookie-consent-cookie-consent-date=geen;Max-Age=2147483647;path=/;';
+        document.cookie = 'vl-cookie-consent-cookie-consent=true;Max-Age=2147483647;path=/;SameSite=Strict;';
+        document.cookie = 'vl-cookie-consent-cookie-consent-date=geen;Max-Age=2147483647;path=/;SameSite=Strict;';
         const cookieConsent = fixture('vl-cookie-consent-fixture');
         const modal = cookieConsent.shadowRoot.querySelector('vl-modal');
         sandbox.stub(modal, '_dialogElement').get(() => dialogElement);
