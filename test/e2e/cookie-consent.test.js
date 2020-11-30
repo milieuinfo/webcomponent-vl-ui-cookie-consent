@@ -1,12 +1,15 @@
-const {assert, driver} = require('vl-ui-core').Test.Setup;
+const {assert, getDriver} = require('vl-ui-core').Test.Setup;
 const VlCookieConsentPage = require('./pages/vl-cookie-consent.page');
 const CookieManager = require('./components/cookie-manager');
 
 describe('vl-cookie-consent', async () => {
-  const vlCookieConsentPage = new VlCookieConsentPage(driver);
-  const cookies = new CookieManager(driver);
+  let vlCookieConsentPage;
+  let cookies;
 
   beforeEach(async () => {
+    const driver = getDriver();
+    vlCookieConsentPage = new VlCookieConsentPage(driver);
+    cookies = new CookieManager(getDriver());
     await driver.manage().deleteAllCookies();
     return vlCookieConsentPage.load();
   });
