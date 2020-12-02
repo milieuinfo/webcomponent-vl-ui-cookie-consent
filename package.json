@@ -30,7 +30,7 @@
     "test:unit": "npm explore vl-ui-util -- npm run test:component:unit",
     "test:unit:grid": "npm explore vl-ui-util -- npm run test:component:unit:grid",
     "test:e2e": "npm explore vl-ui-util -- npm run test:component:e2e",
-    "test:e2e:grid": "npm explore vl-ui-util -- npm run test:component:e2e:grid",
+    "test:e2e:grid": "npm explore vl-ui-util -- npm run test:component:e2e:browserstack",
     "release": "npm explore vl-ui-util -- npm run release",
     "release:prepare": "npm explore vl-ui-util -- npm run release-component:prepare $(pwd) cookie-consent",
     "release:testless": "np --yolo",
@@ -38,11 +38,11 @@
   },
   "dependencies": {
     "vl-ui-button": "5.0.6",
-    "vl-ui-checkbox": "^3.2.0",
-    "vl-ui-core": "^6.0.0",
-    "vl-ui-form-grid": "^3.0.6",
+    "vl-ui-checkbox": "^3.2.2",
+    "vl-ui-core": "^6.2.3",
+    "vl-ui-form-grid": "^3.0.7",
     "vl-ui-form-message": "^5.0.5",
-    "vl-ui-modal": "^4.0.0"
+    "vl-ui-modal": "github:milieuinfo/webcomponent-vl-ui-modal"
   },
   "peerDependencies": {
     "vl-ui-button": "^5.0.6",
@@ -50,10 +50,10 @@
     "vl-ui-core": "^6.0.0",
     "vl-ui-form-grid": "^3.0.6",
     "vl-ui-form-message": "^5.0.5",
-    "vl-ui-modal": "^4.0.0"
+    "vl-ui-modal": "milieuinfo/webcomponent-vl-ui-modal"
   },
   "devDependencies": {
-    "vl-ui-body": "^1.0.3",
-    "vl-ui-util": "^5.2.17"
+    "vl-ui-body": "^1.0.5",
+    "vl-ui-util": "^5.3.1"
   }
 }
