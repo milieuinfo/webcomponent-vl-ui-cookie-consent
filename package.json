@@ -39,7 +39,7 @@
   "dependencies": {
     "vl-ui-button": "5.0.7",
     "vl-ui-checkbox": "^3.2.2",
-    "vl-ui-core": "^6.2.3",
+    "vl-ui-core": "^7.0.0",
     "vl-ui-form-grid": "^3.0.7",
     "vl-ui-form-message": "^5.0.5",
     "vl-ui-modal": "github:milieuinfo/webcomponent-vl-ui-modal"
@@ -47,7 +47,7 @@
   "peerDependencies": {
     "vl-ui-button": "^5.0.6",
     "vl-ui-checkbox": "^3.2.0",
-    "vl-ui-core": "^6.0.0",
+    "vl-ui-core": "^7.0.0",
     "vl-ui-form-grid": "^3.0.6",
     "vl-ui-form-message": "^5.0.5",
     "vl-ui-modal": "milieuinfo/webcomponent-vl-ui-modal"
