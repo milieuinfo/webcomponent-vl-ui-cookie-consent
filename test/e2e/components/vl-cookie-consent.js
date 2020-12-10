@@ -41,7 +41,9 @@ class VlCookieConsent extends VlElement {
 
   async save() {
     const modal = await this._getModal();
-    await modal.submit();
+    const button = await modal._getActionButton();
+    await button.scrollIntoView();
+    await button.click();
   }
 }
 
