@@ -37,12 +37,12 @@
     "demo": "http-server"
   },
   "dependencies": {
-    "vl-ui-button": "^5.0.9",
-    "vl-ui-checkbox": "^3.2.3",
+    "vl-ui-button": "^5.0.10",
+    "vl-ui-checkbox": "^3.2.4",
     "vl-ui-core": "^7.1.1",
-    "vl-ui-form-grid": "^3.0.8",
-    "vl-ui-form-message": "^5.0.6",
-    "vl-ui-modal": "^4.0.3"
+    "vl-ui-form-grid": "^3.0.9",
+    "vl-ui-form-message": "^5.0.7",
+    "vl-ui-modal": "^4.0.4"
   },
   "peerDependencies": {
     "vl-ui-button": "^5.0.9",
