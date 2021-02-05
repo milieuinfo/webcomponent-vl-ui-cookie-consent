@@ -2,8 +2,8 @@ import {vlElement, define} from 'vl-ui-core';
 import 'vl-ui-button';
 import 'vl-ui-form-grid';
 import 'vl-ui-modal';
-import {analytics} from 'vl-ui-cookie-consent/src/analytics.js';
-import 'vl-ui-cookie-consent/dist/vl-cookie-consent-opt-in.src.js';
+import {analytics} from '../src/analytics.js';
+import '../dist/vl-cookie-consent-opt-in.src.js';
 
 /**
  * VlCookieConsent
