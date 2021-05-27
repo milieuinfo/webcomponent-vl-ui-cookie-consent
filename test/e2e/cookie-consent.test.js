@@ -14,6 +14,10 @@ describe('vl-cookie-consent', async () => {
     return vlCookieConsentPage.load();
   });
 
+  it('WCAG', async () => {
+    await assert.eventually.isFalse(vlCookieConsentPage.hasWcagIssues());
+  });
+
   it('als gebruiker kan ik de auto-open-disabled modal bevestigen en worden de juiste cookies gezet', async () => {
     await vlCookieConsentPage.openConsent();
     const consentModal = await vlCookieConsentPage.getConsent();
