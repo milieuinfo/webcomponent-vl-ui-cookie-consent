@@ -9,6 +9,10 @@ describe('vl-cookie-consent-opt-in', async () => {
     return vlCookieConsentOptInPage.load();
   });
 
+  it('WCAG', async () => {
+    await assert.eventually.isFalse(vlCookieConsentOptInPage.hasWcagIssues());
+  });
+
   it('als gebruiker krijg ik een label en beschrijving te zien', async () => {
     const optIn = await vlCookieConsentOptInPage.getConsentWithLabelAndDescription();
     await assert.eventually.equal(optIn.getLabel(), 'Sociale media');
